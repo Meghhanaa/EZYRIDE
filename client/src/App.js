@@ -8,7 +8,7 @@ import Reg_customer from "./Pages/Reg_customer";
 import Reg_owner from "./Pages/Reg_owner";
 // import Vehicles from "./Pages/Vehicles";
 import Models from "./Pages/Models";
-// import Vehicles from "./Pages/Vehicles";
+import OurTeam from "./Pages/OurTeam";
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
         <Route index path="/main_owner" element={<Main_owner />} />
         <Route path="/custRegister" element={<Reg_customer />} />
         <Route path="/ownRegister" element={<Reg_owner />} />
+        <Route path="/OurTeam" element={<OurTeam />} />
       </Routes>
     </>
   );
