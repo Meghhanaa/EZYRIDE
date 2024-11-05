@@ -16,7 +16,7 @@ function App() {
         <Route index path="/main_customer" element={<Main_customer />} />
         <Route index path="/main_owner" element={<Main_owner />} />
         <Route path="/custRegister" element={<Reg_customer />} />
-        <Route path="/ownRegister" element={<Reg_owner />} />
+        <Route path="/ownRegister" element={<Reg_owner />} />        
       </Routes>
     </>
   );
