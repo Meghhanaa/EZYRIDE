@@ -12,7 +12,7 @@ const app = express();
 const port = 3000;
 
 // Middleware
-app.use(express.json());
+app.use(express.json()); 
 // app.use(cors());
 app.use(cors({
   origin: "http://localhost:3001", // Allow only specific frontend origin

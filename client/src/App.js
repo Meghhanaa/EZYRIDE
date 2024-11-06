@@ -6,10 +6,12 @@ import Main_customer from "./Pages/Main_customer";
 import Main_owner from "./Pages/Main_owner";
 import Reg_customer from "./Pages/Reg_customer";
 import Reg_owner from "./Pages/Reg_owner";
+import AboutSection from "./Pages/About";
 
 function App() {
   return (
     <>
+      
       <Navbar />
       <Routes>
         <Route index path="/" element={<Home />} />
@@ -17,6 +19,7 @@ function App() {
         <Route index path="/main_owner" element={<Main_owner />} />
         <Route path="/custRegister" element={<Reg_customer />} />
         <Route path="/ownRegister" element={<Reg_owner />} />
+        <Route path="/About" element={<AboutSection/>} />
       </Routes>
     </>
   );
