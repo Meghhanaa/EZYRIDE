@@ -10,7 +10,12 @@ const app = express();
 const port = 3000;
 
 // Middleware
+<<<<<<< HEAD
 app.use(express.json());
+=======
+app.use(express.json()); 
+// app.use(cors());
+>>>>>>> 53ef7a6560591c3ac74eaac1d1b024e13a61e8b5
 app.use(cors({
   origin: "http://localhost:3000", // Allow only specific frontend origin
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
