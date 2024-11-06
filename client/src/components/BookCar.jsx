@@ -281,7 +281,16 @@ function BookCar() {
                   <input id="droptime" value={dropTime} onChange={(e) => handleChange(e, setDropTime)} type="time" />
                 </div>
 
-                <button className="form-btn" onClick={openModal}>Book Now</button>
+                <div className="box-form__car-type">
+                  <label><i className="fa-solid fa-dollar-sign"></i> &nbsp; Required Driver <b>*</b></label>
+                  <select value={priceRange} onChange={(e) => handleChange(e, setPriceRange)}>
+                    <option>Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <button className="form-btn" onClick={openModal}>SEARCH</button>
               </form>
             </div>
           </div>

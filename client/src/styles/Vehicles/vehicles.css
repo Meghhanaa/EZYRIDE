@@ -164,6 +164,7 @@
   }
 
   .add-titlee{
+    margin-top: 8%;
     color: #750E21;
     margin-bottom: 12px;
     font-size: 25px;
@@ -228,4 +229,54 @@
   .category-buttons button:hover {
     background-color: #000;
   }
+
+  /* Tablet screens */
+@media (max-width: 768px) {
+  .add-titlee {
+    font-size: 22px;
+    margin-top: 18%;
+  }
+
+  .megh-1, .btn.button {
+    width: 80%; /* Increase width for better usability */
+  }
+
+  .category-buttons button {
+    padding: 0.8rem 2rem;
+    font-size: 0.9rem; /* Smaller font size */
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+  .add-titlee {
+    font-size: 20px;
+    margin-top: 30%;
+    text-align: center; /* Center title on smaller screens */
+  }
+
+  .megh-1, .btn.button {
+    width: 90%; /* Full width for better usability on mobile */
+  }
+
+  .category-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .category-buttons button {
+    width: 100%;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}
   
+
+.error {
+  align-items: flex-start;
+  justify-self: start;
+  color: red;
+  font-size: 0.9em;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}

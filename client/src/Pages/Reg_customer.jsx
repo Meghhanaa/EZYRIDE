@@ -25,14 +25,95 @@ const RegCustomer = () => {
   // const [alreadyCustomer, setAlreadyCustomer] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const handleInputChange = (e) => {
+//   const handleInputChange = (e) => {
+//   const { name, value } = e.target;
+
+//   if (name === 'c_no') {
+//     // Convert contactNo to BigInt
+//     setFormData({ ...formData, [name]: bigInt(value) });
+//   } else {
+//     setFormData({ ...formData, [name]: value });
+//   }
+// };
+
+const handleInputChange = (e) => {
   const { name, value } = e.target;
 
-  if (name === 'c_no') {
-    // Convert contactNo to BigInt
-    setFormData({ ...formData, [name]: bigInt(value) });
-  } else {
+  // Logic for Aadhaar number input
+  if (name === 'c_aadhar') {
+    const regex = /^\d{0,12}$/; // Allow only numbers, up to 16 digits
+    if (regex.test(value)) {
+      setFormData({ ...formData, [name]: value });
+
+      // Set error based on length
+      if (value.length === 12) {
+        setErrors({ ...errors, [name]: '' });
+      } else {
+        setErrors({ ...errors, [name]: 'Aadhaar number must be 12 digits long.' });
+      }
+    } else {
+      setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
+    }
+  }
+
+  // Logic for Pin input
+  else if (name === 'c_pin') {
+    const regex = /^\d{0,6}$/; // Allow only numbers, up to 6 digits
+    if (regex.test(value)) {
+      setFormData({ ...formData, [name]: value });
+
+      // Set error based on length
+      if (value.length === 6) {
+        setErrors({ ...errors, [name]: '' });
+      } else {
+        setErrors({ ...errors, [name]: 'Pin must be exactly 6 digits long.' });
+      }
+    } else {
+      setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
+    }
+  }
+
+  // Logic for contact number input
+  else if (name === 'c_no') {
+    // Ensure the value is numeric
+    const regex = /^\d{0,10}$/;
+    if (regex.test(value)) {
+      // Convert contactNo to BigInt (if you want to store it as BigInt)
+      setFormData({ ...formData, [name]: bigInt(value) });
+      setErrors({ ...errors, [name]: '' }); // Reset error if valid
+      // Set error based on length
+      if (value.length === 6) {
+        setErrors({ ...errors, [name]: '' });
+      } else {
+        setErrors({ ...errors, [name]: 'Must be exactly 10 digits long.' });
+      }
+    } else {
+      setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
+    }
+  }
+  
+  else if (name === 'c_lic_no') {
+    // Ensure the length is exactly 10 characters
+    if (value.length <= 16) {
+      setFormData({ ...formData, [name]: value });
+      setErrors({ ...errors, [name]: '' }); // Reset error if valid
+
+      // Set error if the length is not exactly 16
+      if (value.length === 16) {
+        setErrors({ ...errors, [name]: '' });
+      } else {
+        setErrors({ ...errors, [name]: 'License number must be exactly 16 characters long.' });
+      }
+    } else {
+      // Set error if the input exceeds 16 characters
+      setErrors({ ...errors, [name]: 'License number cannot exceed 16 characters.' });
+    }
+}
+
+  // For other inputs
+  else {
     setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' }); // Reset error for other fields
   }
 };
 
@@ -131,7 +212,7 @@ const RegCustomer = () => {
           </h2>
           <form onSubmit={handleSubmit}>
             {/* Form Fields */}
-            <div style={{ marginBottom: '16px' }}>
+            {/* <div style={{ marginBottom: '16px' }}>
               <input
                 type="text"
                 name="c_no"
@@ -148,7 +229,28 @@ const RegCustomer = () => {
                 }}
               />
               {errors.contactNo && <p style={{ color: 'red' }}>{errors.contactNo}</p>}
-            </div>
+            </div> */}
+
+            {/* Contact No. */}
+            <div style={{ marginBottom: '16px' }}>
+                <input
+                  type="text"
+                  name="c_no"
+                  placeholder="Contact No."
+                  value={formData.c_no}
+                  onChange={handleInputChange}
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    border: '1px solid #ccc',
+                    borderRadius: '5px',
+                    outline: 'none',
+                    marginBottom: '10px',
+                  }}
+                  required
+                />
+                {errors.c_no && <p style={{ color: 'red' }}>{errors.c_no}</p>}
+              </div>
 
             <div style={{ marginBottom: '16px' }}>
               <input
@@ -165,8 +267,9 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
-              {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
+              {errors.c_name && <p style={{ color: 'red' }}>{errors.c_name}</p>}
             </div>
 
             {/* Adhar No. */}
@@ -185,8 +288,9 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
-              {errors.adharNo && <p style={{ color: 'red' }}>{errors.adharNo}</p>}
+              {errors.c_aadhar && <p style={{ color: 'red' }}>{errors.c_aadhar}</p>}
             </div>
 
             {/* License No. */}
@@ -205,8 +309,9 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
-              {errors.licenseNo && <p style={{ color: 'red' }}>{errors.licenseNo}</p>}
+              {errors.c_lic_no && <p style={{ color: 'red' }}>{errors.c_lic_no}</p>}
             </div>
 
             {/* Date of Birth */}
@@ -224,8 +329,9 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
-              {errors.dob && <p style={{ color: 'red' }}>{errors.dob}</p>}
+              {errors.c_DOB && <p style={{ color: 'red' }}>{errors.c_DOB}</p>}
             </div>
 
             {/* Gender */}
@@ -249,7 +355,7 @@ const RegCustomer = () => {
                 <option value="F">Female</option>
                 <option value="O">Other</option>
               </select>
-              {errors.gender && <p style={{ color: 'red' }}>{errors.gender}</p>}
+              {errors.c_gender && <p style={{ color: 'red' }}>{errors.c_gender}</p>}
             </div>
 
             {/* Address Fields */}
@@ -268,8 +374,9 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
-              {errors.state && <p style={{ color: 'red' }}>{errors.state}</p>}
+              {errors.c_state && <p style={{ color: 'red' }}>{errors.c_state}</p>}
             </div>
 
             <div style={{ marginBottom: '16px' }}>
@@ -287,8 +394,9 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
-              {errors.city && <p style={{ color: 'red' }}>{errors.city}</p>}
+              {errors.c_city && <p style={{ color: 'red' }}>{errors.c_city}</p>}
             </div>
 
             <div style={{ marginBottom: '16px' }}>
@@ -306,8 +414,9 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
-              {errors.street && <p style={{ color: 'red' }}>{errors.street}</p>}
+              {errors.c_street && <p style={{ color: 'red' }}>{errors.c_street}</p>}
             </div>
 
             <div style={{ marginBottom: '16px' }}>
@@ -325,8 +434,9 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
-              {errors.pin && <p style={{ color: 'red' }}>{errors.pin}</p>}
+              {errors.c_pin && <p style={{ color: 'red' }}>{errors.pin}</p>}
             </div>
 
             {/* Email */}
@@ -345,8 +455,9 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
-              {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+              {errors.c_email && <p style={{ color: 'red' }}>{errors.c_email}</p>}
             </div>
 
             {/* Password */}
@@ -366,6 +477,7 @@ const RegCustomer = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               <span
                 onClick={() => setPasswordVisible(!passwordVisible)}
@@ -378,7 +490,7 @@ const RegCustomer = () => {
               >
                 {passwordVisible ? '🙈' : '👁'}
               </span>
-              {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
+              {errors.c_password  && <p style={{ color: 'red' }}>{errors.c_password }</p>}
             </div>
 
              {/* Confirm Password

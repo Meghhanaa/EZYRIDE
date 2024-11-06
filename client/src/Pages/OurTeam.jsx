@@ -3,11 +3,14 @@ import amit from "../images/ourteam/amitmondal.jpg";
 import anchal from "../images/ourteam/anchalk.jpg";
 import anurag from "../images/ourteam/anu.jpg";
 import Footer from "../components/Footer.jsx"; 
+import HeroPages from '../components/HeroPages';
+import "../styles/ourteam/ourteam.css";
 
 function OurTeam() {
     let message = "Our team is a blend of visionaries, innovators, and passionate individuals committed to transforming the way you experience mobility with EZYRIDE.";
     return (
         <section className="section-white">
+            <HeroPages name="Our Team" />
             <div className="container">
                 <div className="row">
                     <div className="col-md-12 text-center">
@@ -20,7 +23,7 @@ function OurTeam() {
                     <div className="col-sm-6 col-md-3">
                         <div className="team-item" alt="pic">
                             <img src="https://demo.epic-webdesign.com/tf-pacifico/v1/images/team2a.jpg" className="team-img" />
-                            <h3>meghna tamrakar</h3>
+                            <h3>Meghana tamrakar</h3>
                             <div className="team-info">
                                 <p>Head of ceo</p>
                             </div>

@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CarImg1 from "../images/cars-big/audi-box.png";
 import CarImg2 from "../images/cars-big/golf6-box.png";
 import CarImg3 from "../images/cars-big/toyota-box.png";
 import CarImg4 from "../images/cars-big/bmw-box.png";
 import CarImg5 from "../images/cars-big/benz-box.png";
-import BikeImg1 from "../images/bike/bike1.jpeg"; // Example bike image
-import ScootyImg1 from "../images/Scooty/scooty1.jpeg"; // Example scooty image
+import BikeImg1 from "../images/bike/bike1.jpeg"; 
+import ScootyImg1 from "../images/Scooty/scooty1.jpeg"; 
 import "../styles/Vehicles/vehicles.css";
 import HeroPages from '../components/HeroPages';
+import AddVehicle from '../components/AddVehicle'; // Import AddVehicle component
 
-// Component to display a single residence card
-const ResidenceCard = ({ imgSrc, price, title, description }) => {
+const VehiclCardComp = ({ imgSrc, price, title, description }) => {
   return (
     <article className="popular__card swiper-slide">
       <img className="popular__img" src={imgSrc} alt={title} />
@@ -29,11 +30,12 @@ const ResidenceCard = ({ imgSrc, price, title, description }) => {
   );
 };
 
-// Main component to display all residence cards and a form to add new ones
 const Models = () => {
-  const [category, setCategory] = useState('All'); // Default to showing all vehicles
-  const [properties, setProperties] = useState([
-    { imgSrc: CarImg1, price: '66,356', title: 'Indrapuri, BHopal', description: 'Audi Car', type: 'Car' },
+  const [category, setCategory] = useState('All');
+  const navigate = useNavigate();
+
+  const [items, setItems] = useState([
+    { imgSrc: CarImg1, price: '66,356', title: 'Indrapuri, Bhopal', description: 'Audi Car', type: 'Car' },
     { imgSrc: CarImg2, price: '35,159', title: 'MP Nagar, Bhopal', description: 'Golf6 Car', type: 'Car' },
     { imgSrc: CarImg3, price: '75,043', title: 'Arera Hills, Bhopal', description: 'Toyota Car', type: 'Car' },
     { imgSrc: CarImg4, price: '62,024', title: 'Kolar , Bhopal', description: 'BMW Car', type: 'Car' },
@@ -42,68 +44,65 @@ const Models = () => {
     { imgSrc: ScootyImg1, price: '10,000', title: 'Piplani, Bhopal', description: 'Scooty', type: 'Scooty' }
   ]);
 
-  const [newProperty, setNewProperty] = useState({
-    imgSrc: '',
-    price: '',
-    title: '',
-    description: '',
-    type: 'Car' // Default to 'Car'
-  });
-
-  // Handle input change for text fields
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewProperty({ ...newProperty, [name]: value });
+  const handleAddVehicle = (newVehicle) => {
+    setItems((prevItems) => [...prevItems, newVehicle]);
   };
 
-  // Handle image file upload
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setNewProperty({ ...newProperty, imgSrc: reader.result }); // Store base64 string as imgSrc
-    };
-
-    if (file) {
-      reader.readAsDataURL(file); // Convert the image file to base64 string
-    }
-  };
-
-  // Add new property to the list
-  const addProperty = () => {
-    if (newProperty.imgSrc && newProperty.price && newProperty.title && newProperty.description) {
-      setProperties([...properties, newProperty]);
-      setNewProperty({ imgSrc: '', price: '', title: '', description: '', type: 'Car' }); // Reset form fields
+  const handleCategoryChange = (newCategory) => {
+    if (newCategory === 'Add New Vehicle') {
+      navigate('/AddVehicle');
     } else {
-      alert('Please fill out all fields and upload an image.');
+      setCategory(newCategory);
     }
   };
 
-  // Filter vehicles based on the selected category
-  const filteredProperties = category === 'All'
-    ? properties
-    : properties.filter(property => property.type === category);
+  const filteredItems = category === 'All'
+    ? items
+    : items.filter(item => item.type === category);
 
   return (
-    // <HeroPages></HeroPages>
     <section className="section" id="popular">
       <HeroPages name="Vehicle Models" />
       <div className="container">
-
         {/* Category Buttons */}
         <div className="category-buttons">
-          <button onClick={() => setCategory('All')} className={category === 'All' ? 'active' : ''}>All</button>
-          <button onClick={() => setCategory('Car')} className={category === 'Car' ? 'active' : ''}>Car</button>
-          <button onClick={() => setCategory('Bike')} className={category === 'Bike' ? 'active' : ''}>Bike</button>
-          <button onClick={() => setCategory('Scooty')} className={category === 'Scooty' ? 'active' : ''}>Scooty</button>
+          <button
+            onClick={() => handleCategoryChange('All')}
+            className={category === 'All' ? 'active' : ''}
+          >
+            All
+          </button>
+          <button
+            onClick={() => handleCategoryChange('Car')}
+            className={category === 'Car' ? 'active' : ''}
+          >
+            Car
+          </button>
+          <button
+            onClick={() => handleCategoryChange('Bike')}
+            className={category === 'Bike' ? 'active' : ''}
+          >
+            Bike
+          </button>
+          <button
+            onClick={() => handleCategoryChange('Scooty')}
+            className={category === 'Scooty' ? 'active' : ''}
+          >
+            Scooty
+          </button>
+          <button
+            onClick={() => handleCategoryChange('Add New Vehicle')}
+            className={category === 'Add New Vehicle' ? 'active' : ''}
+          >
+            Add New Vehicle
+          </button>
         </div>
 
         {/* Display filtered vehicles */}
         <div className="popular__container swiper">
           <div className="swiper-wrapper">
-            {filteredProperties.map((property, index) => (
-              <ResidenceCard
+            {filteredItems.map((property, index) => (
+              <VehiclCardComp
                 key={index}
                 imgSrc={property.imgSrc}
                 price={property.price}
@@ -112,17 +111,24 @@ const Models = () => {
               />
             ))}
           </div>
-
-          <div className="swiper-button-next">
-            <i className="bx bx-chevron-right"></i>
-          </div>
-          <div className="swiper-button-prev">
-            <i className="bx bx-chevron-left"></i>
-          </div>
         </div>
 
+        {/* Add New Vehicle Form */}
+        {category === 'Add New Vehicle' && (
+          <AddVehicle addVehicle={handleAddVehicle} />
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default Models;
+
+
+
+
         {/* Form to add a new vehicle */}
-        <div className="add-property-form">
+        {/* <div className="add-property-form">
           <h1 className='add-titlee'>Add New Vehicle</h1>
           <input
             className="megh-1"
@@ -168,10 +174,4 @@ const Models = () => {
           <a href="#" className="btn button" onClick={addProperty}>
             Add Vehicle
           </a>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Models;
+        </div> */}
