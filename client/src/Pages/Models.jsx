@@ -10,8 +10,18 @@ import ScootyImg1 from "../images/Scooty/scooty1.jpeg";
 import "../styles/Vehicles/vehicles.css";
 import HeroPages from '../components/HeroPages';
 import AddVehicle from '../components/AddVehicle'; // Import AddVehicle component
-
+const isRegistered = true;
 const VehiclCardComp = ({ imgSrc, price, title, description }) => {
+  const navigate = useNavigate();
+  const handleBookNowClick = () => {
+    if (isRegistered) {
+      // Redirect to BookModel page
+      navigate("/BookModel");
+    } else {
+      // Redirect to CustomerRegister page
+      navigate("/RegCustomer");
+    }
+  };
   return (
     <article className="popular__card swiper-slide">
       <img className="popular__img" src={imgSrc} alt={title} />
@@ -22,7 +32,9 @@ const VehiclCardComp = ({ imgSrc, price, title, description }) => {
         <h1 className="popular__title">{title}</h1>
         <p className="popular__description">{description}</p>
         <div className="popular__buttons">
-          <button className="popular__button book">Book Now</button>
+        <button className="popular__button book" onClick={handleBookNowClick}>
+            Book Now
+          </button>
           <button className="popular__button more">More</button>
         </div>
       </div>
