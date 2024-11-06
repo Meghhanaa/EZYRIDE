@@ -37,10 +37,10 @@ function Navbar() {
           <ul className="mobile-navbar__links">
             <li><Link onClick={toggleNav} to="/">Home</Link></li>
             <li><Link onClick={toggleNav} to="/about">About</Link></li>
-            <li><Link onClick={toggleNav} to="/models">Models</Link></li>
-            <li><Link onClick={toggleNav} to="/testimonials">Testimonials</Link></li>
-            <li><Link onClick={toggleNav} to="/team">Our Team</Link></li>
-            <li><Link onClick={toggleNav} to="/contact">Contact</Link></li>
+            <li><Link onClick={toggleNav} to="/models">Vehicle Models</Link></li>
+            <li><Link onClick={toggleNav} to="/Safety">Safety</Link></li>
+            <li><Link onClick={toggleNav} to="/OurTeam">Our Team</Link></li>
+            <li><Link onClick={toggleNav} to="/ContactEzy">Contact</Link></li>
           </ul>
 
           {/* User Section for Mobile */}
@@ -142,9 +142,9 @@ function Navbar() {
             <li><Link className="home-link" to="/">Home</Link></li>
             <li><Link className="about-link" to="/about">About</Link></li>
             <li><Link className="models-link" to="/models">Vehicle Models</Link></li>
-            <li><Link className="testi-link" to="/testimonials">Testimonials</Link></li>
-            <li><Link className="team-link" to="/team">Our Team</Link></li>
-            <li><Link className="contact-link" to="/contact">Contact</Link></li>
+            <li><Link className="safety-link" to="/Safety">Safety</Link></li>
+            <li><Link className="team-link" to="/OurTeam">Our Team</Link></li>
+            <li><Link className="contact-link" to="/contactEzy">Contact</Link></li>
           </ul>
 
           <div className="navbar__buttons">
