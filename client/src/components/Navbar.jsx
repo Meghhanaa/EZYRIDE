@@ -40,7 +40,7 @@ function Navbar() {
             <li><Link onClick={toggleNav} to="/models">Models</Link></li>
             <li><Link onClick={toggleNav} to="/testimonials">Testimonials</Link></li>
             <li><Link onClick={toggleNav} to="/team">Our Team</Link></li>
-            <li><Link onClick={toggleNav} to="/contact">Contact</Link></li>
+            <li><Link onClick={toggleNav} to="/contactEzy">Contact</Link></li>
           </ul>
 
           {/* Sign In Button for Mobile */}
@@ -146,7 +146,7 @@ function Navbar() {
             <li><Link className="models-link" to="/models">Vehicle Models</Link></li>
             <li><Link className="testi-link" to="/testimonials">Testimonials</Link></li>
             <li><Link className="team-link" to="/team">Our Team</Link></li>
-            <li><Link className="contact-link" to="/contact">Contact</Link></li>
+            <li><Link className="contact-link" to="/contactEzy">Contact</Link></li>
           </ul>
 
           <div className="navbar__buttons">
