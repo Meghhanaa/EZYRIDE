@@ -1,13 +1,28 @@
 import React from 'react';
-import './Contact.css';
+import '../styles/Contact/Contact.css';
+import p1 from '../images/contact/contact.png';
 
-const Contact = () => {
+const ContactEzy = () => {
   return (
     <div className="contact_us_8">
-      <div className="responsive-container-block container">
-        <form className="form-box">
-          <div className="container-block form-wrapper">
-            <div className="responsive-container-block">
+      <div className="text-section">
+        <h2>Contact Us</h2>
+        <p className='har-p'>
+          Feel free to reach out through the contact form or find our contact
+          information below. Your feedback, questions, and suggestions are
+          important to us as we strive to provide exceptional service to our
+          community.
+        </p>
+      </div>
+      
+      <div className="bottom-content">
+        <div className="content-wrapper"> 
+          <div className="image-section">
+            <img src={p1} alt="Contact Illustration" />
+          </div>    
+          
+          <form className="form-box">
+            <div className="container-block form-wrapper">
               <div className="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-8 wk-ipadp-12">
                 <input className="input" name="FirstName" placeholder="Enter your Name" required />
               </div>
@@ -25,64 +40,22 @@ const Contact = () => {
                 </select>
               </div>
               <div className="responsive-cell-block">
-                <textarea
-                  className="textinput"
-                  placeholder="Comment"
-                ></textarea>
+                <textarea className="textinput" placeholder="Comment"></textarea>
               </div>
-            </div>
-            <div className="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-8 wk-ipadp-12 checkbox-container">
-              <div className="checkbox-container">
+
+              <div className="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-8 wk-ipadp-12 checkbox-container">
                 <input type="checkbox" />
-                <p className="checkbox-text">
-                  All the fields are correct
-                </p>
+                <p className="checkbox-text">All the fields are correct</p>
+              </div>
+              <div className="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-8 wk-ipadp-12">
+                <button type="submit" className="harstuti-btn">Submit</button>
               </div>
             </div>
-            <div className="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-8 wk-ipadp-12">
-              <button type="submit" className="submit-btn">Submit</button>
-            </div>
-            <div className="get-in-touch">
-              <h2 className="text-blk contactus-head font-bold mb-80">Get in Touch</h2>
-              <p className="text-blk contactus-subhead">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis diam lectus sapien.
-              </p>
-              <div className="social-media-links">
-                <a href="#">
-                  <img
-                    className="link-img"
-                    src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-twitter.png"
-                    alt="Twitter"
-                  />
-                </a>
-                <a href="#">
-                  <img
-                    className="link-img"
-                    src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-facebook.png"
-                    alt="Facebook"
-                  />
-                </a>
-                <a href="#">
-                  <img
-                    className="link-img"
-                    src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-google.png"
-                    alt="Google"
-                  />
-                </a>
-                <a href="#">
-                  <img
-                    className="link-img"
-                    src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-instagram.png"
-                    alt="Instagram"
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-        </form>
+          </form>        
+        </div>
       </div>
     </div>
   );
 };
 
-export default Contact;
+export default ContactEzy;
