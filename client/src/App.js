@@ -14,6 +14,7 @@ import OurTeam from "./Pages/OurTeam";
 import AddVehicle from "./components/AddVehicle";
 import Safety from "./Pages/Safety";
 import BookModel from "./components/BookModel";
+import { ViewProvider } from "./Context_api/contextApi";
 
 function App() {
   // Initialize properties state
@@ -26,7 +27,7 @@ function App() {
 
   return (
     <>
-      
+      <ViewProvider>
       <Navbar />
       <Routes>
         <Route index path="/" element={<Home />} />
@@ -45,6 +46,7 @@ function App() {
         <Route path="/bookModel" element={<BookModel/>} />
         {/* <Route path="/ContactEzy" element={<ContactEzy />} /> */}
       </Routes>
+      </ViewProvider>
     </>
   );
 }

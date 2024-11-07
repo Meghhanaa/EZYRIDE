@@ -1,61 +1,67 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useViewContext } from '../Context_api/contextApi';
 
 const MainCustomer = () => {
-  const [formData, setFormData] = useState({
-    c_no: '',
-    c_password: '',
-  });
 
-  const [errors, setErrors] = useState({});
+  const {handleInputChange,handleSubmit,formData,errors,Message,userName}=useViewContext();
+  // const [formData, setFormData] = useState({
+  //   c_no: '',
+  //   c_password: '',
+  // });
 
-  const navigate = useNavigate();
+  // const [errors, setErrors] = useState({});
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // const navigate = useNavigate();
 
-  const validateForm = () => {
-    const newErrors = {};
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
 
-    // Validate contact number (must be exactly 10 digits)
-    if (!formData.c_no) {
-      newErrors.c_no = 'Contact is required';
-    } else if (!/^\d{10}$/.test(formData.c_no)) {
-      newErrors.c_no = 'Contact number must be a 10-digit numeric value';
-    }
+  // if (name === 'contact') {
+  //   // Convert contactNo to BigInt
+  //   setFormData({ ...formData, [name]: bigInt(value) });
+  // } else {
+  //   setFormData({ ...formData, [name]: value });
+  // }
+  // };
 
-    // Validate password
-    if (!formData.c_password) {
-      newErrors.c_password = 'Password is required';
-    }
+  // const validateForm = () => {
+  //   const newErrors = {};
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  //   if (!formData.c_no) newErrors.c_no = 'Contact is required';
+  //   if (!formData.c_password) newErrors.c_password = 'Password is required';
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      try {
-        console.log('Form Data:', formData);
-        const response = await axios.post('http://localhost:3000/customer_login', formData, {
-          headers: { 'Content-Type': 'application/json' },
-        });
-        console.log(response.data.message);
-        navigate('/');
-        localStorage.setItem('userName', response.data.user.name);
-      } catch (error) {
-        if (error.response) {
-          console.log(error.response.data.message || 'An error occurred. Please try again.');
-        } else {
-          console.log('An error occurred. Please try again.');
-        }
-      }
-    }
-  };
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
+
+  // const handleSubmit = async(e) => {
+  //   e.preventDefault();
+  //   const validationErrors = validateForm();
+  //   if (validateForm()) {
+  //     try {
+  //       console.log('Form Data:', formData);
+  //       const response = await axios.post('http://localhost:3001/customer_login', formData, {
+  //       headers: { 'Content-Type': 'application/json' }
+  //     });
+  //       // setMessage(response.data.message);
+  //       console.log(response.data.message);
+  //       navigate('/');
+  //       localStorage.setItem('userName',response.data.user.name);
+  //       console.log(response.data.message) // You might want to save this token in localStorage or context
+  //       // localStorage.setItem('token', response.data.token);
+  //     } catch (error) {
+  //       if (error.response) {
+  //         console.log(error.response.data.message || 'An error occurred. Please try again.');
+  //       } else {
+  //         console.log('An error occurred. Please try again.');
+  //       }
+  //     }
+  //   } else {
+  //     setErrors(validationErrors);
+  //   }
+  // };
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f3f3f3', fontFamily: 'Arial, sans-serif' }}>
@@ -92,6 +98,10 @@ const MainCustomer = () => {
             <button type="submit" style={{ width: '100%', backgroundColor: '#750E21', color: '#fff', padding: '12px', borderRadius: '5px', border: 'none', cursor: 'pointer', fontSize: '1rem', transition: 'background-color 0.3s ease' }}>
               SIGN IN
             </button>
+
+            <p style={{width: '100%',
+                backgroundColor: '',
+                color: 'black',border:"1px solid red",height:'20%'}}>{Message}</p>
           </form>
         </div>
 

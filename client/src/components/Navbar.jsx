@@ -4,19 +4,19 @@ import { useEffect, useState } from "react";
 import { TbGridDots } from "react-icons/tb";
 import { FaTimes } from "react-icons/fa";
 import UserImage from "../images/card-image.png"; // Path to user image
+import { useViewContext } from "../Context_api/contextApi";
 
 function Navbar() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration
-  const [userName, setUserName] = useState('');
-
+  const {userName}=useViewContext();
   useEffect(() => {
     // Retrieve user name from local storage
-    const storedName = localStorage.getItem('userName');
-    if (storedName) {
-      setUserName(storedName);
-    }
-  }, []);
+    // const storedName = localStorage.getItem('userName');
+    // if (storedName) {
+    //   setUserName(storedName);
+    // }
+  }, []);
 
   const toggleNav = () => {
     setNav(!nav); // Toggle mobile menu
