@@ -513,7 +513,7 @@ const RegOwner = () => {
     if (validationErrors) {
       try {
         console.log('Form Data:', formData);
-        const response = await axios.post('http://localhost:3000/owner_register', formData, {
+        const response = await axios.post('http://localhost:3001/owner_register', formData, {
         headers: { 'Content-Type': 'application/json' }
       });
         // setMessage(response.data.message);

@@ -148,23 +148,7 @@ function Navbar() {
           </ul>
 
           <div className="navbar__buttons">
-            {userName ? (
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <img
-                  src={UserImage}
-                  alt="user-icon"
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    cursor: "pointer"
-                  }}
-                  title={`Hello, ${userName}`}
-                />
-                <span style={{ fontWeight: "bold", color: "#750E21" }}>{userName}</span>
-              </div>
-            ) : (
+           
               <div className="navbar__register-dropdown" style={{ position: "relative", display: "inline-block" }}>
                 <button
                   className="navbar_buttons_register"
@@ -234,7 +218,6 @@ function Navbar() {
                   </div>
                 )}
               </div>
-            )}
           </div>
 
           {/* Mobile Hamburger Menu */}

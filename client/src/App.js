@@ -13,6 +13,7 @@ import ContactEzy from "./Pages/Contact";
 import OurTeam from "./Pages/OurTeam";
 import AddVehicle from "./components/AddVehicle";
 import Safety from "./Pages/Safety";
+import { ViewProvider } from "./Context_api/contextApi";
 
 function App() {
   // Initialize properties state
@@ -25,7 +26,7 @@ function App() {
 
   return (
     <>
-      
+      <ViewProvider>
       <Navbar />
       <Routes>
         <Route index path="/" element={<Home />} />
@@ -43,6 +44,7 @@ function App() {
         <Route path="/AddVehicle" element={<AddVehicle addVehicle={addVehicle} />} />
         {/* <Route path="/ContactEzy" element={<ContactEzy />} /> */}
       </Routes>
+      </ViewProvider>
     </>
   );
 }
