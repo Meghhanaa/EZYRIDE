@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useState,useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import bigInt from 'big-integer';
 import { useNavigate } from 'react-router-dom';
+
 // Create context
 const viewContext = createContext();
 
@@ -16,20 +17,20 @@ const ViewProvider = ({ children }) => {
   });
 
   const [errors, setErrors] = useState({});
-  const [Message, setMessage] = useState("");
-  const [userName, setuserName] = useState("");
+  const [Message, setMessage] = useState('');
+  const [userName, setUserName] = useState("");
 
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-  if (name === 'contact') {
-    // Convert contactNo to BigInt
-    setFormData({ ...formData, [name]: bigInt(value) });
-  } else {
-    setFormData({ ...formData, [name]: value });
-  }
+    if (name === 'contact') {
+      // Convert contactNo to BigInt
+      setFormData({ ...formData, [name]: bigInt(value) });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const validateForm = () => {
@@ -42,21 +43,20 @@ const ViewProvider = ({ children }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
-    if (validateForm()) {
+    if (validationErrors) {
       try {
         console.log('Form Data:', formData);
         const response = await axios.post('http://localhost:3001/customer_login', formData, {
-        headers: { 'Content-Type': 'application/json' }
-      });
-        setMessage(response.data.message);
+          headers: { 'Content-Type': 'application/json' },
+        });
+        setUserName(response.data.user.name);
         navigate('/');
-        setuserName(response.data.user.name);
-        console.log(Message) 
       } catch (error) {
         if (error.response) {
+          setMessage(error.response.data.message);
           console.log(error.response.data.message || 'An error occurred. Please try again.');
         } else {
           console.log('An error occurred. Please try again.');
@@ -66,8 +66,7 @@ const handleSubmit = async(e) => {
       setErrors(validationErrors);
     }
   };
-
-  const allValue = { handleSubmit,handleInputChange,formData,errors,userName,Message};
+  const allValue = { handleSubmit, handleInputChange, formData, errors, userName, Message };
 
   return (
     <viewContext.Provider value={allValue}>
