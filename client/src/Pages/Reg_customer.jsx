@@ -146,7 +146,7 @@ const handleInputChange = (e) => {
     if (validateForm()) {
       try {
         console.log('Form Data:', formData);
-        const response = await axios.post('http://localhost:3000/customer_register', formData, {
+        const response = await axios.post('http://localhost:3001/customer_register', formData, {
         headers: { 'Content-Type': 'application/json' }
       });
         // setMessage(response.data.message);
