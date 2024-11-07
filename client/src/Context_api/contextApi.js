@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useState,useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import bigInt from 'big-integer';
 import { useNavigate } from 'react-router-dom';
+
 // Create context
 const viewContext = createContext();
 const useViewContext = () => useContext(viewContext);
@@ -23,12 +24,12 @@ const ViewProvider = ({ children }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-  if (name === 'contact') {
-    // Convert contactNo to BigInt
-    setFormData({ ...formData, [name]: bigInt(value) });
-  } else {
-    setFormData({ ...formData, [name]: value });
-  }
+    if (name === 'contact') {
+      // Convert contactNo to BigInt
+      setFormData({ ...formData, [name]: bigInt(value) });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const validateForm = () => {
@@ -41,10 +42,10 @@ const ViewProvider = ({ children }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
-    if (validateForm()) {
+    if (validationErrors) {
       try {
         console.log('Form Data:', formData);
         const response = await axios.post('http://localhost:3001/customer_login', formData, {

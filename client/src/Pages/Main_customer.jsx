@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useViewContext } from '../Context_api/contextApi';
 
 const MainCustomer = () => {
 
-  const {handleInputChange,handleSubmit,formData,errors,mess,userName}=useViewContext();
+  const {handleInputChange,handleSubmit,formData,errors,Message}=useViewContext();
   // const [formData, setFormData] = useState({
   //   c_no: '',
   //   c_password: '',
@@ -63,6 +63,12 @@ const MainCustomer = () => {
   //   }
   // };
 
+  // useEffect(() => {
+  //   if (Message) {
+  //     console.log(Message);  // This will log the Message whenever it changes
+  //   }
+  // }, [Message]);  // Dependency on Message
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f3f3f3', fontFamily: 'Arial, sans-serif' }}>
       <div style={{ width: '100%', maxWidth: '1100px', display: 'flex', backgroundColor: '#fff', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)', borderRadius: '10px', overflow: 'hidden' }}>
@@ -99,9 +105,17 @@ const MainCustomer = () => {
               SIGN IN
             </button>
 
-            <p style={{width: '100%',
-                backgroundColor: '',
-                color: 'black',border:"1px solid red",height:'20%'}}>{mess}</p>
+            {Message && (
+  <p
+    style={{
+      color: Message.includes('successful') ? 'green' : 'red', // Green for success, red for error
+      padding: '10px',
+      marginTop: '10px',
+    }}
+  >
+    <center>{Message}</center>
+  </p>
+)}
           </form>
         </div>
 
