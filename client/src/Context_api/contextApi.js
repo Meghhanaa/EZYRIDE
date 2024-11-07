@@ -16,6 +16,7 @@ const ViewProvider = ({ children }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [userName, setuserName] = useState("");
 
   const navigate = useNavigate();
 
@@ -52,7 +53,7 @@ const handleSubmit = async(e) => {
         // setMessage(response.data.message);
         console.log(response.data.message);
         navigate('/');
-        localStorage.setItem('userName',response.data.user.name);
+        setuserName(response.data.user.name);
         console.log(response.data.message) // You might want to save this token in localStorage or context
         // localStorage.setItem('token', response.data.token);
       } catch (error) {
@@ -67,7 +68,7 @@ const handleSubmit = async(e) => {
     }
   };
 
-  const allValue = { handleSubmit,handleInputChange,formData,errors};
+  const allValue = { handleSubmit,handleInputChange,formData,errors,userName};
 
   return (
     <viewContext.Provider value={allValue}>
