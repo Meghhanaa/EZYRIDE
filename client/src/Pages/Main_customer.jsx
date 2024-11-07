@@ -5,7 +5,7 @@ import { useViewContext } from '../Context_api/contextApi';
 
 const MainCustomer = () => {
 
-  const {handleInputChange,handleSubmit,formData,errors,Message,userName}=useViewContext();
+  const {handleInputChange,handleSubmit,formData,errors,mess,userName}=useViewContext();
   // const [formData, setFormData] = useState({
   //   c_no: '',
   //   c_password: '',
@@ -45,15 +45,15 @@ const MainCustomer = () => {
   //       const response = await axios.post('http://localhost:3001/customer_login', formData, {
   //       headers: { 'Content-Type': 'application/json' }
   //     });
-  //       // setMessage(response.data.message);
-  //       console.log(response.data.message);
+  //       // setmess(response.data.mess);
+  //       console.log(response.data.mess);
   //       navigate('/');
   //       localStorage.setItem('userName',response.data.user.name);
-  //       console.log(response.data.message) // You might want to save this token in localStorage or context
+  //       console.log(response.data.mess) // You might want to save this token in localStorage or context
   //       // localStorage.setItem('token', response.data.token);
   //     } catch (error) {
   //       if (error.response) {
-  //         console.log(error.response.data.message || 'An error occurred. Please try again.');
+  //         console.log(error.response.data.mess || 'An error occurred. Please try again.');
   //       } else {
   //         console.log('An error occurred. Please try again.');
   //       }
@@ -101,7 +101,7 @@ const MainCustomer = () => {
 
             <p style={{width: '100%',
                 backgroundColor: '',
-                color: 'black',border:"1px solid red",height:'20%'}}>{Message}</p>
+                color: 'black',border:"1px solid red",height:'20%'}}>{mess}</p>
           </form>
         </div>
 
