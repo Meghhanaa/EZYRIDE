@@ -10,16 +10,25 @@ import ScootyImg1 from "../images/Scooty/scooty1.jpeg";
 import "../styles/Vehicles/vehicles.css";
 import HeroPages from '../components/HeroPages';
 import AddVehicle from '../components/AddVehicle'; // Import AddVehicle component
-const isRegistered = true;
+
+
 const VehiclCardComp = ({ imgSrc, price, title, description }) => {
+  const isRegistered = true;
   const navigate = useNavigate();
   const handleBookNowClick = () => {
     if (isRegistered) {
-      // Redirect to BookModel page
-      navigate("/BookModel");
+      // Navigate to the BookModel page and pass the props using state
+      navigate('/bookModel', {
+        state: {
+          imgSrc,
+          price,
+          title,
+          description,
+        },
+      });
     } else {
       // Redirect to CustomerRegister page
-      navigate("/RegCustomer");
+      navigate("/custRegister");
     }
   };
   return (
