@@ -16,6 +16,7 @@ const ViewProvider = ({ children }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [Message, setMessage] = useState("");
   const [userName, setuserName] = useState("");
 
   const navigate = useNavigate();
@@ -50,12 +51,10 @@ const handleSubmit = async(e) => {
         const response = await axios.post('http://localhost:3001/customer_login', formData, {
         headers: { 'Content-Type': 'application/json' }
       });
-        // setMessage(response.data.message);
-        console.log(response.data.message);
+        setMessage(response.data.message);
         navigate('/');
         setuserName(response.data.user.name);
-        console.log(response.data.message) // You might want to save this token in localStorage or context
-        // localStorage.setItem('token', response.data.token);
+        console.log(Message) 
       } catch (error) {
         if (error.response) {
           console.log(error.response.data.message || 'An error occurred. Please try again.');
@@ -68,7 +67,7 @@ const handleSubmit = async(e) => {
     }
   };
 
-  const allValue = { handleSubmit,handleInputChange,formData,errors,userName};
+  const allValue = { handleSubmit,handleInputChange,formData,errors,userName,Message};
 
   return (
     <viewContext.Provider value={allValue}>

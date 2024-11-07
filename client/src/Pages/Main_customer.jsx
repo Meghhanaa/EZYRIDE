@@ -5,7 +5,7 @@ import { useViewContext } from '../Context_api/contextApi';
 
 const MainCustomer = () => {
 
-  const {handleInputChange,handleSubmit,formData,errors}=useViewContext();
+  const {handleInputChange,handleSubmit,formData,errors,Message,userName}=useViewContext();
   // const [formData, setFormData] = useState({
   //   c_no: '',
   //   c_password: '',
@@ -175,6 +175,10 @@ const MainCustomer = () => {
             >
               SIGN IN
             </button>
+
+            <p style={{width: '100%',
+                backgroundColor: '',
+                color: 'black',border:"1px solid red",height:'20%'}}>{Message}</p>
           </form>
         </div>
 
