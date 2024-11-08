@@ -147,7 +147,7 @@ app.get('/vehicles', async (req, res) => {
 
         // Start building the SQL query with basic vehicle selection and include owner address
         let sqlQuery = `
-            SELECT v.v_insurance, v.v_name, v.v_type, v.v_rto, v.v_color, v.v_mileage, v.v_engine_type, v.o_no, v.v_image, o.o_street
+            SELECT v.v_insurance, v.v_name, v.v_type, v.v_rto, v.v_color, v.v_mileage,v.v_pay, v.v_engine_type, v.o_no, v.v_image, o.o_street
             FROM vehicle v
             JOIN owner o ON v.o_no = o.o_no
             WHERE o.o_no IN (SELECT DISTINCT d.o_no FROM driver d)
@@ -186,6 +186,8 @@ app.get('/vehicles', async (req, res) => {
         const [rows] = await pool.execute(sqlQuery, queryParams);
 
         // Send the response with the filtered vehicles
+        console.log("happy")
+        console.log(rows)
         res.status(200).json(rows);
     } catch (error) {
         console.error('Error fetching vehicles:', error);
