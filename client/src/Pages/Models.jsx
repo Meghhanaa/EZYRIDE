@@ -46,10 +46,10 @@ const VehiclCardComp = ({ imgSrc, price, title, description }) => {
 
 
 const Models = () => {
-  const { VehicleData } = useViewContext(); // Access context values
-  const [category, setCategory] = useState('All');
-  const [items, setItems] = useState([]);
-  const navigate = useNavigate();
+  const { vehicle } = useViewContext(); // Access context values
+  // const [category, setCategory] = useState('All');
+  // const [items, setItems] = useState([]);
+  // const navigate = useNavigate();
 
   // // Fetch data from backend
   // useEffect(() => {
@@ -121,13 +121,13 @@ const Models = () => {
         {/* Display filtered vehicles */}
         <div className="popular__container swiper">
           <div className="swiper-wrapper">
-            {VehicleData.map((property, index) => (
+            {vehicle.map((property, index) => (
               <VehiclCardComp
-                key={index}
-                imgSrc={property.imgSrc}
-                price={property.price}
-                title={property.title}
-                description={property.description}
+                key={property.v_insurance}
+                imgSrc={property.v_image}
+                price={property.v_pay}
+                title={property.v_name}
+                description={property.v_mileage}
               />
             ))}
           </div>
