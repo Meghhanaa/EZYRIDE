@@ -1,3 +1,7 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+
 .section-white {
     background: #fff;
     padding: 70px 0;
@@ -17,17 +21,22 @@
 
 .row {
     margin-top: 40px;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 .team-item {
+    
     background: #f4f5f6;
     text-align: center;
     margin: 20px 0;
     padding: 50px 20px 40px 20px;
     border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.25s ease-in-out;
+      
 }
-
+  
+  
 .team-item:hover {
     background: #800000;
     color: white;
@@ -65,8 +74,13 @@
     padding: 6px;
     background-color: #dedede;
     border-radius: 50%;
-}
-
+    display: flex; 
+    justify-content: center;  
+    align-items: center;
+    margin-left: 30%;  
+  }
+    
+  
 ul.team-icon {
     margin-top: 25px;
     padding: 0;

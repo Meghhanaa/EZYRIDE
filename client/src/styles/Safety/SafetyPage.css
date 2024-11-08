@@ -1,0 +1,67 @@
+
+.safety-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem;
+  animation: fadeInUp 0.8s ease forwards;
+
+  
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin: 10rem 0 2rem;
+  font-weight: bolder;
+  color: maroon;
+}
+
+.header p {
+  font-size: 2rem;
+  max-width: 600px;
+  margin: 0.5rem auto;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.contact-section {
+  text-align: center;
+  padding: 2rem;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.contact-section h2 {
+  font-size: 1.8rem;
+  color:maroon;
+  margin-bottom: 0.5rem;
+}
+
+.contact-section p {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-button {
+  padding: 0.8rem 1.5rem;
+  background-color: maroon;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: maroon;
+  transform: scale(1.05);
+}
