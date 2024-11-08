@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 import bigInt from 'big-integer';
 import { useNavigate } from 'react-router-dom';
@@ -9,24 +9,22 @@ const useViewContext = () => useContext(viewContext);
 
 // Custom hook to use the context for the Customer Login
 const ViewProvider = ({ children }) => {
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     c_no: '',
     c_password: '',
   });
 
   const [errors, setErrors] = useState({});
-  const [mess, setmess] = useState("MEGHANA");
-  const [userName, setuserName] = useState("");
-
-  const navigate = useNavigate();
+  const [mess, setMess] = useState("");
+  const [userName, setUserName] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'contact') {
-      // Convert contactNo to BigInt
-      setFormData({ ...formData, [name]: bigInt(value) });
+    if (name === 'c_no') {
+      // Convert contact number to BigInt if necessary
+      setFormData({ ...formData, [name]: bigInt(value).toString() });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -44,65 +42,60 @@ const ViewProvider = ({ children }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validateForm();
-    if (validationErrors) {
+    if (validateForm()) {
       try {
         console.log('Form Data:', formData);
         const response = await axios.post('http://localhost:3001/customer_login', formData, {
-        headers: { 'Content-Type': 'application/json' }
-      });
-        setmess(response.data.mess);
+          headers: { 'Content-Type': 'application/json' }
+        });
+        setMess(response.data.mess);
+        setUserName(response.data.user.name);
         navigate('/');
-        setuserName(response.data.user.name);
-        console.log(mess) 
       } catch (error) {
         if (error.response) {
-          setmess(error.response.data.mess || 'An error occurred. Please try again.');
+          setMess(error.response.data.mess || 'An error occurred. Please try again.');
         } else {
           console.log('An error occurred. Please try again.');
-          setmess('An error occurred. Please try again.');
+          setMess('An error occurred. Please try again.');
         }
       }
-    } else {
-      setErrors(validationErrors);
     }
   };
 
-  
-// Custom hook to use the context for the SEARCH A VEHICLE
-
-  // Search data state
-  const [searchData, setSearchData] = useState({
+  const [searchVehData, setSearchVehData] = useState({
+    carType: '',
+    color: '',
     vehicleType: '',
+    priceRange: '',
+    pickUp: '',
+    dropOff: '',
+    pickDate: '',
+    pickTime: '',
+    dropDate: '',
+    dropTime: '',
+    carImg: '',
+    driverRequired: ''
   });
 
-  // State to hold the fetched vehicle data
-  const [VehicleData, setVehicleData] = useState([]);
-  const [Message, setMessage] = useState(''); // State for error Messageages, if any
+  const vehicleInputChange = (e) => {
+    console.log("current initiated:", searchVehData);
+  const { name, value } = e.target;
+  setSearchVehData(prevData => ({ ...prevData, [name]: value }));
+};
 
-  // Handle input change for search
-  const handleSearchChange = (e) => {
-    const { name, value } = e.target;
-    setSearchData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Fetch data and store it in VehicleData
+  const [vehicle,setVehicle]=useState([]);
   const handleSearch = async () => {
     try {
+      console.log("Search initiated:", searchVehData);
       const response = await axios.get(`http://localhost:3001/vehicles`, {
-        params: { type: searchData },
+        params: searchVehData,
       });
       console.log('Search Results:', response.data);
-
-      // Store the fetched data in VehicleData
-      setVehicleData(response.data);
-      setMessage(''); // Clear any previous error Messageages
-
-      // Navigate to the Models page with the fetched data
+      setVehicle(response.data);
+      console.log('Results:', vehicle);
       navigate('/models');
     } catch (error) {
       console.log('Error fetching vehicles:', error);
-      setMessage('An error occurred while searching. Please try again.');
     }
   };
 
@@ -113,14 +106,11 @@ const ViewProvider = ({ children }) => {
     errors,
     userName,
     mess,
-    searchData,
-    handleSearchChange,
     handleSearch,
-    VehicleData, // Expose VehicleData to be used in components like Models
-    Message,
-  }; 
-
-  // const allValue = { handleSubmit,handleInputChange,formData,errors,userName,mess};
+    vehicleInputChange,
+    searchVehData,
+    vehicle,
+  };
 
   return (
     <viewContext.Provider value={allValue}>

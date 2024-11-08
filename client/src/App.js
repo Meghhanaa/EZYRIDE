@@ -12,7 +12,7 @@ import AboutSection from "./Pages/About";
 import ContactEzy from "./Pages/Contact";
 import OurTeam from "./Pages/OurTeam";
 import AddVehicle from "./components/AddVehicle";
-import Safety from "./Pages/Safety";
+import Safety from "./Pages/SafetyPage";
 import BookModel from "./components/BookModel";
 import { ViewProvider } from "./Context_api/contextApi";
 import AdminLogin from "./components/adminLogin";
@@ -20,10 +20,8 @@ import DummyCom from "./components/dummyCom";
 // import dummyCom from "./components/dummyCom";
 
 function App() {
-  // Initialize properties state
   const [properties, setProperties] = useState([]);
 
-  // Define addVehicle function to add a new vehicle to properties
   const addVehicle = (vehicle) => {
     setProperties([...properties, vehicle]);
   };
@@ -34,7 +32,6 @@ function App() {
       {/* <Navbar /> */}
       <Routes>
         <Route index path="/" element={<Home />} />
-        {/* <Route index path="/Vehicles" element={<Vehicles />} /> */}
         <Route index path="/Models" element={<Models properties={properties} />} />
         <Route index path="/main_customer" element={<Main_customer />} />
         <Route index path="/main_owner" element={<Main_owner />} />

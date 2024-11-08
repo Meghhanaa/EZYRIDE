@@ -40,6 +40,7 @@ const Safety = () => {
       </section>
     </div>
     </>
+
   );
 };
 
