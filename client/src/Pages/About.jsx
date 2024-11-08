@@ -6,10 +6,12 @@ import Icon2 from "../images/about/icon2.png"; // Update the path as necessary
 import Icon3 from "../images/about/icon3.png"; // Update the path as necessary
 import "../styles/About/AboutSection.css"; // Import the CSS file
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const AboutSection = () => {
   return (
     <>
+    <Navbar/>
     <section className="about-section">
       <div className="about-content">
         <div className="about-image-wrapper">

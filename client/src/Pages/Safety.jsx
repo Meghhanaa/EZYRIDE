@@ -1,8 +1,11 @@
 import React from 'react';
 import '../styles/Safety/Safety.css'; // Make sure to style it accordingly in CSS
+import Navbar from '../components/Navbar';
 
 const Safety = () => {
   return (
+    <>
+    <Navbar/>
     <div className="safety-container">
       {/* Safety for All Section */}
       <section className="safety-for-all">
@@ -36,6 +39,7 @@ const Safety = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

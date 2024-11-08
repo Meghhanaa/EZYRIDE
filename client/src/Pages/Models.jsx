@@ -4,6 +4,7 @@ import HeroPages from '../components/HeroPages';
 import AddVehicle from '../components/AddVehicle';
 import "../styles/Vehicles/vehicles.css";
 import { useViewContext } from '../Context_api/contextApi';
+import Navbar from '../components/Navbar';
 
 const VehiclCardComp = ({ imgSrc, price, title, description }) => {
   const isRegistered = true;
@@ -81,6 +82,8 @@ const Models = () => {
   //   : items.filter(item => item.type === category);
 
   return (
+    <>
+    <Navbar/>
     <section className="section" id="popular">
       <HeroPages name="Vehicle Models" />
       <div className="container">
@@ -139,6 +142,7 @@ const Models = () => {
         )} */}
       </div>
     </section>
+    </>
   );
 };
 

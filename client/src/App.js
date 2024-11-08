@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../src/dist/styles.css";
 import Home from "./Pages/Home";
-import Navbar from "../src/components/Navbar";
+// import Navbar from "../src/components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main_customer from "./Pages/Main_customer";
 import Main_owner from "./Pages/Main_owner";
@@ -15,6 +15,9 @@ import AddVehicle from "./components/AddVehicle";
 import Safety from "./Pages/Safety";
 import BookModel from "./components/BookModel";
 import { ViewProvider } from "./Context_api/contextApi";
+import AdminLogin from "./components/adminLogin";
+import DummyCom from "./components/dummyCom";
+// import dummyCom from "./components/dummyCom";
 
 function App() {
   // Initialize properties state
@@ -28,7 +31,7 @@ function App() {
   return (
     <>
       <ViewProvider>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route index path="/" element={<Home />} />
         {/* <Route index path="/Vehicles" element={<Vehicles />} /> */}
@@ -44,7 +47,8 @@ function App() {
         <Route path="/Safety" element={<Safety></Safety>} />
         <Route path="/AddVehicle" element={<AddVehicle addVehicle={addVehicle} />} />
         <Route path="/bookModel" element={<BookModel/>} />
-        {/* <Route path="/ContactEzy" element={<ContactEzy />} /> */}
+        <Route path="/adminLogin" element={<AdminLogin></AdminLogin>} />
+        {/* <Route path="/ContactEzy" element={<ContactEzy />} /> */} 
       </Routes>
       </ViewProvider>
     </>

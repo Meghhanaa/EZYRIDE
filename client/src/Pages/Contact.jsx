@@ -1,9 +1,12 @@
 import React from 'react';
 import '../styles/Contact/Contact.css';
 import p1 from '../images/contact/contact.png';
+import Navbar from '../components/Navbar';
 
 const ContactEzy = () => {
   return (
+    <>
+    <Navbar/>
     <div className="contact_us_8">
       <div className="text-section">
         <h2>Contact Us</h2>
@@ -55,6 +58,7 @@ const ContactEzy = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -5,10 +5,13 @@ import anurag from "../images/ourteam/anu.jpg";
 import Footer from "../components/Footer.jsx"; 
 import HeroPages from '../components/HeroPages';
 import "../styles/ourteam/ourteam.css";
+import Navbar from "../components/Navbar.jsx";
 
 function OurTeam() {
     let message = "Our team is a blend of visionaries, innovators, and passionate individuals committed to transforming the way you experience mobility with EZYRIDE.";
     return (
+        <>
+        <Navbar/>
         <section className="section-white">
             <HeroPages name="Our Team" />
             <div className="container">
@@ -106,6 +109,7 @@ function OurTeam() {
             </div>
             <Footer /> 
         </section>
+        </>
     );
 }
 
