@@ -107,48 +107,8 @@ const ViewProvider = ({ children }) => {
   };
 
   //Save booking details
-
-const [BookformData, setBookFormData] = useState({
-    b_location:"",
-    v_rto:"",
-    c_no: "",
-    d_no: "",
-    v_pay:"",
-    b_date: "",
-    b_time: "",
-    b_method: "",
-    b_type:"",
-    b_return_date: "",
-    b_return_time: "",
-    b_pickup:""
-  });
-
 const [BookData,setBookData]=useState([]);
 const [custNumber,setcustNumber]=useState('');
-
-const handleBookChange = (e) => {
-    const { name, value } = e.target;
-    setBookFormData({
-      ...formData,
-      [name]: value,
-      ...(name === "b_location" && { b_pickup: value })
-    });
-  };
-  
-  const handleBookSubmit = async () => {
-    // try {
-    //   console.log("Search initiated:", searchVehData);
-    //   const response = await axios.get(`http://localhost:3001/vehicles`, {
-    //     params: searchVehData,
-    //   });
-    //   console.log('Search Results:', response.data);
-    //   setVehicle(response.data);
-    //   console.log('Results:', vehicle);
-    //   navigate('/models');
-    // } catch (error) {
-    //   console.log('Error fetching vehicles:', error);
-    // }
-  }
 
   const handleBookNowClick = async (e) => {
     console.log(e);
@@ -168,7 +128,33 @@ const handleBookChange = (e) => {
 });
 
 };
+const [BookformData, setBookFormData] = useState({
+      // b_location: BookData.o_street,
+      // v_rto: BookData.v_rto,
+      // c_no: custNumber,
+      // d_no: BookData.d_no,
+      b_pay: "",
+      b_date: "", // default empty, user will select
+      b_time: "", // default empty, user will select
+      b_method: "", // default empty, user will select
+      b_return_date: "", // default empty, user will select
+      b_return_time: "", // default empty, user will select
+      // b_pickup: BookData.o_street// assuming pickup is the same as location
+  });
 
+
+// const handleBookChange = (e) => {
+//     const { name, value } = e.target;
+//     setBookFormData({
+//       ...formData,
+//       [name]: value,
+//       ...(name === "b_location" && { b_pickup: value })
+//     });
+//   };
+  
+  const handleBookSubmit = async () => {
+      
+  }
 
 const handlePayLaterClick = async(e)=>{
     e.preventDefault();
@@ -203,9 +189,9 @@ const handlePayLaterClick = async(e)=>{
     searchVehData,
     vehicle,
     BookformData,
+    setBookFormData,
     BookData,
     custNumber,
-    handleBookChange,
     handlePayLaterClick,
     handleBookNowClick,
     handleBookSubmit

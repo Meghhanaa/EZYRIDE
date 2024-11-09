@@ -24,7 +24,7 @@ const Models = () => {
                    <p className="popular__description">{property.o_street}</p>
                    <div className="popular__buttons">
                      <button className="popular__button book" onClick={() => handleBookNowClick(property.v_insurance)}>Book Now</button>
-                     <button className="popular__button more" onClick={() => handlePayLaterClick(property.v_insurance)}>More</button>
+                     <button className="popular__button more" onClick={() => handleMore(property.v_insurance)}>More</button>
                 ,  </div> 
                 </div>
               </article>))}

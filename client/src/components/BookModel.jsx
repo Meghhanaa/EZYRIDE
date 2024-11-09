@@ -4,15 +4,52 @@ import Navbar from "./Navbar";
 import { useViewContext } from "../Context_api/contextApi";
 
 const BookModel = () => {
-  const {BookformData,BookData,handleBookChange,handleBookSubmit,custNumber}=useViewContext();
+  const {BookformData,setBookFormData,BookData,handleBookSubmit,custNumber}=useViewContext();
   const handlePayLater = () => {
     {console.log(BookformData.v_pay)}; // Add ₹50 extra for Pay Later option
   };
 
   const [isDriverRequired, setIsDriverRequired] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false); // State to manage Confirm checkbox
+
 
   const handleCheckboxChange = (event) => {
-    setIsDriverRequired(event.target.checked);
+    if (event.target.id === "driver-required") {
+      setIsDriverRequired(true);
+    } 
+    // If the user clicks on the "Driver Not Required" checkbox, set it to false
+    else{
+      setIsDriverRequired(false);
+    }
+    if (event.target.id === "confirm-checkbox") {
+      setIsConfirmed(true); // Toggle confirmation state
+      // extraBookformdata();
+    }else{
+      setIsConfirmed(false);
+    }
+  };
+
+  // const extraBookformdata =()=>{
+  //    setBookFormData((prevData) => ({
+  //       ...prevData,
+  //       "b_location": BookData.o_street,
+  //       "v_rto": BookData.v_rto,
+  //       "c_no": custNumber,
+  //       "d_no": BookData.d_no,
+  //       "b_date":BookformData.b_date
+  //     }));
+  //    console.log(BookformData)
+  // }
+  
+
+  const handleBookChange = (e) => {
+    const { name, value } = e.target;
+    setBookFormData({
+      ...BookformData,
+      [name]: value,
+      ...(name === "b_location" && { b_pickup: value })
+    });
+    console.log(BookformData)
   };
 
   return (
@@ -26,57 +63,83 @@ const BookModel = () => {
         <h3>Price: ₹{BookData.v_pay}</h3>
         <form onSubmit={(e) => handleBookSubmit(e, false)} className="booking-form">
         {/* driver required */}
-         <center><div className="flex items-center">
-      <input 
-        type="checkbox" 
-        id="driver-required" 
-        checked={isDriverRequired} 
-        onChange={handleCheckboxChange} 
-      />
-      <label htmlFor="driver-required" className="text-lg">Driver Required</label>
-    </div></center>
+         <center>
+        <div className="flex items-center">
+          <input 
+            type="checkbox" 
+            id="driver-required" 
+            checked={isDriverRequired} 
+            onChange={handleCheckboxChange} 
+          />
+          <label htmlFor="driver-required" className="text-lg">Driver Required</label>
+
+          <input 
+            type="checkbox" 
+            id="driver-not-required" 
+            checked={!isDriverRequired}  // Uncheck if isDriverRequired is true
+            onChange={handleCheckboxChange} 
+          />
+          <label htmlFor="driver-not-required" className="text-lg">Driver Not Required</label>
+        </div>
+      </center><br></br><br></br>
           {/* Form fields */}
           <div className="megh-1">
             <label>Booking Location</label>
             <input 
               type="text" 
-              name="b_location "
+              // name="b_location "
               value={BookData.o_street} 
-              onChange={handleBookChange} 
+              // onChange={handleBookChange} 
               readOnly 
             />
           </div>
           <div className="megh-1">
             <label>Contact Number</label>
-            <input type="tel" name="c_no" value={custNumber} onChange={handleBookChange} readOnly />
+            <input type="tel" 
+            // name="c_no" 
+            value={custNumber} 
+            // onChange={handleBookChange} 
+            readOnly />
           </div>
           {isDriverRequired && (
              <div className="megh-1">
              <label>Driver Number</label>
              <input 
                type="text" 
-               name="d_no" 
+              //  name="d_no" 
                value={BookData.d_no} 
-               onChange={handleBookChange} 
+              //  onChange={handleBookChange} 
                readOnly 
              />
             </div>
           )}
           <div className="megh-1">
             <label>Vehicle RTO</label>
-            <input type="text" name="v_insurance" value={BookData.v_rto} onChange={handleBookChange} readOnly />
+            <input type="text"
+            //  name="v_rto"
+             value={BookData.v_rto} 
+            // onChange={handleBookChange} 
+            readOnly />
           </div>
           <div className="megh-1">
             <label>Booking Date</label>
-            <input type="date" name="b_date" value={BookformData.b_date} onChange={handleBookChange} required />
+            <input type="date" 
+            name="b_date" 
+            value={BookformData.b_date} 
+            onChange={handleBookChange} 
+            required />
           </div>
           <div className="megh-1">
             <label>Booking Time</label>
-            <input type="time" name="b_time" value={BookformData.b_time} onChange={handleBookChange} required />
+            <input type="time" 
+            name="b_time" 
+            value={BookformData.b_time}
+            onChange={handleBookChange} 
+            required />
           </div>
           <div className="megh-1">
             <label>Payment Method</label>
-            <select name="b_pay" value={BookformData.b_method} onChange={handleBookChange} required>
+            <select name="b_method" value={BookformData.b_method} onChange={handleBookChange} required>
               <option value="">Select Payment Method</option>
               <option value="Credit Card">Credit Card</option>
               <option value="Debit Card">Debit Card</option>
@@ -96,24 +159,48 @@ const BookModel = () => {
             <label>Pick-Up Location</label>
             <input 
               type="text" 
-              name="b_pickup" 
+              // name="b_pickup" 
               value={BookData.o_street} 
-              onChange={handleBookChange}  
+              // onChange={handleBookChange}  
               readOnly 
             />
           </div>
+
+          {/* Confirm Checkbox */}
+      <center>
+        <div className="flex items-center">
+          <input 
+            type="checkbox" 
+            id="confirm-checkbox" 
+            checked={isConfirmed} 
+            onChange={handleCheckboxChange} 
+          />
+          <label htmlFor="confirm-checkbox" className="text-lg">I Confirm</label>
+          <input 
+            type="checkbox" 
+            id="not-confirm-checkbox" 
+            checked={!isConfirmed} 
+            onChange={handleCheckboxChange} 
+          />
+          <label htmlFor="not-confirm-checkbox" className="text-lg">Not Confirm</label>
+        </div>
+      </center><br></br>
+
 
           {/* Payment Buttons */}
           <div className="megh-pay">
             <button type="submit" className="submit-button">Pay Now</button>
             <button 
-              type="submit" 
+              name="pay_later"
+              type="submit"
+              value="" 
               className="submit-button pay-later-button"  
               onChange={handlePayLater}
             >
               Pay Later (₹50 Extra)
             </button>
           </div>
+          <center><h1></h1></center>
         </form>
       </div>
     </div>
