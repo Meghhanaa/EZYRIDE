@@ -12,6 +12,7 @@ const BookModel = () => {
     c_no: "",
     d_no: "",
     v_insurance: "",
+    v_pay:"",
     b_date: "",
     b_time: "",
     b_pay: "",
@@ -145,8 +146,10 @@ const BookModel = () => {
           <div className="megh-pay">
             <button type="submit" className="submit-button">Pay Now</button>
             <button 
-              type="button" 
+              type="submit" 
               className="submit-button pay-later-button" 
+              value={formData.b_pickup} 
+              onChange={handleChange}
             >
               Pay Later (₹50 Extra)
             </button>
