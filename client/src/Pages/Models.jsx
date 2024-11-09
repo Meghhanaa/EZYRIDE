@@ -186,6 +186,16 @@ const Models = () => {
     <section className="section" id="popular">
       <HeroPages name="Vehicle Models" />
       <div className="container">
+        {/* Payment Buttons */}
+        <div className="megh-pay">
+            <button type="submit" className="submit-button">Required Driver</button>
+            <button 
+              type="button" 
+              className="submit-button pay-later-button" 
+            >
+              Not Required Driver
+            </button>
+        </div>
         {/* Category Buttons */}
         {/* <div className="category-buttons">
           <button

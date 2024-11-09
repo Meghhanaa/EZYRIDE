@@ -33,7 +33,7 @@ function BookCar() {
               </div>
 
               {/* Vehicle Preference */}
-              <div className="box-form__car-type">
+              {/* <div className="box-form__car-type">
                 <label><i className="fa-solid fa-car"></i> &nbsp; Select Vehicle Preference </label>
                 <select 
                   name="carType"
@@ -46,7 +46,7 @@ function BookCar() {
                     <option key={index} value={type}>{type}</option>
                   ))}
                 </select>
-              </div>
+              </div> */}
 
               {/* Color Selection */}
               <div className="box-form__car-type">
