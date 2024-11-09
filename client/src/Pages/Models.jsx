@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 
 
 const Models = () => {
-  const { vehicle,handleBookNowClick,handleMoreClick } = useViewContext(); // Access context values
+  const { vehicle,handleBookNowClick,handlePayLaterClick } = useViewContext(); // Access context values
   return (
     <>
     <Navbar/>
@@ -34,7 +34,7 @@ const Models = () => {
                    <p className="popular__description">{property.o_street}</p>
                    <div className="popular__buttons">
                      <button className="popular__button book" onClick={() => handleBookNowClick(property.v_insurance)}>Book Now</button>
-                     <button className="popular__button more" onClick={() => handleMoreClick(property.v_insurance)}>More</button>
+                     <button className="popular__button more" onClick={() => handlePayLaterClick(property.v_insurance)}>More</button>
                 ,  </div> 
                 </div>
               </article>))}
