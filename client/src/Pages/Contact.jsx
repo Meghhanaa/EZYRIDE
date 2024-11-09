@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/Contact/Contact.css';
 import p1 from '../images/contact/contact.png';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const ContactEzy = () => {
   return (
@@ -58,6 +59,7 @@ const ContactEzy = () => {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };
