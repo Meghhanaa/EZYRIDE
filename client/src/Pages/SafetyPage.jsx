@@ -4,9 +4,12 @@ import SafetyCard from "../components/SafetyCard"
 import "../styles/Safety/SafetyPage.css";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const SafetyPage = () => {
-  return (<>
+  return (
+  <>
+    <Navbar/>
     <div className="safety-page">
       <header className="header">
         <h1>SAFETY MEASURES AT EZYRIDE</h1>

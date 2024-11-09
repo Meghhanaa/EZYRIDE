@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../styles/BookStyles/BookModel.css";
+import Navbar from "./Navbar";
 
 const BookModel = () => {
   const location = useLocation();
@@ -69,6 +70,8 @@ const BookModel = () => {
   };
 
   return (
+    <>
+    <Navbar></Navbar>
     <div className="booking-modal active-modal">
       <div className="booking-modal__content">
         <h2 className="book-title-1">Complete Reservation for {title}</h2>
@@ -140,17 +143,18 @@ const BookModel = () => {
 
           {/* Payment Buttons */}
           <div className="megh-pay">
-          <button type="submit" className="submit-button">Pay Now</button>
-          <button 
-            type="button" 
-            className="submit-button pay-later-button" 
-          >
-            Pay Later (₹50 Extra)
-          </button>
+            <button type="submit" className="submit-button">Pay Now</button>
+            <button 
+              type="button" 
+              className="submit-button pay-later-button" 
+            >
+              Pay Later (₹50 Extra)
+            </button>
           </div>
         </form>
       </div>
     </div>
+    </>
   );
 };
 

@@ -5,10 +5,6 @@ import anchal from "../images/ourteam/anchalk.jpg";
 import anurag from "../images/ourteam/anu.jpg";
 import harstuti from "../images/ourteam/harstuti.jpg";
 import meghna from "../images/ourteam/meghnaji.jpg";
-
-
-
-
 import Footer from "../components/Footer.jsx";
 import HeroPages from "../components/HeroPages";
 import "../styles/ourteam/ourteam.css";
@@ -83,6 +79,8 @@ function OurTeam() {
   };
   
   return (
+    <>
+    <Navbar/>
     <section className="section-white">
       <HeroPages name="Our Team" />
       <div className="container">
@@ -113,6 +111,7 @@ function OurTeam() {
       </div>
       <Footer />
     </section>
+    </>
   );
 }
 

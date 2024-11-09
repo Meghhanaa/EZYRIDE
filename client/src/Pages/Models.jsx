@@ -1,3 +1,102 @@
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import CarImg1 from "../images/cars-big/audi-box.png";
+// import "../styles/Vehicles/vehicles.css";
+// import AddVehicle from '../components/AddVehicle';
+// import Navbar from '../components/Navbar';
+
+// const Models = () => {
+//   const [category, setCategory] = useState('All');
+//   const [showModal, setShowModal] = useState(false);
+//   const [selectedVehicle, setSelectedVehicle] = useState(null);
+//   const navigate = useNavigate();
+
+//   // Sample vehicle data
+//   const [items, setItems] = useState([
+//     {
+//       imgSrc: CarImg1, price: '66,356', title: 'Indrapuri, Bhopal', description: 'Audi Car', type: 'Car',
+//       v_image: CarImg1, v_insurance: '12345', v_name: 'Audi', v_type: 'Car', v_desp: 'Luxury car with premium features',
+//       v_rto: 'MP09', v_color: 'Black', v_mileage: '15 km/l', v_engine_type: 'V8', o_no: '0987654321', v_pay: 'Paid',
+//       v_booked: true, v_price: '66,356'
+//     },
+//     // Add more vehicles here...
+//   ]);
+
+//   const filteredItems = category === 'All' ? items : items.filter(item => item.type === category);
+
+//   const handleBookNowClick = (vehicle) => {
+//     navigate('/bookModel', {
+//       state: { ...vehicle }
+//     });
+//   };
+
+//   const handleMoreClick = (vehicle) => {
+//     setSelectedVehicle(vehicle);
+//     setShowModal(true);
+//   };
+
+//   const handleCloseModal = () => {
+//     setShowModal(false);
+//     setSelectedVehicle(null);
+//   };
+
+//   return (
+//     <>
+//     <Navbar></Navbar>
+//     <section className="section" id="popular">
+//       <div className="container">
+
+//         {/* Display filtered vehicles */}
+//         <div className="popular__container swiper">
+//           <div className="swiper-wrapper">
+//             {filteredItems.map((vehicle, index) => (
+//               <article className="popular__card swiper-slide" key={index}>
+//                 <img className="popular__img" src={vehicle.imgSrc} alt={vehicle.title} />
+//                 <div className="popular__data">
+//                   <h2 className="popular__price"><span>$</span>{vehicle.price}</h2>
+//                   <h1 className="popular__title">{vehicle.title}</h1>
+//                   <p className="popular__description">{vehicle.description}</p>
+//                   <div className="popular__buttons">
+//                     <button className="popular__button book" onClick={() => handleBookNowClick(vehicle)}>Book Now</button>
+//                     <button className="popular__button more" onClick={() => handleMoreClick(vehicle)}>More</button>
+//                   </div>
+//                 </div>
+//               </article>
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* Add New Vehicle Form */}
+//         {category === 'Add New Vehicle' && <AddVehicle addVehicle={(newVehicle) => setItems([...items, newVehicle])} />}
+
+//         {/* Info Modal */}
+//         {showModal && selectedVehicle && (
+//           <div className="info-modal">
+//             <div className="info-modal-content">
+//               <button className="close-button" onClick={handleCloseModal}>X</button>
+//               <img src={selectedVehicle.v_image} alt={selectedVehicle.v_name} className="vehicle-image" />
+//               <h2 className='info-title'>{selectedVehicle.v_name}</h2>
+//               <p><strong>Type:</strong> {selectedVehicle.v_type}</p>
+//               <p><strong>Description:</strong> {selectedVehicle.v_desp}</p>
+//               <p><strong>RTO:</strong> {selectedVehicle.v_rto}</p>
+//               <p><strong>Color:</strong> {selectedVehicle.v_color}</p>
+//               <p><strong>Mileage:</strong> {selectedVehicle.v_mileage}</p>
+//               <p><strong>Engine Type:</strong> {selectedVehicle.v_engine_type}</p>
+//               <p><strong>Booked:</strong> {selectedVehicle.v_booked ? "Yes" : "No"}</p>
+//               <p><strong>Price:</strong> ${selectedVehicle.v_price}</p>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </section>
+//     </>
+//   );
+// };
+
+// export default Models;
+
+
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeroPages from '../components/HeroPages';

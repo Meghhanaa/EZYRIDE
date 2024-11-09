@@ -150,8 +150,14 @@
 }
 
 @media (max-width: 480px) {
+  .booking-modal{
+    margin-top: 130%;
+    margin-bottom: 50%;
+  }
   .booking-modal__content {
+    margin-top: 10%;
     padding: 15px;
+    margin-bottom: 50%;
   }
 
   .booking-modal h2 {
@@ -164,6 +170,13 @@
 
   .booking-description {
     font-size: 14px;
+  }
+
+  .megh-pay{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 25px;
   }
 
   .megh-1 input[type="text"],
