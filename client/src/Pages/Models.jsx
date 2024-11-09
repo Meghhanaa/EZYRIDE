@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 
 
 const Models = () => {
-  const { vehicle,handleBookNowClick,handlePayLaterClick } = useViewContext(); // Access context values
+  const { vehicle,handleBookNowClick,handleMore } = useViewContext(); // Access context values
   return (
     <>
     <Navbar/>

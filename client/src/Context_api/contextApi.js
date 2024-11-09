@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import bigInt from 'big-integer';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ const useViewContext = () => useContext(viewContext);
 // Custom hook to use the context for the Customer Login
 const ViewProvider = ({ children }) => {
   const navigate = useNavigate();
+
+
   const [formData, setFormData] = useState({
     c_no: '',
     c_password: '',
@@ -117,7 +119,7 @@ const [custNumber,setcustNumber]=useState('');
     withCredentials: true,
 })
 .then(response => {
-    setcustNumber(response.data.customerNumber);
+    setcustNumber(formData.c_no);
     setBookData(response.data.detail);
     console.log(response.data.detail);
     navigate('/bookModel');
@@ -133,7 +135,7 @@ const [BookformData, setBookFormData] = useState({
       // v_rto: BookData.v_rto,
       // c_no: custNumber,
       // d_no: BookData.d_no,
-      b_pay: "",
+      // b_pay: "",
       b_date: "", // default empty, user will select
       b_time: "", // default empty, user will select
       b_method: "", // default empty, user will select
@@ -141,20 +143,32 @@ const [BookformData, setBookFormData] = useState({
       b_return_time: "", // default empty, user will select
       // b_pickup: BookData.o_street// assuming pickup is the same as location
   });
-
-
-// const handleBookChange = (e) => {
-//     const { name, value } = e.target;
-//     setBookFormData({
-//       ...formData,
-//       [name]: value,
-//       ...(name === "b_location" && { b_pickup: value })
-//     });
-//   };
+  const [totalPay,settotalPay]=useState("")
   
-  const handleBookSubmit = async () => {
-      
-  }
+   const handleBookSubmit = async (e) => {
+    e.preventDefault();
+
+    // Construct the request payload
+    const requestBody = {
+      c_no: formData.c_no,
+      b_pay:totalPay,
+      b_location: BookData.o_street,
+      d_no: BookData.d_no,
+      v_insurance: BookData.v_insurance,
+      b_pickup: BookData.o_street, // Update pick-up location from BookData
+      ...BookformData, // Spread operator to add all properties of BookformData
+    };
+
+    console.log(requestBody);
+
+    try {
+      // Make the POST request to the backend
+      const response = await axios.post('http://localhost:3001/booking', requestBody);
+      console.log('Booking successfully created:', response.data);
+    } catch (error) {
+      console.error('Error creating booking:', error);
+    }
+  };
 
 const handlePayLaterClick = async(e)=>{
     e.preventDefault();
@@ -191,6 +205,8 @@ const handlePayLaterClick = async(e)=>{
     BookformData,
     setBookFormData,
     BookData,
+    totalPay,
+    settotalPay,
     custNumber,
     handlePayLaterClick,
     handleBookNowClick,
