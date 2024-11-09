@@ -45,7 +45,7 @@ const ViewProvider = ({ children }) => {
       try {
         console.log('Form Data:', formData);
         const response = await axios.post('http://localhost:3001/customer_login', formData, {
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json' },withCredentials: true,
         });
         setMess(response.data.message);
         setUserName(response.data.user.name);
@@ -106,6 +106,87 @@ const ViewProvider = ({ children }) => {
     }
   };
 
+  //Save booking details
+
+const [BookformData, setBookFormData] = useState({
+    b_location:"",
+    v_rto:"",
+    c_no: "",
+    d_no: "",
+    v_pay:"",
+    b_date: "",
+    b_time: "",
+    b_method: "",
+    b_type:"",
+    b_return_date: "",
+    b_return_time: "",
+    b_pickup:""
+  });
+
+const [BookData,setBookData]=useState([]);
+const [custNumber,setcustNumber]=useState('');
+
+const handleBookChange = (e) => {
+    const { name, value } = e.target;
+    setBookFormData({
+      ...formData,
+      [name]: value,
+      ...(name === "b_location" && { b_pickup: value })
+    });
+  };
+  
+  const handleBookSubmit = async () => {
+    // try {
+    //   console.log("Search initiated:", searchVehData);
+    //   const response = await axios.get(`http://localhost:3001/vehicles`, {
+    //     params: searchVehData,
+    //   });
+    //   console.log('Search Results:', response.data);
+    //   setVehicle(response.data);
+    //   console.log('Results:', vehicle);
+    //   navigate('/models');
+    // } catch (error) {
+    //   console.log('Error fetching vehicles:', error);
+    // }
+  }
+
+  const handleBookNowClick = async (e) => {
+    console.log(e);
+    // Correct the URL structure to include / before e (insuranceId)
+    axios.get(`http://localhost:3001/book/driver/${e}`, {
+    withCredentials: true,
+})
+.then(response => {
+    setcustNumber(response.data.customerNumber);
+    setBookData(response.data.detail);
+    console.log(response.data.detail);
+    navigate('/bookModel');
+    
+})
+.catch(error => {
+    console.error('Error in searching:', error);
+});
+
+};
+
+
+const handlePayLaterClick = async(e)=>{
+    e.preventDefault();
+    console.log(e);
+    //  axios.get(`http://localhost:3001/book/driver${e}`)
+    //       .then(response => {
+    //         console.log(response.data)
+    //         setFooddetail(response.data);
+    //         setClose(true)
+    //       })
+    //       .catch(error => {
+    //         console.error('Error in searching:', error);
+    //       });
+
+
+  }
+
+
 
 
   //custom hook for book by customer
@@ -121,6 +202,13 @@ const ViewProvider = ({ children }) => {
     vehicleInputChange,
     searchVehData,
     vehicle,
+    BookformData,
+    BookData,
+    custNumber,
+    handleBookChange,
+    handlePayLaterClick,
+    handleBookNowClick,
+    handleBookSubmit
   };
 
   return (
