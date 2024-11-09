@@ -173,21 +173,37 @@ app.post('/admin', async (req, res) => {
 app.get('/vehicles', async (req, res) => {
     try {
         // Extract query parameters from the request
-        const { carType, color, vehicleType, priceRange, driverRequired } = req.query;
-        console.log(color + " " + vehicleType + " " + priceRange + " " + driverRequired);
+        const { vehicleType, color, priceRange, pickUp } = req.query;
+        console.log(vehicleType+" "+color+" "+priceRange+" "+pickUp);
 
-        // Start building the SQL query with basic vehicle selection and include owner address
+        // SQL query with the base structure for vehicle, owner, and driver details
         let sqlQuery = `
-            SELECT v.v_insurance, v.v_name, v.v_type, v.v_rto, v.v_color, v.v_mileage, v.v_pay, v.v_engine_type, v.o_no, v.v_image, o.o_street, o.o_driver_count
-            FROM vehicle v
-            JOIN owner o ON v.o_no = o.o_no
+            SELECT 
+                v.v_name,
+                v.v_image,
+                v.v_type,
+                v.v_color,
+                v.v_insurance,
+                v.v_rto,
+                v.v_mileage,
+                v.v_engine_type,
+                v.v_pay,
+                o.o_name,
+                o.o_no,
+                o.o_street,
+                o.o_driver_count
+            FROM 
+                vehicle v
+            JOIN 
+                owner o ON v.o_no = o.o_no  -- Join vehicle with owner
             WHERE 1 = 1
         `;
 
-        // Dynamically add conditions based on the query parameters
+        // Array to hold conditions and query parameters
         const conditions = [];
         const queryParams = [];
 
+        // Dynamically build query based on provided filters
         if (vehicleType) {
             conditions.push(`v.v_type = ?`);
             queryParams.push(vehicleType);
@@ -197,35 +213,32 @@ app.get('/vehicles', async (req, res) => {
             queryParams.push(color);
         }
         if (priceRange) {
-            conditions.push(`v.v_pay >= ?`);
+            conditions.push(`v.v_pay <= ?`);
             queryParams.push(priceRange);
         }
-        if (driverRequired) {
-            if (driverRequired === 'yes') {
-                // Only get vehicles with a driver count greater than 0
-                conditions.push(`o.o_driver_count > 0`);
-            } else {
-                // Only get vehicles without drivers
-                conditions.push(`o.o_driver_count = 0`);
-            }
+        if (pickUp) {
+            conditions.push(`o.o_street = ?`);
+            queryParams.push(pickUp);
         }
 
-        // Append the conditions to the base query if any
+        // Add conditions to the query if any exist
         if (conditions.length > 0) {
             sqlQuery += ` AND ${conditions.join(' AND ')}`;
         }
 
-        // Execute the query with parameters
+        // Execute the query with the provided query parameters
         const [rows] = await pool.execute(sqlQuery, queryParams);
-        console.log(rows[0]);
+        console.log(rows[0]); // Log the first row for debugging
 
-        // Send the response with the filtered vehicles
+        // Send response back to the client
         res.status(200).json(rows);
     } catch (error) {
         console.error('Error fetching vehicles:', error);
         res.status(500).json({ message: 'Error fetching vehicles' });
     }
 });
+
+
 
 
 //to get the alloted driver 
