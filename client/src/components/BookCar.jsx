@@ -2,13 +2,6 @@ import { useViewContext } from "../Context_api/contextApi";
 
 function BookCar() {
   const { handleSearch, vehicleInputChange, searchVehData } = useViewContext();
-
-  const carOptions = {
-    Car: ["Audi A1 S-Line", "VW Golf 6", "Toyota Camry", "BMW 320 ModernLine", "Mercedes-Benz GLK", "VW Passat CC"],
-    Scooty: ["Honda Activa", "TVS Jupiter", "Hero Maestro", "Suzuki Access"],
-    Bike: ["Yamaha R15", "Kawasaki Ninja", "Bajaj Pulsar", "Royal Enfield Classic"]
-  };
-
   return (
     <section id="booking-section" className="book-section">
       <div className="container">
@@ -32,7 +25,7 @@ function BookCar() {
                 </select>
               </div>
 
-              {/* Vehicle Preference */}
+              {/* Vehicle Preference
               <div className="box-form__car-type">
                 <label><i className="fa-solid fa-car"></i> &nbsp; Select Vehicle Preference </label>
                 <select 
@@ -46,7 +39,7 @@ function BookCar() {
                     <option key={index} value={type}>{type}</option>
                   ))}
                 </select>
-              </div>
+              </div> */}
 
               {/* Color Selection */}
               <div className="box-form__car-type">
@@ -61,8 +54,8 @@ function BookCar() {
                   <option value="White">White</option>
                   <option value="Black">Black</option>
                   <option value="Blue">Blue</option>
-                  <option value="Blue">Yellow</option>
-                  <option value="Blue">Green</option>
+                  <option value="Yellow">Yellow</option>
+                  <option value="Green">Green</option>
                 </select>
               </div>
 
@@ -153,7 +146,7 @@ function BookCar() {
                 />
               </div>
 
-              {/* Driver Requirement */}
+              {/* Driver Requirement
               <div className="box-form__car-type">
                 <label><i className="fa-solid fa-dollar-sign"></i> &nbsp; Required Driver <b>*</b></label>
                 <select 
@@ -165,7 +158,7 @@ function BookCar() {
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
-              </div>
+              </div> */}
 
               {/* Submit Button */}
               <button className="form-btn" onClick={handleSearch}>SEARCH</button>

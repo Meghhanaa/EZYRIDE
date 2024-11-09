@@ -48,18 +48,22 @@ pool.getConnection()
     console.error('Database connection failed:', error);
   });
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
-
+const JWT_SECRET = process.env.JWT_SECRET;
+// console.log(JWT_SECRET)
 // Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
   const token = req.cookies.token;
+  console.log(req.cookies.token); // This should print the token if it's set correctly
+
   if (!token) return res.status(403).json({ message: 'Authentication required' });
+
   jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) return res.status(403).json({ message: 'Invalid token' });
     req.user = decoded;
     next();
   });
 };
+
 
 // Customer Login Route
 app.post('/customer_login', async (req, res) => {
@@ -74,8 +78,9 @@ app.post('/customer_login', async (req, res) => {
     const user = rows[0];
     console.log(user)
     const token = jwt.sign({ c_no: user.c_no, c_name: user.c_name,role:user.c_roll }, JWT_SECRET, { expiresIn: '1h' });
-    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-    res.status(200).json({ message: 'Login successful', user: { name: user.c_name } });
+    console.log(token);
+    res.cookie('token', token, { httpOnly: true, secure: false, path: '/', sameSite: 'Lax' });
+    res.status(200).json({ message: 'Login successful', user: { name: user.c_name },token});
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -173,21 +178,37 @@ app.post('/admin', async (req, res) => {
 app.get('/vehicles', async (req, res) => {
     try {
         // Extract query parameters from the request
-        const { carType, color, vehicleType, priceRange, driverRequired } = req.query;
-        console.log(color + " " + vehicleType + " " + priceRange + " " + driverRequired);
+        const { vehicleType, color, priceRange, pickUp } = req.query;
+        console.log(vehicleType+" "+color+" "+priceRange+" "+pickUp);
 
-        // Start building the SQL query with basic vehicle selection and include owner address
+        // SQL query with the base structure for vehicle, owner, and driver details
         let sqlQuery = `
-            SELECT v.v_insurance, v.v_name, v.v_type, v.v_rto, v.v_color, v.v_mileage, v.v_pay, v.v_engine_type, v.o_no, v.v_image, o.o_street, o.o_driver_count
-            FROM vehicle v
-            JOIN owner o ON v.o_no = o.o_no
+            SELECT 
+                v.v_name,
+                v.v_image,
+                v.v_type,
+                v.v_color,
+                v.v_insurance,
+                v.v_rto,
+                v.v_mileage,
+                v.v_engine_type,
+                v.v_pay,
+                o.o_name,
+                o.o_no,
+                o.o_street,
+                o.o_driver_count
+            FROM 
+                vehicle v
+            JOIN 
+                owner o ON v.o_no = o.o_no  -- Join vehicle with owner
             WHERE 1 = 1
         `;
 
-        // Dynamically add conditions based on the query parameters
+        // Array to hold conditions and query parameters
         const conditions = [];
         const queryParams = [];
 
+        // Dynamically build query based on provided filters
         if (vehicleType) {
             conditions.push(`v.v_type = ?`);
             queryParams.push(vehicleType);
@@ -197,29 +218,24 @@ app.get('/vehicles', async (req, res) => {
             queryParams.push(color);
         }
         if (priceRange) {
-            conditions.push(`v.v_pay >= ?`);
+            conditions.push(`v.v_pay <= ?`);
             queryParams.push(priceRange);
         }
-        if (driverRequired) {
-            if (driverRequired === 'yes') {
-                // Only get vehicles with a driver count greater than 0
-                conditions.push(`o.o_driver_count > 0`);
-            } else {
-                // Only get vehicles without drivers
-                conditions.push(`o.o_driver_count = 0`);
-            }
+        if (pickUp) {
+            conditions.push(`o.o_street = ?`);
+            queryParams.push(pickUp);
         }
 
-        // Append the conditions to the base query if any
+        // Add conditions to the query if any exist
         if (conditions.length > 0) {
             sqlQuery += ` AND ${conditions.join(' AND ')}`;
         }
 
-        // Execute the query with parameters
+        // Execute the query with the provided query parameters
         const [rows] = await pool.execute(sqlQuery, queryParams);
-        console.log(rows[0]);
+        console.log(rows[0]); // Log the first row for debugging
 
-        // Send the response with the filtered vehicles
+        // Send response back to the client
         res.status(200).json(rows);
     } catch (error) {
         console.error('Error fetching vehicles:', error);
@@ -227,31 +243,48 @@ app.get('/vehicles', async (req, res) => {
     }
 });
 
-
 //to get the alloted driver 
-app.get('/book/driver',verifyToken, async (req, res) => {
-  const insuranceId = req.query.insuranceId;
-
+app.get('/book/driver/:insuranceId', verifyToken, async (req, res) => {
+  const insuranceId = req.params.insuranceId; // Updated from req.query to req.params
+   console.log(req.user.c_no);
   // Check if insuranceId is provided
   if (!insuranceId) {
     return res.status(400).json({ error: 'Insurance ID is required' });
   }
 
   try {
-    // Query to find drivers whose owner has the specified vehicle insurance
+    // Query to find drivers and vehicle details based on specified vehicle insurance
     const [rows] = await pool.query(
-      `SELECT driver.d_no, vehicle.v_insurance
-      FROM driver
-      JOIN vehicle ON driver.o_no = vehicle.o_no
-      WHERE vehicle.v_insurance = ?
-       `, 
+      `
+      SELECT 
+          v.v_name,
+          v.v_pay,
+          v.v_image,
+          v.v_desp,
+          v.v_rto,
+          d.d_no,
+          d.d_name,
+          o.o_street,
+          o.o_name,
+          o.o_no
+      FROM 
+          vehicle v
+      JOIN 
+          owner o ON v.o_no = o.o_no    -- Join vehicle with owner
+      LEFT JOIN
+          driver d ON d.o_no = o.o_no    -- Left join with driver to include driver details even if not assigned
+      WHERE 
+          v.v_insurance = ?
+      `,
       [insuranceId]
     );
 
     const Data = {
       customerNumber: req.user.c_no, // Access customer number from the decoded token
-      detail: rows // Include the drivers information fetched from the database
+      detail: rows[0] // Include the drivers and vehicle information fetched from the database
     };
+
+    console.log({Data});
 
     // Send the result as JSON
     res.json(Data);
@@ -261,6 +294,7 @@ app.get('/book/driver',verifyToken, async (req, res) => {
     res.status(500).json({ error: 'An error occurred while fetching drivers' });
   }
 });
+
 
 //to get all the drivers
 app.get('/alldriver', verifyToken, async (req, res) => {
@@ -299,16 +333,18 @@ app.get('/allowner', verifyToken, async (req, res) => {
 });
 
 //all get all booking
+// Get all bookings
 app.get('/allbooking', verifyToken, async (req, res) => {
     try {
-        // Query all customer
+        // Query to retrieve all bookings
         const [data] = await pool.query('SELECT * FROM booking'); 
         res.status(200).json(data);
     } catch (error) {
-        console.error("Error fetching booking:", error);
-        res.status(500).json({ message: 'An error occurred while fetching booking.' });
+        console.error("Error fetching bookings:", error);
+        res.status(500).json({ message: 'An error occurred while fetching bookings.' });
     }
 });
+
 
 //all payment detail
 app.get('/allpayment', verifyToken, async (req, res) => {
