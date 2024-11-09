@@ -35,7 +35,7 @@ const pool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME, // Replace with your DB name
   waitForConnections: true,
-  connectionLimit: 10,
+  connectionLimit: 50,
   queueLimit: 0
 });
 
@@ -51,18 +51,18 @@ pool.getConnection()
 const JWT_SECRET = process.env.JWT_SECRET;
 // console.log(JWT_SECRET)
 // Middleware to verify JWT token
-const verifyToken = (req, res, next) => {
-  const token = req.cookies.token;
-  console.log(req.cookies.token); // This should print the token if it's set correctly
+// const verifyToken = (req, res, next) => {
+//   const token = req.cookies.token;
+//   console.log(req.cookies.token); // This should print the token if it's set correctly
 
-  if (!token) return res.status(403).json({ message: 'Authentication required' });
+//   if (!token) return res.status(403).json({ message: 'Authentication required' });
 
-  jwt.verify(token, JWT_SECRET, (err, decoded) => {
-    if (err) return res.status(403).json({ message: 'Invalid token' });
-    req.user = decoded;
-    next();
-  });
-};
+//   jwt.verify(token, JWT_SECRET, (err, decoded) => {
+//     if (err) return res.status(403).json({ message: 'Invalid token' });
+//     req.user = decoded;
+//     next();
+//   });
+// };
 
 
 // Customer Login Route
@@ -77,10 +77,10 @@ app.post('/customer_login', async (req, res) => {
 
     const user = rows[0];
     console.log(user)
-    const token = jwt.sign({ c_no: user.c_no, c_name: user.c_name,role:user.c_roll }, JWT_SECRET, { expiresIn: '1h' });
-    console.log(token);
-    res.cookie('token', token, { httpOnly: true, secure: false, path: '/', sameSite: 'Lax' });
-    res.status(200).json({ message: 'Login successful', user: { name: user.c_name },token});
+    // const token = jwt.sign({ c_no: user.c_no, c_name: user.c_name,role:user.c_roll }, JWT_SECRET, { expiresIn: '24h' });
+    // console.log(token);
+    // res.cookie('token', token, { httpOnly: true, secure: false, path: '/', sameSite: 'Lax' });
+    res.status(200).json({ message: 'Login successful', user: { name: user.c_name }});
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -120,9 +120,9 @@ app.post('/owner_login', async (req, res) => {
     }
 
     const user = rows[0];
-    const token = jwt.sign({ o_no: user.o_no, o_name: user.o_name,role:user.o_roll }, JWT_SECRET, { expiresIn: '1h' });
+    // const token = jwt.sign({ o_no: user.o_no, o_name: user.o_name,role:user.o_roll }, JWT_SECRET, { expiresIn: '1h' });
 
-    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+    // res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
     res.status(200).json({ message: 'Login successful' });
   } catch (error) {
     console.error('Error during login:', error);
@@ -244,9 +244,8 @@ app.get('/vehicles', async (req, res) => {
 });
 
 //to get the alloted driver 
-app.get('/book/driver/:insuranceId', verifyToken, async (req, res) => {
+app.get('/book/driver/:insuranceId',async (req, res) => {
   const insuranceId = req.params.insuranceId; // Updated from req.query to req.params
-   console.log(req.user.c_no);
   // Check if insuranceId is provided
   if (!insuranceId) {
     return res.status(400).json({ error: 'Insurance ID is required' });
@@ -262,10 +261,12 @@ app.get('/book/driver/:insuranceId', verifyToken, async (req, res) => {
           v.v_image,
           v.v_desp,
           v.v_rto,
+          v.v_type,
           d.d_no,
           d.d_name,
           o.o_street,
           o.o_name,
+          v.v_insurance,
           o.o_no
       FROM 
           vehicle v
@@ -279,8 +280,7 @@ app.get('/book/driver/:insuranceId', verifyToken, async (req, res) => {
       [insuranceId]
     );
 
-    const Data = {
-      customerNumber: req.user.c_no, // Access customer number from the decoded token
+    const Data = { // Access customer number from the decoded token
       detail: rows[0] // Include the drivers and vehicle information fetched from the database
     };
 
@@ -295,9 +295,36 @@ app.get('/book/driver/:insuranceId', verifyToken, async (req, res) => {
   }
 });
 
+//to add booking data in the backend
+app.post('/booking', async (req, res) => {
+  const { c_no, b_location, d_no, v_insurance, b_pickup, b_pay, b_date, b_time, b_return_date, b_return_time } = req.body;
+
+  try {
+    // Insert booking data into the booking table
+    const [result] = await pool.query(`
+      INSERT INTO booking (b_location,c_no,d_no,v_insurance,b_date,b_time,b_pay,b_return_date,b_return_time,b_pickup)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [b_location,c_no, d_no, v_insurance, b_date, b_time,b_pay, b_return_date, b_return_time,b_pickup]);
+    
+
+    await pool.query(`
+      UPDATE vehicle SET v_booked = '1' WHERE v_insurance = ?
+    `, [v_insurance]);
+
+    await pool.query(`
+      UPDATE driver SET d_booked = '1' WHERE d_no = ?
+    `, [d_no]);
+    // Return success response
+    res.status(200).json({ message: 'Booking created successfully', bookingId: result.insertId });
+  } catch (error) {
+    console.error('Error creating booking:', error);
+    res.status(500).json({ message: 'Error creating booking' });
+  }
+});
+
 
 //to get all the drivers
-app.get('/alldriver', verifyToken, async (req, res) => {
+app.get('/alldriver', async (req, res) => {
     try {
         // Query all drivers
         const [data] = await pool.query('SELECT * FROM driver'); 
@@ -309,7 +336,7 @@ app.get('/alldriver', verifyToken, async (req, res) => {
 });
 
 //to get all customer
-app.get('/allcustomer', verifyToken, async (req, res) => {
+app.get('/allcustomer', async (req, res) => {
     try {
         // Query all customer
         const [data] = await pool.query('SELECT * FROM customer'); 
@@ -321,7 +348,7 @@ app.get('/allcustomer', verifyToken, async (req, res) => {
 });
 
 //to get all owner
-app.get('/allowner', verifyToken, async (req, res) => {
+app.get('/allowner',async (req, res) => {
     try {
         // Query all customer
         const [data] = await pool.query('SELECT * FROM owner'); 
@@ -334,7 +361,7 @@ app.get('/allowner', verifyToken, async (req, res) => {
 
 //all get all booking
 // Get all bookings
-app.get('/allbooking', verifyToken, async (req, res) => {
+app.get('/allbooking', async (req, res) => {
     try {
         // Query to retrieve all bookings
         const [data] = await pool.query('SELECT * FROM booking'); 
@@ -347,7 +374,7 @@ app.get('/allbooking', verifyToken, async (req, res) => {
 
 
 //all payment detail
-app.get('/allpayment', verifyToken, async (req, res) => {
+app.get('/allpayment',async (req, res) => {
     try {
         // Query all customer
         const [data] = await pool.query('SELECT * FROM admin_payment'); 
