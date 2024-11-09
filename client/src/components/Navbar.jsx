@@ -5,6 +5,7 @@ import { TbGridDots } from "react-icons/tb";
 import { FaTimes } from "react-icons/fa";
 import UserImage from "../images/card-image.png"; // Path to user image
 import { useViewContext } from "../Context_api/contextApi";
+import "../styles/NavbarStyles/Navbar.css"
 
 function Navbar() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
@@ -18,6 +19,7 @@ function Navbar() {
     // }
   }, []);
 
+
   const toggleNav = () => {
     setNav(!nav); // Toggle mobile menu
   };
@@ -26,9 +28,24 @@ function Navbar() {
     setDropdownOpen(!dropdownOpen); // Toggle the dropdown
   };
 
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 0); // Make navbar sticky when scrolled down
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <nav>
+      <nav className={isSticky ? "navbar sticky-navbar" : "navbar"}>
+
         {/* Mobile Navbar */}
         <div className={`mobile-navbar ${nav ? "open-nav" : ""}`}>
           <div onClick={toggleNav} className="mobile-navbar__close">

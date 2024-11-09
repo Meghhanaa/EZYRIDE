@@ -1,12 +1,13 @@
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Hero from "../components/Hero";
 import BookCar from "../components/BookCar";
 import PlanTrip from "../components/PlanTrip";
 import Footer from "../components/Footer";
+import Hero from "../components/Hero/Hero";
+import Navbar from "../components/Navbar";
 
 function Home() {
   return (
     <>
+      <Navbar></Navbar>
       <Hero />
       <BookCar />
       <PlanTrip />

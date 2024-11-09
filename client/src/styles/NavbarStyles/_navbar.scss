@@ -23,6 +23,7 @@
   &.sticky {
     position: fixed;
     background-color: white;
+    top: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 1.5rem 2rem;
     transition: all 0.3s ease-in-out;
