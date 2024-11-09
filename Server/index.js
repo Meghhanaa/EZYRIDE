@@ -23,10 +23,17 @@ app.use(cookieParser());
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'vrms', // Replace with your DB name
+  // host: process.env.DB_HOST || 'localhost',
+  // user: process.env.DB_USER || 'root',
+  // password: process.env.DB_PASSWORD || '',
+  // database: process.env.DB_NAME || 'vrms', // Replace with your DB name
+  // waitForConnections: true,
+  // connectionLimit: 10,
+  // queueLimit: 0
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME, // Replace with your DB name
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -66,7 +73,7 @@ app.post('/customer_login', async (req, res) => {
 
     const user = rows[0];
     console.log(user)
-    const token = jwt.sign({ c_no: user.c_no, c_name: user.c_name }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ c_no: user.c_no, c_name: user.c_name,role:user.c_roll }, JWT_SECRET, { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
     res.status(200).json({ message: 'Login successful', user: { name: user.c_name } });
   } catch (error) {
@@ -97,6 +104,7 @@ app.post('/customer_register', async (req, res) => {
   }
 });
 
+//owner login
 app.post('/owner_login', async (req, res) => {
   const { number, password } = req.body;
 
@@ -107,7 +115,7 @@ app.post('/owner_login', async (req, res) => {
     }
 
     const user = rows[0];
-    const token = jwt.sign({ o_no: user.o_no, o_name: user.o_name }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ o_no: user.o_no, o_name: user.o_name,role:user.o_roll }, JWT_SECRET, { expiresIn: '1h' });
 
     res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
     res.status(200).json({ message: 'Login successful' });
@@ -139,41 +147,66 @@ app.post('/owner_register', async (req, res) => {
   }
 });
 
+//admin login
+app.post('/admin', async (req, res) => {
+  const { number, password } = req.body;
+  try {
+    const [rows] = await pool.query('SELECT * FROM admin WHERE a_no = ? AND a_password = ?', [number, password]);
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const user = rows[0];
+    const token = jwt.sign({ a_no: user.a_no, a_name: user.a_name,role:user.a_roll }, JWT_SECRET, { expiresIn: '1h' });
+
+    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+    res.status(200).json({ message: 'Login successful' });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
+);
+
+
 //get all the data of vehicle
 app.get('/vehicles', async (req, res) => {
     try {
         // Extract query parameters from the request
-        const { category, color, price_min, driver_required } = req.query;
+        const { carType, color, vehicleType, priceRange, driverRequired } = req.query;
+        console.log(color + " " + vehicleType + " " + priceRange + " " + driverRequired);
 
         // Start building the SQL query with basic vehicle selection and include owner address
         let sqlQuery = `
-            SELECT v.v_insurance, v.v_name, v.v_type, v.v_rto, v.v_color, v.v_mileage,v.v_pay, v.v_engine_type, v.o_no, v.v_image, o.o_street
+            SELECT v.v_insurance, v.v_name, v.v_type, v.v_rto, v.v_color, v.v_mileage, v.v_pay, v.v_engine_type, v.o_no, v.v_image, o.o_street, o.o_driver_count
             FROM vehicle v
             JOIN owner o ON v.o_no = o.o_no
-            WHERE o.o_no IN (SELECT DISTINCT d.o_no FROM driver d)
+            WHERE 1 = 1
         `;
 
         // Dynamically add conditions based on the query parameters
         const conditions = [];
         const queryParams = [];
 
-        if (category) {
-            conditions.push(`(v.v_type = ? OR ? IS NULL)`);
-            queryParams.push(category, category);
+        if (vehicleType) {
+            conditions.push(`v.v_type = ?`);
+            queryParams.push(vehicleType);
         }
         if (color) {
-            conditions.push(`(v.v_color = ? OR ? IS NULL)`);
-            queryParams.push(color, color);
+            conditions.push(`v.v_color = ?`);
+            queryParams.push(color);
         }
-        if (price_min) {
-            conditions.push(`(v.v_pay >= ? OR ? IS NULL)`);
-            queryParams.push(price_min, price_min);
+        if (priceRange) {
+            conditions.push(`v.v_pay >= ?`);
+            queryParams.push(priceRange);
         }
-        if (driver_required) {
-            if (driver_required === 'yes') {
-                conditions.push(`(o.o_no IN (SELECT DISTINCT d.o_no FROM driver d))`);
+        if (driverRequired) {
+            if (driverRequired === 'yes') {
+                // Only get vehicles with a driver count greater than 0
+                conditions.push(`o.o_driver_count > 0`);
             } else {
-                conditions.push(`(o.o_no NOT IN (SELECT DISTINCT d.o_no FROM driver d))`);
+                // Only get vehicles without drivers
+                conditions.push(`o.o_driver_count = 0`);
             }
         }
 
@@ -184,10 +217,9 @@ app.get('/vehicles', async (req, res) => {
 
         // Execute the query with parameters
         const [rows] = await pool.execute(sqlQuery, queryParams);
+        console.log(rows[0]);
 
         // Send the response with the filtered vehicles
-        console.log("happy")
-        console.log(rows)
         res.status(200).json(rows);
     } catch (error) {
         console.error('Error fetching vehicles:', error);
@@ -230,9 +262,69 @@ app.get('/book/driver',verifyToken, async (req, res) => {
   }
 });
 
+//to get all the drivers
+app.get('/alldriver', verifyToken, async (req, res) => {
+    try {
+        // Query all drivers
+        const [data] = await pool.query('SELECT * FROM driver'); 
+        res.status(200).json(data);
+    } catch (error) {
+        console.error("Error fetching drivers:", error);
+        res.status(500).json({ message: 'An error occurred while fetching drivers.' });
+    }
+});
+
+//to get all customer
+app.get('/allcustomer', verifyToken, async (req, res) => {
+    try {
+        // Query all customer
+        const [data] = await pool.query('SELECT * FROM customer'); 
+        res.status(200).json(data);
+    } catch (error) {
+        console.error("Error fetching customer:", error);
+        res.status(500).json({ message: 'An error occurred while fetching customer.' });
+    }
+});
+
+//to get all owner
+app.get('/allowner', verifyToken, async (req, res) => {
+    try {
+        // Query all customer
+        const [data] = await pool.query('SELECT * FROM owner'); 
+        res.status(200).json(data);
+    } catch (error) {
+        console.error("Error fetching owner:", error);
+        res.status(500).json({ message: 'An error occurred while fetching owner.' });
+    }
+});
+
+//all get all booking
+app.get('/allbooking', verifyToken, async (req, res) => {
+    try {
+        // Query all customer
+        const [data] = await pool.query('SELECT * FROM booking'); 
+        res.status(200).json(data);
+    } catch (error) {
+        console.error("Error fetching booking:", error);
+        res.status(500).json({ message: 'An error occurred while fetching booking.' });
+    }
+});
+
+//all payment detail
+app.get('/allpayment', verifyToken, async (req, res) => {
+    try {
+        // Query all customer
+        const [data] = await pool.query('SELECT * FROM admin_payment'); 
+        res.status(200).json(data);
+    } catch (error) {
+        console.error("Error fetching payment:", error);
+        res.status(500).json({ message: 'An error occurred while fetching payment.' });
+    }
+});
+
 
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port} ${process.env.DB_NAME}`);
 });

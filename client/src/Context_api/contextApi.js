@@ -48,12 +48,12 @@ const ViewProvider = ({ children }) => {
         const response = await axios.post('http://localhost:3001/customer_login', formData, {
           headers: { 'Content-Type': 'application/json' }
         });
-        setMess(response.data.mess);
+        setMess(response.data.message);
         setUserName(response.data.user.name);
         navigate('/');
       } catch (error) {
         if (error.response) {
-          setMess(error.response.data.mess || 'An error occurred. Please try again.');
+          setMess(error.response.data.message || 'An error occurred. Please try again.');
         } else {
           console.log('An error occurred. Please try again.');
           setMess('An error occurred. Please try again.');
@@ -78,9 +78,20 @@ const ViewProvider = ({ children }) => {
   });
 
   const vehicleInputChange = (e) => {
+    const { name, value: initialValue } = e.target;
+    let value = initialValue;
+
+    if (value === "Vehicle type" || 
+        value === "Select Preference" || 
+        value === "Select color" || 
+        value === "Select price range" || 
+        value === "Select pick up location"||
+        value === "Select") {
+        value = "";
+    }
+
+    setSearchVehData(prevData => ({ ...prevData, [name]: value }));
     console.log("current initiated:", searchVehData);
-  const { name, value } = e.target;
-  setSearchVehData(prevData => ({ ...prevData, [name]: value }));
 };
 
   const [vehicle,setVehicle]=useState([]);

@@ -127,7 +127,7 @@ const Models = () => {
                 imgSrc={property.v_image}
                 price={property.v_pay}
                 title={property.v_name}
-                description={property.v_mileage}
+                description={property.v_type}
               />
             ))}
           </div>

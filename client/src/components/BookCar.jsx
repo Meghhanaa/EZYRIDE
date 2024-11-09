@@ -41,7 +41,7 @@ function BookCar() {
                   onChange={(e) => vehicleInputChange(e)} 
                   disabled={!searchVehData.vehicleType}
                 >
-                  <option>Select</option>
+                  <option>Select Preference</option>
                   {searchVehData.vehicleType && carOptions[searchVehData.vehicleType].map((type, index) => (
                     <option key={index} value={type}>{type}</option>
                   ))}
@@ -56,11 +56,13 @@ function BookCar() {
                   value={searchVehData.color} 
                   onChange={vehicleInputChange}
                 >
-                  <option></option>
+                  <option>Select color</option>
                   <option value="Red">Red</option>
                   <option value="White">White</option>
                   <option value="Black">Black</option>
                   <option value="Blue">Blue</option>
+                  <option value="Blue">Yellow</option>
+                  <option value="Blue">Green</option>
                 </select>
               </div>
 
@@ -73,10 +75,9 @@ function BookCar() {
                   onChange={vehicleInputChange}
                 >
                   <option>Select price range</option>
-                  <option value="Below $50">Below $50</option>
-                  <option value="$50 - $100">$50 - $100</option>
-                  <option value="$100 - $150">$100 - $150</option>
-                  <option value="Above $150">Above $150</option>
+                  <option value="100">Below 100</option>
+                  <option value="150">100 - 150</option>
+                  <option value="500">150 - 500</option>
                 </select>
               </div>
 
@@ -97,7 +98,7 @@ function BookCar() {
                 </select>
               </div>
 
-              {/* Drop-off Location */}
+              {/* Drop-off Location
               <div className="box-form__car-type">
                 <label><i className="fa-solid fa-location-dot"></i> &nbsp; Drop-off </label>
                 <select 
@@ -112,7 +113,7 @@ function BookCar() {
                   <option>KOLAR</option>
                   <option>ARERA HILLS</option>
                 </select>
-              </div>
+              </div> */}
 
               {/* Pick-up Date & Time */}
               <div className="box-form__car-time">
@@ -160,7 +161,7 @@ function BookCar() {
                   value={searchVehData.driverRequired} 
                   onChange={vehicleInputChange}
                 >
-                  <option>Select</option>
+                  <option>Select </option>
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
