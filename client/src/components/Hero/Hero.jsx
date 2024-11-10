@@ -3,25 +3,24 @@ import Slider from 'react-slick';
 import './Hero.css';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css"; 
-import i1 from './p1.jpg';
-import i2 from './p2.jpg';
-// import i3 from './p3.jpg';
+import i1 from './p10.jpg';
+import i3 from './p3.jpg';
 import i4 from './p4.jpg';
-// import i5 from './p5.jpg';
-import i6 from './p6.jpg';
+import i5 from './p5.jpg';
 import i7 from './p7.jpg';
 import i8 from './p8.jpg';
-// import i9 from './p9.jpg';
-import i10 from './p10.jpg';
+import i9 from './p9.jpg';
+import i10 from './p1.jpg';
 
 const Hero = () => {
   const images = [
-   i1,i10,i2,i4,i6,i7,i8
+   i1
+   ,i10='https://th.bing.com/th/id/OIP.EZjOZMxOe0ZlXDgsqoHc8wHaE7?w=1024&h=682&rs=1&pid=ImgDetMain',i3,i4,i5,i7,i8,i9
   ];
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    speed: 500,
+    speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
