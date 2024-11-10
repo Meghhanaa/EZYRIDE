@@ -11,6 +11,7 @@
 
 .slide-image {
   height: 700px;
+  width: 100%;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -31,7 +32,7 @@
   background-size: cover;
   background-position: center;
   background-image: inherit;
-  filter: blur(6px);
+  filter: blur(2px);
   z-index: 1;
 }
 

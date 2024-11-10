@@ -44,7 +44,7 @@ const Reviews = () => {
       
   return (
     <>    
-    <div className="heading">ReViews</div>
+    <div className="heading">Reviews</div>
     <Slider {...sliderSettings} className="review-slider">
       {Data.map((review, index) => (
         <div key={index} className="card">
