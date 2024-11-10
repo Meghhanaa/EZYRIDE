@@ -81,7 +81,7 @@ app.post('/customer_login', async (req, res) => {
     // const token = jwt.sign({ c_no: user.c_no, c_name: user.c_name,role:user.c_roll }, JWT_SECRET, { expiresIn: '24h' });
     // console.log(token);
     // res.cookie('token', token, { httpOnly: true, secure: false, path: '/', sameSite: 'Lax' });
-    res.status(200).json({ message: 'Login successful', user: { name: user.c_name }});
+    res.status(200).json({ message: 'Login successful', user: { name: user.c_name },role:{name:user.c_role}});
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -112,19 +112,19 @@ app.post('/customer_register', async (req, res) => {
 
 //owner login
 app.post('/owner_login', async (req, res) => {
-  const { number, password } = req.body;
+  const { o_no, o_password } = req.body;
 
   try {
-    const [rows] = await pool.query('SELECT * FROM owner WHERE o_no = ? AND o_password = ?', [number, password]);
+    const [rows] = await pool.query('SELECT * FROM owner WHERE o_no = ? AND o_password = ?', [o_no, o_password]);
     if (rows.length === 0) {
       return res.status(404).json({ message: 'User not found' });
     }
 
     const user = rows[0];
     // const token = jwt.sign({ o_no: user.o_no, o_name: user.o_name,role:user.o_roll }, JWT_SECRET, { expiresIn: '1h' });
-
+    console.log(user)
     // res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-    res.status(200).json({ message: 'Login successful' });
+    res.status(200).json({ message: 'Login successful', user: { name: user.o_name },role:{name:user.o_role} });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -154,24 +154,23 @@ app.post('/owner_register', async (req, res) => {
 });
 
 //admin login
-app.post('/admin', async (req, res) => {
-  const { number, password } = req.body;
+app.post('/admin_login', async (req, res) => {
+  const { a_no, a_password } = req.body;
   try {
-    const [rows] = await pool.query('SELECT * FROM admin WHERE a_no = ? AND a_password = ?', [number, password]);
+    const [rows] = await pool.query('SELECT * FROM admin WHERE a_no = ? AND a_password = ?', [a_no, a_password]);
     if (rows.length === 0) {
       return res.status(404).json({ message: 'User not found' });
     }
 
     const user = rows[0];
-    const token = jwt.sign({ a_no: user.a_no, a_name: user.a_name,role:user.a_roll }, JWT_SECRET, { expiresIn: '1h' });
-
-    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-    res.status(200).json({ message: 'Login successful' });
+    // const token = jwt.sign({ o_no: user.o_no, o_name: user.o_name,role:user.o_roll }, JWT_SECRET, { expiresIn: '1h' });
+    console.log(user)
+    // res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+    res.status(200).json({ message: 'Login successful', user: { name: user.a_name },role:{name:user.a_role} });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
-  }
-}
+  }}
 );
 
 
