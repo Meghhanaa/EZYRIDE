@@ -399,6 +399,7 @@ import axios from 'axios';
 import bigInt from 'big-integer';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
+import Navbar from '../components/Navbar';
 
 const RegOwner = () => {
   const [formData, setFormData] = useState({
@@ -542,7 +543,29 @@ const RegOwner = () => {
     }
   };
 
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    
+    if (file && file.size > 2000000) { // Example: Limit file size to 2MB
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            image: "File size should be less than 2MB.",
+        }));
+    } else {
+        setFormData((prevData) => ({
+            ...prevData,
+            image: file,
+        }));
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            image: null, // Clear error if file is valid
+        }));
+    }
+};
+
   return (
+    <>
+    <Navbar/>
     <div
       style={{
         // marginTop: '120px',
@@ -588,6 +611,27 @@ const RegOwner = () => {
           </h2>
           <form onSubmit={handleSubmit}>
             {/* Form Fields */}
+
+            {/* Image Upload */}
+            <div style={{ marginBottom: '16px' }}>
+                <input
+                    type="file"
+                    name="image"
+                    accept="image/*"  // Restrict to image files only
+                    onChange={handleImageUpload}
+                    style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: '1px solid #ccc',
+                        borderRadius: '5px',
+                        outline: 'none',
+                        marginBottom: '10px',
+                    }}
+                    required
+                />
+                {errors.image && <p style={{ color: 'red' }}>{errors.image}</p>}
+            </div>
+
             {/* Contact No. */}
               <div style={{ marginBottom: '16px' }}>
                 <input
@@ -888,6 +932,7 @@ const RegOwner = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

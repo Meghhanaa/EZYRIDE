@@ -84,6 +84,7 @@
   }
   
   .navbar__buttons {
+    margin-right: 10%;
     display: flex;
     gap: 2.5rem;
     font-size: var(--p-size);
@@ -92,6 +93,47 @@
     align-items: center;
   }
   
+  .mobile-signin{
+    font-size: 1.5rem;
+    margin-bottom: 15%;
+    justify-content: center;
+  }
+
+  /* Menu button styles */ 
+  .menu-button { 
+    background-color: #444; /* Adjust as needed */ 
+    color: #fff; /* Adjust as needed */ 
+    border: none; 
+    padding: 2px 5px 2px 5px; 
+    cursor: pointer; 
+    position: relative; 
+  } 
+  
+  /* Menu styles */ 
+  .menu { 
+    list-style: none; 
+    padding: 0; 
+    margin: 28px 0 0;
+    /* margin: 35px 88% 0;  */
+    background-color: #706f6f; /* Adjust as needed */ 
+    border: 1px solid #706f6f; /* Adjust as needed */ 
+    position: absolute; 
+    top: 40px; /* Adjust based on button size */ 
+    right: 25px; /* Adjust based on button position */
+     border-radius: 5px; /* Optional, for rounded corners */ 
+  } 
+    
+    /* Menu item styles */ 
+    .menu-item { 
+      padding: 10px 20px; 
+      color: #fff; /* Adjust as needed */ 
+      cursor: pointer; 
+    } 
+    
+    .menu-item:hover { 
+      background-color: #555; 
+    } /* Adjust as needed */
+
   @media (max-width: 1000px) {
     .navbar__buttons {
       display: none;
@@ -115,6 +157,53 @@
   .navbar__buttons a {
     text-decoration: none;
   }
+
+  /* Dropdown Menu Container */
+.user-dropdown-menu {
+  position: absolute;
+  top: 100%; /* Aligns right below the user's name/image */
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  min-width: 150px;
+  z-index: 1000;
+}
+
+/* Individual Dropdown Items */
+.user-dropdown-menu .dropdown-item {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover Effect for Dropdown Items */
+.user-dropdown-menu .dropdown-item:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+/* Additional Styling */
+.user-dropdown-menu .dropdown-item:active {
+  background-color: #e0e0e0;
+}
+
+.user-dropdown-menu .dropdown-item button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  color: inherit;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
   
   /* Mobile and Tablet Nav Styles */
   
@@ -238,3 +327,29 @@
     }
   }
   
+
+ /* Responsive Styles */
+@media (max-width: 768px) {
+  .menu {
+    top: 50px; /* Adjust based on button size */
+    right: 10px; /* Adjust based on button position */
+    width: 200px; /* Set a specific width */
+  }
+  .menu-button {
+    padding: 5px 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    top: 115px; /* Adjust based on button size */
+    right: 5px; /* Adjust based on button position */
+    width: 35%; /* Full width for very small screens */
+  }
+  .menu-item {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+  .menu-item:hover{
+    background-color: #555; 
+  }
+}

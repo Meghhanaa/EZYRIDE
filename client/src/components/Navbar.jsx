@@ -6,11 +6,14 @@ import { FaTimes } from "react-icons/fa";
 import UserImage from "../images/card-image.png"; // Path to user image
 import { useViewContext } from "../Context_api/contextApi";
 import "../styles/NavbarStyles/Navbar.css"
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+
 
 function Navbar() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
-  const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration4
   const {userName}=useViewContext();
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
   useEffect(() => {
     // Retrieve user name from local storage
     // const storedName = localStorage.getItem('userName');
@@ -18,11 +21,16 @@ function Navbar() {
     //   setUserName(storedName);
     // }
   }, []);
-
+ 
+// Toggle the visibility of the menu 
+const toggleMenu = () => { 
+  setIsMenuVisible(!isMenuVisible); 
+};
 
   const toggleNav = () => {
     setNav(!nav); // Toggle mobile menu
   };
+
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen); // Toggle the dropdown
@@ -51,15 +59,6 @@ function Navbar() {
           <div onClick={toggleNav} className="mobile-navbar__close">
             <FaTimes />
           </div>
-          <ul className="mobile-navbar__links">
-            <li><Link onClick={toggleNav} to="/">Home</Link></li>
-            <li><Link onClick={toggleNav} to="/About">About</Link></li>
-            <li><Link onClick={toggleNav} to="/models">Vehicle Models</Link></li>
-            <li><Link onClick={toggleNav} to="/Safety">Safety</Link></li>
-            <li><Link onClick={toggleNav} to="/OurTeam">Our Team</Link></li>
-            <li><Link onClick={toggleNav} to="/ContactEzy">Contact</Link></li>
-          </ul>
-
           {/* User Section for Mobile */}
           <div className="mobile-signin">
             {userName ? (
@@ -77,6 +76,18 @@ function Navbar() {
                   title={`Hello, ${userName}`}
                 />
                 <span style={{ fontWeight: "bold", color: "#750E21" }}>{userName}</span>
+                <div> 
+                  <button className="menu-button" onClick={toggleMenu}> 
+                    <HiOutlineMenuAlt3 style={{ fontWeight: "bold", color: "#fff" }} /> 
+                  </button> 
+                  {isMenuVisible && ( 
+                    <ul className="menu">
+                      <li className="menu-item"><Link to={'/Profile'}>Your Profile</Link></li>
+                      <li className="menu-item">My Bookings</li> 
+                      <li className="menu-item">Logout</li> 
+                    </ul> 
+                  )}
+              </div>
               </div>
             ) : (
               <button
@@ -146,6 +157,16 @@ function Navbar() {
               </div>
             )}
           </div>
+          <ul className="mobile-navbar__links">
+            <li><Link onClick={toggleNav} to="/">Home</Link></li>
+            <li><Link onClick={toggleNav} to="/About">About</Link></li>
+            <li><Link onClick={toggleNav} to="/models">Vehicle Models</Link></li>
+            <li><Link onClick={toggleNav} to="/Safety">Safety</Link></li>
+            <li><Link onClick={toggleNav} to="/OurTeam">Our Team</Link></li>
+            <li><Link onClick={toggleNav} to="/ContactEzy">Contact</Link></li>
+          </ul>
+
+          
         </div>
 
         {/* Desktop Navbar */}
@@ -180,7 +201,19 @@ function Navbar() {
                   title={`Hello, ${userName}`}
                 />
                 <span style={{ fontWeight: "bold", color: "#750E21" }}>{userName}</span>
+                <div> 
+                  <button className="menu-button" onClick={toggleMenu}> 
+                    <HiOutlineMenuAlt3 style={{ fontWeight: "bold", color: "#fff" }} /> 
+                  </button> 
+                  {isMenuVisible && ( 
+                    <ul className="menu">
+                      <li className="menu-item">Your Profile</li>
+                      <li className="menu-item">My Bookings</li> 
+                      <li className="menu-item">Logout</li> 
+                    </ul> 
+                  )}
               </div>
+              </div>  
             ) : (
               <div className="navbar__register-dropdown" style={{ position: "relative", display: "inline-block" }}>
                 <button
@@ -253,7 +286,7 @@ function Navbar() {
               </div>
             )}
           </div>
-
+          
           {/* Mobile Hamburger Menu */}
           <div className="mobile-hamb" onClick={toggleNav}>
             {nav ? <FaTimes /> : <TbGridDots className="icon toggleNavbarIcon" />}

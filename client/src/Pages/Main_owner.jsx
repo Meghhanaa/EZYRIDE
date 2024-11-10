@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const MainOwner = () => {
   const [formData, setFormData] = useState({
@@ -42,6 +43,8 @@ const MainOwner = () => {
   };
 
   return (
+    <>
+    <Navbar></Navbar>
     <div
       style={{
         minHeight: '100vh',
@@ -203,6 +206,7 @@ const MainOwner = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
