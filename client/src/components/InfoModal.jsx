@@ -1,24 +1,10 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import { useViewContext } from '../Context_api/contextApi';
 import '../styles/ModelsStyles/modal.css';
 
-const dummyVehicle = {
-  v_image: 'https://imgd.aeplcdn.com/370x208/n/cw/ec/139651/curvv-exterior-right-front-three-quarter.jpeg?isig=0&q=80',
-  v_insurance: 'INS123456',
-  v_name: 'Toyota Camry',
-  v_type: 'Sedan',
-  v_desp: 'A comfortable and spacious sedan with excellent fuel efficiency.',
-  v_rto: 'MP07',
-  v_color: 'White',
-  v_mileage: '25 kmpl',
-  v_engine_type: 'Hybrid',
-  o_no: '9876543210',
-  v_pay: '50000',
-  v_booked: false,
-  v_price: '1500000'
-};
-
 const InfoModal = () => {
+   const{dummyVehicle,handleClose}=useViewContext();
   return (
     <>
       <Navbar />
@@ -98,6 +84,7 @@ const InfoModal = () => {
               </div>
             </div>
           </form>
+
         </div>
       </div>
     </>
