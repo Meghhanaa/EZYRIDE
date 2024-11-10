@@ -2,10 +2,11 @@ import React from 'react';
 import "../styles/Vehicles/vehicles.css";
 import { useViewContext } from '../Context_api/contextApi';
 import Navbar from '../components/Navbar';
+import InfoModal from '../components/InfoModal';
 
 
 const Models = () => {
-  const { vehicle,handleBookNowClick,handleMore } = useViewContext(); // Access context values
+  const { vehicle,handleBookNowClick,handleMore,close } = useViewContext(); // Access context values
   return (
     <>
     {/* <Navbar/> */}
@@ -33,6 +34,11 @@ const Models = () => {
         </div>
       </div>
     </section>
+    {
+      close&&(
+        <InfoModal/>
+      )
+    }
     </>
   );
 };

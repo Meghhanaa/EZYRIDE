@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useState } from "react";
 import "../src/dist/styles.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Models from "./Pages/Models";
 import Main_customer from "./Pages/Main_customer";
