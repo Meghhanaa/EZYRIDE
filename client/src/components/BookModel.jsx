@@ -131,23 +131,29 @@ useEffect(() => {
           <form onSubmit={handleBookSubmit} className="booking-form">
             {/* Driver required checkbox */}
             <center>
-              <div className="flex items-center">
+            <div className="flex">
+              <div className="checkbox-group">
                 <input
                   type="checkbox"
+                  className="check-book"
                   id="driver-required"
                   checked={isDriverRequired}
                   onChange={handleCheckboxChange}
                 />
                 <label htmlFor="driver-required" className="text-lg">Driver Required</label>
-
+              </div>
+              <div className="checkbox-group">
                 <input
                   type="checkbox"
+                  className="check-book"
                   id="driver-not-required"
                   checked={!isDriverRequired}
                   onChange={handleCheckboxChange}
                 />
                 <label htmlFor="driver-not-required" className="text-lg">Driver Not Required</label>
               </div>
+            </div>
+
             </center><br />
 
             {/* Form fields */}
@@ -165,9 +171,19 @@ useEffect(() => {
                 <input type="text" value={BookData.d_no} readOnly />
               </div>
             )}
+            {isDriverRequired && (
+              <div className="megh-1">
+                <label>Driver Name</label>
+                <input type="text" value={BookData.d_name} readOnly />
+              </div>
+            )}
             <div className="megh-1">
               <label>Vehicle RTO</label>
               <input type="text" value={BookData.v_rto} readOnly />
+            </div>
+            <div className="megh-1">
+              <label>Vehicle Owner Number</label>
+              <input type="text" value={BookData.o_no} readOnly />
             </div>
             <div className="megh-1">
               <label>Booking Date</label>
@@ -203,9 +219,9 @@ useEffect(() => {
             {/* Confirm Checkbox */}
             <center>
               <div className="flex items-center">
-                <input type="checkbox" id="confirm-checkbox" checked={isConfirmed} onChange={handleCheckboxChange} />
+                <input type="checkbox" className="check-book-1" id="confirm-checkbox" checked={isConfirmed} onChange={handleCheckboxChange} />
                 <label htmlFor="confirm-checkbox" className="text-lg">I Confirm</label>
-                <input type="checkbox" id="not-confirm-checkbox" checked={!isConfirmed} onChange={handleCheckboxChange} />
+                <input type="checkbox" className="check-book-1" id="not-confirm-checkbox" checked={!isConfirmed} onChange={handleCheckboxChange} />
                 <label htmlFor="not-confirm-checkbox" className="text-lg">Not Confirm</label>
               </div>
             </center><br /><br></br>
