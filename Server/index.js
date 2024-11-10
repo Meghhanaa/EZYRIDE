@@ -9,7 +9,7 @@ import session from'express-session';
 dotenv.config(); // Load environment variables
 
 const app = express();
-const port = process.env.PORT;
+const portlocation = 3001;
 
 // Middleware
 app.use(express.json());
@@ -31,6 +31,7 @@ const pool = mysql.createPool({
   // connectionLimit: 10,
   // queueLimit: 0
   host: process.env.DB_HOST,
+  port:3307,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME, // Replace with your DB name
@@ -463,6 +464,6 @@ app.get('/allpayment',async (req, res) => {
 
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port} ${process.env.DB_NAME}`);
+app.listen(portlocation, () => {
+  console.log("Server running on",portlocation);
 });
