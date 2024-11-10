@@ -29,40 +29,26 @@ function Footer() {
               </li>
 
               <li>
-                <a
-                  style={{ fontSize: "14px" }}
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://www.linkedin.com/in/meghana-tamrakar-64804521b/"
-                >
-                  Design by MEGHANA TAMRAKAR
-                </a>
               </li>
             </ul>
 
             <ul className="footer-content__2">
               <li>Company</li>
               <li>
-                <a href="#home">New York</a>
-              </li>
-              <li>
-                <a href="#home">Careers</a>
+                <a href="#home">Our Team</a>
               </li>
               <li>
                 <a href="#home">Mobile</a>
               </li>
               <li>
-                <a href="#home">Blog</a>
-              </li>
-              <li>
-                <a href="#home">How we work</a>
+                <a href="#home">About Us</a>
               </li>
             </ul>
 
             <ul className="footer-content__2">
               <li>Working Hours</li>
               <li>Mon - Fri: 9:00AM - 9:00PM</li>
-              <li>Sat: 9:00AM - 19:00PM</li>
+              <li>Sat: 9:00AM - 1:00PM</li>
               <li>Sun: Closed</li>
             </ul>
 
