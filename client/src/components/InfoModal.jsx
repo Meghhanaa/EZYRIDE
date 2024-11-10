@@ -15,8 +15,8 @@ const InfoModal = () => {
           <form>
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="insuranceNumber"><strong>Insurance Number:</strong></label>
-                <input type="text" id="insuranceNumber" name="insuranceNumber" defaultValue={dummyVehicle.v_insurance} required readOnly />
+                <label htmlFor="insuranceNumber"><strong>RTO:</strong></label>
+                <input type="text" id="insuranceNumber" name="insuranceNumber" defaultValue={dummyVehicle.v_rto} required readOnly />
               </div>
               <div className="form-group">
                 <label htmlFor="vehicleType"><strong>Vehicle Type:</strong></label>
@@ -67,24 +67,18 @@ const InfoModal = () => {
             </div>
 
             <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="payment"><strong>Payment Amount:</strong></label>
-                <input type="text" id="payment" name="payment" defaultValue={dummyVehicle.v_pay} required readOnly />
-              </div>
+              
               <div className="form-group">
                 <label htmlFor="booked"><strong>Booked:</strong></label>
                 <input type="text" id="booked" name="booked" defaultValue={dummyVehicle.v_booked ? "Yes" : "No"} required readOnly />
               </div>
-            </div>
-
-            <div className="form-row">
               <div className="form-group">
                 <label htmlFor="price"><strong>Price:</strong></label>
-                <input type="text" id="price" name="price" defaultValue={dummyVehicle.v_price} required readOnly />
+                <input type="text" id="price" name="price" Value={dummyVehicle.v_pay} required readOnly />
               </div>
             </div>
+            <button></button>
           </form>
-
         </div>
       </div>
     </>

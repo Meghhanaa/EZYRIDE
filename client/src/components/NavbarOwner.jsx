@@ -12,8 +12,8 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 function NavbarOwner() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration4
-  // const {userName}=useViewContext();
-  const userName = 'Meghana';
+  const {userName}=useViewContext();
+  // const userName = 'Meghana';
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   useEffect(() => {
     // Retrieve user name from local storage
