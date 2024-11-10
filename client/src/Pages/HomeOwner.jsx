@@ -1,16 +1,14 @@
-import BookCar from "../components/BookCar";
 import PlanTrip from "../components/PlanTrip";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero/Hero";
-import Navbar from "../components/Navbar";
 import Reviews from "../components/Reviews";
+import NavbarOwner from "../components/NavbarOwner";
 
-function Home() {
+function HomeOwner() {
   return (
     <>
-      {/* <Navbar></Navbar> */}
+      <NavbarOwner></NavbarOwner>
       <Hero />
-      <BookCar />
       <PlanTrip />
       <Reviews/>
       <Footer /> 
@@ -18,4 +16,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeOwner;

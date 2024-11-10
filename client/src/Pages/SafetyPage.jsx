@@ -9,7 +9,7 @@ import Navbar from "../components/Navbar";
 const SafetyPage = () => {
   return (
   <>
-    <Navbar/>
+    {/* <Navbar/> */}
     <div className="safety-page">
       <header className="header">
         <h1>SAFETY MEASURES AT EZYRIDE</h1>

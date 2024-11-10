@@ -72,7 +72,7 @@ const MainCustomer = () => {
 
   return (
     <>
-    <Navbar></Navbar>
+    {/* <Navbar></Navbar> */}
     <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f3f3f3', fontFamily: 'Arial, sans-serif' }}>
       <div style={{ width: '100%', maxWidth: '1100px', display: 'flex', backgroundColor: '#fff', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)', borderRadius: '10px', overflow: 'hidden' }}>
         {/* Left Side - Sign In */}

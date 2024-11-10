@@ -9,10 +9,11 @@ import "../styles/NavbarStyles/Navbar.css"
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
 
-function Navbar() {
+function NavbarOwner() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration4
-  const {userName}=useViewContext();
+  // const {userName}=useViewContext();
+  const userName = 'Meghana';
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   useEffect(() => {
     // Retrieve user name from local storage
@@ -83,7 +84,8 @@ const toggleMenu = () => {
                   {isMenuVisible && ( 
                     <ul className="menu">
                       <li className="menu-item"><Link to={'/Profile'}>Your Profile</Link></li>
-                      <li className="menu-item">My Bookings</li> 
+                      <li className="menu-item">Add Vehicles</li> 
+                      <li className="menu-item">Add drivers</li>
                       <li className="menu-item">Logout</li> 
                     </ul> 
                   )}
@@ -160,7 +162,8 @@ const toggleMenu = () => {
           <ul className="mobile-navbar__links">
             <li><Link onClick={toggleNav} to="/">Home</Link></li>
             <li><Link onClick={toggleNav} to="/About">About</Link></li>
-            {/* <li><Link onClick={toggleNav} to="/models">Vehicle Models</Link></li> */}
+            <li><Link className="models-link" to="/models">Your Vehicle</Link></li>
+            <li><Link className="models-link" to="/models">Your Drivers</Link></li>
             <li><Link onClick={toggleNav} to="/Safety">Safety</Link></li>
             <li><Link onClick={toggleNav} to="/OurTeam">Our Team</Link></li>
             <li><Link onClick={toggleNav} to="/ContactEzy">Contact</Link></li>
@@ -179,7 +182,8 @@ const toggleMenu = () => {
           <ul className="navbar__links">
             <li><Link className="home-link" to="/">Home</Link></li>
             <li><Link className="about-link" to="/About">About</Link></li>
-            {/* <li><Link className="models-link" to="/models">Vehicle Models</Link></li> */}
+            <li><Link className="models-link" to="/models">Your Vehicle</Link></li>
+            <li><Link className="models-link" to="/models">Your Drivers</Link></li>
             <li><Link className="safety-link" to="/Safety">Safety</Link></li>
             <li><Link className="team-link" to="/OurTeam">Our Team</Link></li>
             <li><Link className="contact-link" to="/contactEzy">Contact</Link></li>
@@ -208,7 +212,8 @@ const toggleMenu = () => {
                   {isMenuVisible && ( 
                     <ul className="menu">
                       <li className="menu-item">Your Profile</li>
-                      <li className="menu-item">My Bookings</li> 
+                      <li className="menu-item">Add Vehicles</li> 
+                      <li className="menu-item">Add drivers</li>
                       <li className="menu-item">Logout</li> 
                     </ul> 
                   )}
@@ -297,4 +302,4 @@ const toggleMenu = () => {
   );
 }
 
-export default Navbar;
+export default NavbarOwner;

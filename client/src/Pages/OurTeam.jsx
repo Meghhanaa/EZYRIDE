@@ -80,7 +80,7 @@ function OurTeam() {
   
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
     <section className="section-white">
       <HeroPages name="Our Team" />
       <div className="container">

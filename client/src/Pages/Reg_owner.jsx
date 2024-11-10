@@ -565,7 +565,7 @@ const RegOwner = () => {
 
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
     <div
       style={{
         // marginTop: '120px',

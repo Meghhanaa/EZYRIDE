@@ -8,7 +8,7 @@ const Models = () => {
   const { vehicle,handleBookNowClick,handleMore } = useViewContext(); // Access context values
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
     <section className="section" id="popular">
     <h1 className='megh-title'>YOUR VEHICLES</h1>
       {/* <HeroPages name="Vehicle Models" /> */}

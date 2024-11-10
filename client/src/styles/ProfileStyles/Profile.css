@@ -13,7 +13,7 @@ body {
   padding: 50px;
   border-radius: 10px;
   max-width: 800px;
-  margin: 140px auto 0;  /* Set margin to push it below the navbar */
+  margin: 250px auto 0;  /* Set margin to push it below the navbar */
   justify-content: center;
   background-color: #f9f9f9;
   border: 1px solid #ddd; 

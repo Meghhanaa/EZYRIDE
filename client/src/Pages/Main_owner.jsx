@@ -44,7 +44,7 @@ const MainOwner = () => {
 
   return (
     <>
-    <Navbar></Navbar>
+    {/* <Navbar></Navbar> */}
     <div
       style={{
         minHeight: '100vh',

@@ -5,11 +5,28 @@ import Icon3 from "../images/about/icon3.png";
 import "../styles/About/AboutSection.css"; // Import the CSS file
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import AdminNav from "../components/AdminNav";
+import NavbarOwner from "../components/NavbarOwner";
 
-const AboutSection = () => {
+const AboutSection = ({ user }) => {
+  const { o_role } = user; // Make sure to pass 'owner' prop to this component
+
+  const renderNavbar = () => {
+    switch (o_role) {
+      case 'owner':
+        return <NavbarOwner />;
+      case 'customer':
+        return <Navbar />;
+      case 'admin':
+        return <AdminNav />;
+      default:
+        return <Navbar />;
+    }
+  };
+
   return (
     <>
-    <Navbar/>
+      {/* {renderNavbar()} */}
       <section className="about-section">
         <div className="about-content">
           <div className="about-text">

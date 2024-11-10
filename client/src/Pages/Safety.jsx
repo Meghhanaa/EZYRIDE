@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 const Safety = () => {
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
     <div className="safety-container">
       {/* Safety for All Section */}
       <section className="safety-for-all">

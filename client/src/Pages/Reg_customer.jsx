@@ -190,7 +190,7 @@ const handleInputChange = (e) => {
 
   return (
     <>
-    <Navbar></Navbar>
+    {/* <Navbar></Navbar> */}
     <div
       style={{
         // marginTop: '120px',
