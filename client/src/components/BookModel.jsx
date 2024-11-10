@@ -3,16 +3,20 @@ import "../styles/BookStyles/BookModel.css";
 import Navbar from "./Navbar";
 import { useViewContext } from "../Context_api/contextApi";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const BookModel = () => {
+  const navigate = useNavigate();
   const { BookformData, setBookFormData, BookData, handleBookSubmit, custNumber,totalPay,settotalPay } = useViewContext();
   const [isDriverRequired, setIsDriverRequired] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false); // State to manage Confirm checkbox
 
   const handleCheckboxChange = (event) => {
     if (event.target.id === "driver-required") {
+      // settotalPay(parseFloat(totalPay) + parseFloat(100));
       setIsDriverRequired(true);
     } else if (event.target.id === "driver-not-required") {
+      // settotalPay(parseFloat(totalPay) - parseFloat(100));
       setIsDriverRequired(false);
     }
 
@@ -104,6 +108,11 @@ const calculatetotalpay = () => {
     console.log("Total Pay for Scooty:", BookData.v_pay + pay);
   }
 };
+useEffect(() => {
+    if (custNumber === '') {
+      navigate('/main_customer');
+    }
+  },);
 
   // Submit booking form
 
@@ -119,23 +128,29 @@ const calculatetotalpay = () => {
           <form onSubmit={handleBookSubmit} className="booking-form">
             {/* Driver required checkbox */}
             <center>
-              <div className="flex items-center">
+            <div className="flex">
+              <div className="checkbox-group">
                 <input
                   type="checkbox"
+                  className="check-book"
                   id="driver-required"
                   checked={isDriverRequired}
                   onChange={handleCheckboxChange}
                 />
                 <label htmlFor="driver-required" className="text-lg">Driver Required</label>
-
+              </div>
+              <div className="checkbox-group">
                 <input
                   type="checkbox"
+                  className="check-book"
                   id="driver-not-required"
                   checked={!isDriverRequired}
                   onChange={handleCheckboxChange}
                 />
                 <label htmlFor="driver-not-required" className="text-lg">Driver Not Required</label>
               </div>
+            </div>
+
             </center><br />
 
             {/* Form fields */}
@@ -153,9 +168,19 @@ const calculatetotalpay = () => {
                 <input type="text" value={BookData.d_no} readOnly />
               </div>
             )}
+            {isDriverRequired && (
+              <div className="megh-1">
+                <label>Driver Name</label>
+                <input type="text" value={BookData.d_name} readOnly />
+              </div>
+            )}
             <div className="megh-1">
               <label>Vehicle RTO</label>
               <input type="text" value={BookData.v_rto} readOnly />
+            </div>
+            <div className="megh-1">
+              <label>Vehicle Owner Number</label>
+              <input type="text" value={BookData.o_no} readOnly />
             </div>
             <div className="megh-1">
               <label>Booking Date</label>
@@ -191,9 +216,9 @@ const calculatetotalpay = () => {
             {/* Confirm Checkbox */}
             <center>
               <div className="flex items-center">
-                <input type="checkbox" id="confirm-checkbox" checked={isConfirmed} onChange={handleCheckboxChange} />
+                <input type="checkbox" className="check-book-1" id="confirm-checkbox" checked={isConfirmed} onChange={handleCheckboxChange} />
                 <label htmlFor="confirm-checkbox" className="text-lg">I Confirm</label>
-                <input type="checkbox" id="not-confirm-checkbox" checked={!isConfirmed} onChange={handleCheckboxChange} />
+                <input type="checkbox" className="check-book-1" id="not-confirm-checkbox" checked={!isConfirmed} onChange={handleCheckboxChange} />
                 <label htmlFor="not-confirm-checkbox" className="text-lg">Not Confirm</label>
               </div>
             </center><br /><br></br>
