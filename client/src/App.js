@@ -16,8 +16,8 @@ import Safety from "./Pages/SafetyPage";
 import BookModel from "./components/BookModel";
 import { ViewProvider } from "./Context_api/contextApi";
 import AdminLogin from "./components/adminLogin";
-import DummyCom from "./components/dummyCom";
 import Profile from "./components/Profile";
+import InfoModal from "./components/InfoModal";
 // import dummyCom from "./components/dummyCom";
 
 function App() {
@@ -46,6 +46,7 @@ function App() {
         <Route path="/AddVehicle" element={<AddVehicle addVehicle={addVehicle} />} />
         <Route path="/bookModel" element={<BookModel/>} />
         <Route path="/Profile" element={<Profile/>} />
+        <Route path="/InfoModal" element={<InfoModal />} />
         <Route path="/adminLogin" element={<AdminLogin></AdminLogin>} />
         {/* <Route path="/ContactEzy" element={<ContactEzy />} /> */} 
       </Routes>
