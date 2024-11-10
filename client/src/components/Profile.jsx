@@ -3,7 +3,7 @@ import '../styles/ProfileStyles/Profile.css';
 import Navbar from '../components/Navbar';
 
 const customer = {
-  c_image: 'https://via.placeholder.com/150',
+  c_image: 'https://www.goodfreephotos.com/albums/people/pretty-young-women-smiling.jpg',
   c_no: '123456',
   c_name: 'John Doe',
   c_lic_no: 'DL123456789',
@@ -21,26 +21,81 @@ const customer = {
 const Profile = () => {
   return (
     <>
-    <Navbar></Navbar>
-    <div className="profile-container">
-      <img src={customer.c_image} alt={`${customer.c_name}'s profile`} className="profile-image" />
-      <h1>{customer.c_name}</h1>
-      <div className="profile-info">
-        <p><strong>Customer No:</strong> {customer.c_no}</p>
-        <p><strong>License No:</strong> {customer.c_lic_no}</p>
-        <p><strong>Date of Birth:</strong> {customer.c_DOB}</p>
-        <p><strong>Aadhar:</strong> {customer.c_aadhar}</p>
-        <p><strong>Email:</strong> {customer.c_email}</p>
-        <p><strong>State:</strong> {customer.c_state}</p>
-        <p><strong>City:</strong> {customer.c_city}</p>
-        <p><strong>Street:</strong> {customer.c_street}</p>
-        <p><strong>PIN:</strong> {customer.c_pin}</p>
-        <p><strong>Gender:</strong> {customer.c_gender}</p>
-        <p><strong>Password:</strong> {customer.c_password}</p>
+     <Navbar/>
+      <div className="profile-container">
+          <img src={customer.c_image} alt={`${customer.c_name}'s profile`} className="profile-image" />
+          <h1>{customer.c_name}</h1>
+        <div className="profile-info">
+          <form>
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="contactNumber"><strong>Contact Number:</strong></label>
+                <input type="text" id="contactNumber" name="contactNumber" defaultValue={customer.c_no} required readOnly />
+              </div>
+              <div className="form-group">
+                <label htmlFor="licenseNumber"><strong>License Number:</strong></label>
+                <input type="text" id="licenseNumber" name="licenseNumber" defaultValue={customer.c_lic_no} required readOnly/>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="dob"><strong>Date of Birth:</strong></label>
+                <input type="date" id="dob" name="dob" defaultValue={customer.c_DOB} required readOnly/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="aadhar"><strong>Aadhar:</strong></label>
+                <input type="text" id="aadhar" name="aadhar" defaultValue={customer.c_aadhar} required readOnly/>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="email"><strong>Email:</strong></label>
+                <input type="email" id="email" name="email" defaultValue={customer.c_email} required readOnly/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="state"><strong>State:</strong></label>
+                <input type="text" id="state" name="state" defaultValue={customer.c_state} required readOnly/>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="city"><strong>City:</strong></label>
+                <input type="text" id="city" name="city" defaultValue={customer.c_city} required readOnly/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="street"><strong>Street:</strong></label>
+                <input type="text" id="street" name="street" defaultValue={customer.c_street} required readOnly/>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="pin"><strong>PIN:</strong></label>
+                <input type="text" id="pin" name="pin" defaultValue={customer.c_pin} required readOnly/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="gender"><strong>Gender:</strong></label>
+                <input type="text" id="gender" name="gender" defaultValue={customer.c_gender} required readOnly />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="password"><strong>Password:</strong></label>
+                <input type="text" id="password" name="password" defaultValue={customer.c_password} required />
+              </div>
+            </div>
+
+            <button type="submit" className='button'>Update Profile</button>
+          </form>
+        </div>
       </div>
-    </div>
     </>
   );
 };
+
 
 export default Profile;

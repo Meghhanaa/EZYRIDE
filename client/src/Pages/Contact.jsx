@@ -4,7 +4,19 @@ import p1 from '../images/contact/contact.png';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-const ContactEzy = () => {
+        {/* <p><strong>Contact Number:</strong> {customer.c_no}</p>
+        <p><strong>License Number:</strong> {customer.c_lic_no}</p>
+        <p><strong>Date of Birth:</strong> {customer.c_DOB}</p>
+        <p><strong>Aadhar:</strong> {customer.c_aadhar}</p>
+        <p><strong>Email:</strong> {customer.c_email}</p>
+        <p><strong>State:</strong> {customer.c_state}</p>
+        <p><strong>City:</strong> {customer.c_city}</p>
+        <p><strong>Street:</strong> {customer.c_street}</p>
+        <p><strong>PIN:</strong> {customer.c_pin}</p>
+        <p><strong>Gender:</strong> {customer.c_gender}</p>
+        <p><strong>Password:</strong> {customer.c_password}</p> */}
+
+  const ContactEzy = () => {
   return (
     <>
     <Navbar/>
