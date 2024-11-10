@@ -40,6 +40,68 @@
   color: #721c24; /* Color set to #721c24 */
 }
 
+/* Flex container */
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+/* Checkbox styling */
+.check-book {
+  margin-right: 10px; /* Space between checkbox and label */
+  width: 20px; /* Adjust size */
+  height: 20px; /* Adjust size */
+  accent-color: #007BFF; /* Change color of the checkbox */
+}
+
+/* Label styling */
+.text-lg {
+  font-size: 18px; /* Adjust font size */
+  color: #333; /* Adjust text color */
+  cursor: pointer; /* Cursor pointer for better UX */
+  vertical-align: middle; /* Align checkbox and text properly */
+}
+
+/* Additional styling to ensure proper spacing between groups */
+.flex .checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Adjust space between groups of checkbox and label */
+}
+
+
+/* Flex container */
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+/* Checkbox group to add spacing */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Adjust the gap as needed */
+}
+
+/* Checkbox styling */
+.check-book-1 {
+  margin-right: 10px; /* Space between checkbox and label */
+  width: 20px; /* Adjust size */
+  height: 20px; /* Adjust size */
+  accent-color: #007BFF; /* Change color of the checkbox */
+}
+
+/* Label styling */
+.text-lg {
+  font-size: 18px; /* Adjust font size */
+  color: #333; /* Adjust text color */
+  cursor: pointer; /* Cursor pointer for better UX */
+  vertical-align: middle; /* Align checkbox and text properly */
+}
+
+
+
+
 /* Image */
 .booking-image {
   width: 100%;

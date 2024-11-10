@@ -24,7 +24,7 @@ const Hero = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 300,
     fade: true,
   };
   return (
@@ -40,7 +40,7 @@ const Hero = () => {
               Your Journey, <span style={{ color: '#800000',textShadow: '2px 2px 4px #ffffff' }}>Your Ride</span>, Your Way!
             </h2>
 
-              <p>Our vehicle rental app offers a seamless way to book and rent a wide variety of vehicles anytime, anywhere. Whether you need a car for a road trip, a bike for city errands, or a scooty for moving, our app provides a convenient, user-friendly experience with flexible options to suit all your travel needs.</p>
+              <p className='p'  style={{ textShadow: '2px 2px 4px black'}}>Our vehicle rental app offers a seamless way to book and rent a wide variety of vehicles anytime, anywhere. Whether you need a car for a road trip, a bike for city errands, or a scooty for moving, our app provides a convenient, user-friendly experience with flexible options to suit all your travel needs.</p>
               <button className='hero-btn-h'>Book Ride</button>
             </div>
           </div>
@@ -50,3 +50,4 @@ const Hero = () => {
   );
 };
 export default Hero;
+

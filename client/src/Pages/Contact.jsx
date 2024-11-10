@@ -4,7 +4,7 @@ import p1 from '../images/contact/contact.png';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-const ContactEzy = () => {
+  const ContactEzy = () => {
   return (
     <>
     <Navbar/>
