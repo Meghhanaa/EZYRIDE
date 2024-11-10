@@ -10,16 +10,7 @@ const Models = () => {
     <>
     <Navbar/>
     <section className="section" id="popular">
-      {/* Driver Req Buttons */}
-      <div className="megh-pay">
-            <button type="submit" className="submit-button">Required Driver</button>
-            <button 
-              type="submit" 
-              className="submit-button pay-later-button" 
-            >
-              Not Required Driver
-            </button>
-        </div>
+    <h1 className='megh-title'>YOUR VEHICLES</h1>
       {/* <HeroPages name="Vehicle Models" /> */}
       <div className="container">
         {/* Display filtered vehicles */}

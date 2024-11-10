@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useViewContext } from '../Context_api/contextApi';
+import Navbar from '../components/Navbar';
 
 const MainCustomer = () => {
 
@@ -70,6 +71,8 @@ const MainCustomer = () => {
   // }, [Message]);  // Dependency on Message
 
   return (
+    <>
+    <Navbar></Navbar>
     <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f3f3f3', fontFamily: 'Arial, sans-serif' }}>
       <div style={{ width: '100%', maxWidth: '1100px', display: 'flex', backgroundColor: '#fff', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)', borderRadius: '10px', overflow: 'hidden' }}>
         {/* Left Side - Sign In */}
@@ -134,6 +137,7 @@ const MainCustomer = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
