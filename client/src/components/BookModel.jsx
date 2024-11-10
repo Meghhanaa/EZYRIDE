@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 const BookModel = () => {
   const navigate = useNavigate();
-  const { BookformData, setBookFormData, BookData, handleBookSubmit, custNumber,totalPay,settotalPay } = useViewContext();
-  const [isDriverRequired, setIsDriverRequired] = useState(false);
+  const { BookformData, setBookFormData, BookData, handleBookSubmit, custNumber,totalPay,settotalPay,isDriverRequired, setIsDriverRequired } = useViewContext();
   const [isConfirmed, setIsConfirmed] = useState(false); // State to manage Confirm checkbox
 
   const handleCheckboxChange = (event) => {
     if (event.target.id === "driver-required") {
       // settotalPay(parseFloat(totalPay) + parseFloat(100));
+      console.log(totalPay)
       setIsDriverRequired(true);
     } else if (event.target.id === "driver-not-required") {
       // settotalPay(parseFloat(totalPay) - parseFloat(100));
@@ -23,6 +23,9 @@ const BookModel = () => {
     if (event.target.id === "confirm-checkbox") {
       setIsConfirmed(true);
       calculatetotalpay();
+      if(isDriverRequired){
+      settotalPay(parseFloat(totalPay) + parseFloat(100));
+    }
     } else {
       setIsConfirmed(false);
     }

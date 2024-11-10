@@ -143,6 +143,7 @@ const [BookformData, setBookFormData] = useState({
       b_return_time: "", // default empty, user will select
       // b_pickup: BookData.o_street// assuming pickup is the same as location
   });
+  const [isDriverRequired, setIsDriverRequired] = useState(false);
   const [totalPay,settotalPay]=useState("")
   
    const handleBookSubmit = async (e) => {
@@ -205,6 +206,8 @@ const handlePayLaterClick = async(e)=>{
     BookformData,
     setBookFormData,
     BookData,
+    isDriverRequired,
+    setIsDriverRequired,
     totalPay,
     settotalPay,
     custNumber,
