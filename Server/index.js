@@ -201,7 +201,7 @@ app.get('/vehicles', async (req, res) => {
                 vehicle v
             JOIN 
                 owner o ON v.o_no = o.o_no  -- Join vehicle with owner
-            WHERE 1 = 1
+            WHERE v_booked = 0
         `;
 
         // Array to hold conditions and query parameters

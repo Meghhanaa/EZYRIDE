@@ -3,16 +3,20 @@ import "../styles/BookStyles/BookModel.css";
 import Navbar from "./Navbar";
 import { useViewContext } from "../Context_api/contextApi";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const BookModel = () => {
+  const navigate = useNavigate();
   const { BookformData, setBookFormData, BookData, handleBookSubmit, custNumber,totalPay,settotalPay } = useViewContext();
   const [isDriverRequired, setIsDriverRequired] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false); // State to manage Confirm checkbox
 
   const handleCheckboxChange = (event) => {
     if (event.target.id === "driver-required") {
+      // settotalPay(parseFloat(totalPay) + parseFloat(100));
       setIsDriverRequired(true);
     } else if (event.target.id === "driver-not-required") {
+      // settotalPay(parseFloat(totalPay) - parseFloat(100));
       setIsDriverRequired(false);
     }
 
@@ -104,6 +108,11 @@ const calculatetotalpay = () => {
     console.log("Total Pay for Scooty:", BookData.v_pay + pay);
   }
 };
+useEffect(() => {
+    if (custNumber === '') {
+      navigate('/main_customer');
+    }
+  },);
 
   // Submit booking form
 
