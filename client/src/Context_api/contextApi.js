@@ -108,6 +108,28 @@ const ViewProvider = ({ children }) => {
     }
   };
 
+  //information of vehicle
+  const [dummyVehicle,setdummyVehicle]=useState([]);
+  const [close,setclose]=useState(false);
+  const handleMore=async(e) =>{
+       axios.get(`http://localhost:3001/vehicleDetail/${e}`, {
+       withCredentials: true,
+       })
+      .then(response => {
+      setdummyVehicle(response.data);
+      setclose(true);
+      console.log(response.data);    
+})
+.catch(error => {
+    console.error('Error in searching:', error);
+});
+  }
+
+  //handleclose vehicle info
+  const handleClose=async(e)=>{
+    setclose(false);
+  }
+
   //Save booking details
 const [BookData,setBookData]=useState([]);
 const [custNumber,setcustNumber]=useState('');
@@ -144,7 +166,7 @@ const [BookformData, setBookFormData] = useState({
       // b_pickup: BookData.o_street// assuming pickup is the same as location
   });
   const [isDriverRequired, setIsDriverRequired] = useState(false);
-  const [totalPay,settotalPay]=useState("")
+  const [totalPay,settotalPay]=useState(0)
   
    const handleBookSubmit = async (e) => {
     e.preventDefault();
@@ -166,23 +188,37 @@ const [BookformData, setBookFormData] = useState({
       // Make the POST request to the backend
       const response = await axios.post('http://localhost:3001/booking', requestBody);
       console.log('Booking successfully created:', response.data);
+      setIsDriverRequired(false);
+      settotalPay(0)
+      navigate('/')
     } catch (error) {
       console.error('Error creating booking:', error);
     }
   };
 
-const handlePayLaterClick = async(e)=>{
-    e.preventDefault();
-    console.log(e);
-    //  axios.get(`http://localhost:3001/book/driver${e}`)
-    //       .then(response => {
-    //         console.log(response.data)
-    //         setFooddetail(response.data);
-    //         setClose(true)
-    //       })
-    //       .catch(error => {
-    //         console.error('Error in searching:', error);
-    //       });
+const handlePayLaterClick = async()=>{
+    const requestBody = {
+      c_no: formData.c_no,
+      b_pay:totalPay,
+      b_location: BookData.o_street,
+      d_no: BookData.d_no,
+      v_insurance: BookData.v_insurance,
+      b_pickup: BookData.o_street, // Update pick-up location from BookData
+      ...BookformData, // Spread operator to add all properties of BookformData
+    };
+
+    console.log(requestBody);
+
+    try {
+      // Make the POST request to the backend
+      const response = await axios.post('http://localhost:3001/bookingpaylater', requestBody);
+      console.log('Booking successfully created:', response.data);
+      setIsDriverRequired(false);
+      settotalPay(0)
+      navigate('/')
+    } catch (error) {
+      console.error('Error creating booking:', error);
+    }
 
 
   }
@@ -203,6 +239,10 @@ const handlePayLaterClick = async(e)=>{
     vehicleInputChange,
     searchVehData,
     vehicle,
+    dummyVehicle,
+    handleMore,
+    handleClose,
+    close,
     BookformData,
     setBookFormData,
     BookData,

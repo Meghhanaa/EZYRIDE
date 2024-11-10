@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 const BookModel = () => {
   const navigate = useNavigate();
-  const { BookformData, setBookFormData, BookData, handleBookSubmit, custNumber,totalPay,settotalPay,isDriverRequired, setIsDriverRequired } = useViewContext();
+  const { BookformData, setBookFormData, BookData, handleBookSubmit,handlePayLaterClick, custNumber,totalPay,settotalPay,isDriverRequired, setIsDriverRequired } = useViewContext();
   const [isConfirmed, setIsConfirmed] = useState(false); // State to manage Confirm checkbox
 
   const handleCheckboxChange = (event) => {
     if (event.target.id === "driver-required") {
       // settotalPay(parseFloat(totalPay) + parseFloat(100));
-      console.log(totalPay)
+      // settotalPay(100)
       setIsDriverRequired(true);
     } else if (event.target.id === "driver-not-required") {
       // settotalPay(parseFloat(totalPay) - parseFloat(100));
@@ -23,7 +23,7 @@ const BookModel = () => {
     if (event.target.id === "confirm-checkbox") {
       setIsConfirmed(true);
       calculatetotalpay();
-      if(isDriverRequired){
+      if(isDriverRequired && BookData.d_no){
       settotalPay(parseFloat(totalPay) + parseFloat(100));
     }
     } else {
@@ -45,8 +45,8 @@ const BookModel = () => {
   const handlePayLater = () => {
      // Add ₹50 extra for Pay Later option
      calculatetotalpay();
-     settotalPay(parseFloat(totalPay) + parseFloat(50));
-     console.log("happy "+totalPay)
+     settotalPay(totalPay+50)
+     handlePayLaterClick();
   };
 
   const calculateTimeDifferenceInMinutes = (startDateTime, endDateTime) => {
@@ -168,13 +168,13 @@ useEffect(() => {
             {isDriverRequired && (
               <div className="megh-1">
                 <label>Driver Number</label>
-                <input type="text" value={BookData.d_no} readOnly />
+                <input type="text" value={BookData.d_no||"NULL"} readOnly />
               </div>
             )}
             {isDriverRequired && (
               <div className="megh-1">
                 <label>Driver Name</label>
-                <input type="text" value={BookData.d_name} readOnly />
+                <input type="text" value={BookData.d_name||"NULL"} readOnly />
               </div>
             )}
             <div className="megh-1">

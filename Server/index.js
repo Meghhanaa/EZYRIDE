@@ -242,6 +242,55 @@ app.get('/vehicles', async (req, res) => {
         res.status(500).json({ message: 'Error fetching vehicles' });
     }
 });
+//to get all the detail of vehicle
+app.get('/vehicleDetail/:insuranceId',async (req, res) => {
+  const insuranceId = req.params.insuranceId; // Updated from req.query to req.params
+  // Check if insuranceId is provided
+  if (!insuranceId) {
+    return res.status(400).json({ error: 'Insurance ID is required' });
+  }
+
+  try {
+    // Query to find drivers and vehicle details based on specified vehicle insurance
+    const [rows] = await pool.query(
+      `
+      SELECT 
+          v.v_name,
+          v.v_pay,
+          v.v_image,
+          v.v_desp,
+          v.v_rto,
+          v.v_type,
+          v.v_color,
+          v.v_mileage,
+          v.v_engine_type,
+          v.v_booked,
+          o.o_street,
+          o.o_name,
+          v.v_insurance,
+          o.o_no,
+          o.o_name
+      FROM 
+          vehicle v
+      JOIN 
+          owner o ON v.o_no = o.o_no    -- Join vehicle with owner
+      WHERE 
+          v.v_insurance = ?
+      `,
+      [insuranceId]
+    );
+
+    console.log(rows[0]);
+
+    // Send the result as JSON
+    res.json(rows[0]);
+
+  } catch (error) {
+    console.error('Error fetching vohicle detail:', error.message);
+    res.status(500).json({ error: 'An error occurred while fetching vehicle detail' });
+  }
+});
+
 
 //to get the alloted driver 
 app.get('/book/driver/:insuranceId',async (req, res) => {
@@ -322,6 +371,32 @@ app.post('/booking', async (req, res) => {
   }
 });
 
+//paylater booking
+app.post('/bookingpaylater', async (req, res) => {
+  const { c_no, b_location, d_no, v_insurance, b_pickup, b_pay, b_date, b_time, b_return_date, b_return_time } = req.body;
+
+  try {
+    // Insert booking data into the booking table
+    const [result] = await pool.query(`
+      INSERT INTO booking (b_location,c_no,d_no,v_insurance,b_date,b_time,b_pay,b_return_date,b_return_time,b_pickup,b_payment_status)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
+    `, [b_location,c_no, d_no, v_insurance, b_date, b_time,b_pay, b_return_date, b_return_time,b_pickup,1]);
+    
+
+    await pool.query(`
+      UPDATE vehicle SET v_booked = '1' WHERE v_insurance = ?
+    `, [v_insurance]);
+
+    await pool.query(`
+      UPDATE driver SET d_booked = '1' WHERE d_no = ?
+    `, [d_no]);
+    // Return success response
+    res.status(200).json({ message: 'Booking created successfully', bookingId: result.insertId });
+  } catch (error) {
+    console.error('Error creating booking:', error);
+    res.status(500).json({ message: 'Error creating booking' });
+  }
+});
 
 //to get all the drivers
 app.get('/alldriver', async (req, res) => {

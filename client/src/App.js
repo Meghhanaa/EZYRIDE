@@ -33,7 +33,7 @@ function App() {
       {/* <Navbar /> */}
       <Routes>
         <Route index path="/" element={<Home />} />
-        <Route index path="/Models" element={<Models properties={properties} />} />
+        <Route index path="/Models" element={<Models/>} />
         <Route index path="/main_customer" element={<Main_customer />} />
         <Route index path="/main_owner" element={<Main_owner />} />
         <Route path="/custRegister" element={<Reg_customer />} />
