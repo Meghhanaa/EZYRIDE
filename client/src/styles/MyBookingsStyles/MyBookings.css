@@ -1,6 +1,14 @@
 .my-bookings {
-    padding: 2rem;
-  }
+  position: relative;
+  top: 10px;
+  width: 100%;
+}
+
+.my-bookings .button {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
   
   .my-bookings h2 {
     margin-bottom: 1rem;
@@ -16,4 +24,69 @@
     text-align: left;
     border-bottom: 1px solid #ddd;
   }
+  .status-confirmed {
+    color: rgb(73, 204, 73);
+    font-weight: bold;
+  }
   
+  .status-pending {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  .status-cancelled {
+    color: red;
+    font-weight: bold;
+  }
+  
+
+  .my-bookings {
+    margin: 10px auto;
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .my-bookings h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .my-bookings table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .my-bookings th,
+  .my-bookings td {
+    padding: 12px;
+    text-align: left;
+    font-size: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .my-bookings th {
+    background-color: maroon;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .my-bookings tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .my-bookings td {
+    color: #555;
+  }
+  
+  .my-bookings td[colspan="4"] {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+  }
+ 

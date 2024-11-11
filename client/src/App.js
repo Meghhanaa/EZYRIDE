@@ -22,6 +22,7 @@ import OwnerLayout from "../src/modules/OwnerLayout";
 import CustomerLayout from "../src/modules/CustomerLayout";
 import AdminLayout from "../src/modules/AdminLayout"
 import MyBookings from "./Pages/MyBookings";
+import VehiclePage from "./Pages/VehiclePage";
 
 function App() {
    // Set to "customer" or "owner" based on app logic
@@ -41,7 +42,7 @@ function App() {
 
   return (
         <Layout>
-        <MyBookings></MyBookings>
+        <AddVehicle/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Models" element={<Models/>} />
