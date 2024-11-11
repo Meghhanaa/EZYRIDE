@@ -17,18 +17,18 @@ import BookModel from "./components/BookModel";
 import Profile from "./components/Profile";
 import InfoModal from "./components/InfoModal";
 import AdminLogin from "./components/adminLogin";
-import { ViewProvider } from "./Context_api/contextApi";
+import { ViewProvider, useViewContext } from "./Context_api/contextApi";
 import OwnerLayout from "../src/modules/OwnerLayout";
 import CustomerLayout from "../src/modules/CustomerLayout";
 import AdminLayout from "../src/modules/AdminLayout"
 
 function App() {
-  const [properties, setProperties] = useState([]);
-  const [role, setRole] = useState("customer"); // Set to "customer" or "owner" based on app logic
+   // Set to "customer" or "owner" based on app logic
+   const{role}=useViewContext();
 
-  const addVehicle = (vehicle) => {
-    setProperties([...properties, vehicle]);
-  };
+  // const addVehicle = (vehicle) => {
+  //   setProperties([...properties, vehicle]);
+  // };
 
   // Choose layout based on user role
   const Layout = 
@@ -36,13 +36,13 @@ function App() {
     role === "owner" ? OwnerLayout : 
     CustomerLayout;
 
+    console.log(role)
+
   return (
-    <ViewProvider>
-      {/* <BrowserRouter> */}
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Models" element={<Models properties={properties} />} />
+            <Route path="/Models" element={<Models/>} />
             <Route path="/main_customer" element={<Main_customer />} />
             <Route path="/main_owner" element={<Main_owner />} />
             <Route path="/custRegister" element={<Reg_customer />} />
@@ -51,7 +51,7 @@ function App() {
             <Route path="/About" element={<AboutSection user={role} />} />
             <Route path="/OurTeam" element={<OurTeam />} />
             <Route path="/Safety" element={<Safety />} />
-            <Route path="/AddVehicle" element={<AddVehicle addVehicle={addVehicle} />} />
+            <Route path="/AddVehicle" element={<AddVehicle/>} />
             <Route path="/bookModel" element={<BookModel />} />
             <Route path="/Profile" element={<Profile />} />
             <Route path="/InfoModal" element={<InfoModal />} />
@@ -59,8 +59,6 @@ function App() {
             {/* <Route path="/HomeOwner" element={<HomeOwner />} /> */}
           </Routes>
         </Layout>
-      {/* </BrowserRouter> */}
-    </ViewProvider>
   );
 }
 

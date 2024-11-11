@@ -11,17 +11,18 @@ const useViewContext = () => useContext(viewContext);
 const ViewProvider = ({ children }) => {
   const navigate = useNavigate();
 
+  const [role, setRole] = useState("");
+  const [errors, setErrors] = useState({});
+  const [mess, setMess] = useState("");
+  const [userName, setUserName] = useState("");
+
 
   const [formData, setFormData] = useState({
     c_no: '',
     c_password: '',
   });
 
-  const [errors, setErrors] = useState({});
-  const [mess, setMess] = useState("");
-  const [userName, setUserName] = useState("");
-
-  const handleInputChange = (e) => {
+    const handleInputChange = (e) => {
     const { name, value } = e.target;
 
     if (name === 'c_no') {
@@ -31,7 +32,7 @@ const ViewProvider = ({ children }) => {
     }
   };
 
-  const validateForm = () => {
+    const validateForm = () => {
     const newErrors = {};
 
     if (!formData.c_no) newErrors.c_no = 'Contact is required';
@@ -51,6 +52,7 @@ const ViewProvider = ({ children }) => {
         });
         setMess(response.data.message);
         setUserName(response.data.user.name);
+        // setRole(response.data.message.role)
         navigate('/');
       } catch (error) {
         if (error.response) {
@@ -63,6 +65,110 @@ const ViewProvider = ({ children }) => {
     }
   };
 
+
+
+
+  const [formownerData, setFormownerData] = useState({
+    o_no: '',
+    o_password: '',
+  });
+
+  const handleownerInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'o_no') {
+      setFormownerData({ ...formownerData, [name]: bigInt(value).toString() });
+    } else {
+      setFormownerData({ ...formownerData, [name]: value });
+    }
+  };
+
+  const validateownerForm = () => {
+    const newErrors = {};
+
+    if (!formownerData.o_no) newErrors.o_no = 'Contact is required';
+    if (!formownerData.o_password) newErrors.o_password = 'Password is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleownerSubmit = async (e) => {
+    e.preventDefault();
+    if (validateownerForm()) {
+      try {
+        console.log('Form Data:', formownerData);
+        const response = await axios.post('http://localhost:3001/owner_login', formownerData, {
+          headers: { 'Content-Type': 'application/json' },withCredentials: true,
+        });
+        setMess(response.data.message);
+        setUserName(response.data.user.name);
+        setRole(response.data.role.name)
+        console.log(response.data.message.role)
+        navigate('/');
+      } catch (error) {
+        if (error.response) {
+          setMess(error.response.data.message || 'An error occurred. Please try again.');
+        } else {
+          console.log('An error occurred. Please try again.');
+          setMess('An error occurred. Please try again.');
+        }
+      }
+    }
+  };
+
+
+  const [formadminData, setFormadminData] = useState({
+    a_no: '',
+    a_password: '',
+  });
+
+
+  
+  const handleadminInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'a_no') {
+      setFormadminData({ ...formadminData, [name]: bigInt(value).toString() });
+    } else {
+      setFormadminData({ ...formadminData, [name]: value });
+    }
+  };
+
+  const validateadminForm = () => {
+    const newErrors = {};
+
+    if (!formadminData.a_no) newErrors.a_no = 'Contact is required';
+    if (!formadminData.a_password) newErrors.a_password = 'Password is required';
+     console.log(formadminData)
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+const handleadminSubmit = async (e) => {
+    e.preventDefault();
+    if (validateadminForm()) {
+      try {
+        console.log('Form Data:', formadminData);
+        const response = await axios.post('http://localhost:3001/admin_login', formadminData, {
+          headers: { 'Content-Type': 'application/json' },withCredentials: true,
+        });
+        setMess(response.data.message);
+        setUserName(response.data.user.name);
+        setRole(response.data.role.name);
+        console.log(response.data.message.role);
+        navigate('/');
+      } catch (error) {
+        if (error.response) {
+          setMess(error.response.data.message || 'An error occurred. Please try again.');
+        } else {
+          console.log('An error occurred. Please try again.');
+          setMess('An error occurred. Please try again.');
+        }
+      }
+    }
+  };
+  
 
   //custom hook for vehicle search
   const [searchVehData, setSearchVehData] = useState({
@@ -112,18 +218,17 @@ const ViewProvider = ({ children }) => {
   const [dummyVehicle,setdummyVehicle]=useState([]);
   const [close,setclose]=useState(false);
   const handleMore=async(e) =>{
-       axios.get(`http://localhost:3001/vehicleDetail/${e}`, {
-       withCredentials: true,
-       })
-      .then(response => {
+    try{
+
+       const response = await axios.get(`http://localhost:3001/vehicleDetail/${e}`)
       setdummyVehicle(response.data);
       setclose(true);
       console.log(response.data);    
-})
-.catch(error => {
+    }
+catch(error){
     console.error('Error in searching:', error);
-});
-  }
+}
+  };
 
   //handleclose vehicle info
   const handleClose=async(e)=>{
@@ -224,17 +329,31 @@ const handlePayLaterClick = async()=>{
   }
 
 
+//logout
+const handlelogout =()=>{
+  setUserName("");
+  setMess("")
+  setRole("")
+
+}
 
 
   //custom hook for book by customer
 
   const allValue = { 
+    role,
     handleSubmit,
     handleInputChange,
     formData,
     errors,
     userName,
     mess,
+    formownerData,
+    handleownerInputChange,
+    handleownerSubmit,
+    formadminData,
+    handleadminInputChange,
+    handleadminSubmit,
     handleSearch,
     vehicleInputChange,
     searchVehData,
@@ -253,7 +372,8 @@ const handlePayLaterClick = async()=>{
     custNumber,
     handlePayLaterClick,
     handleBookNowClick,
-    handleBookSubmit
+    handleBookSubmit,
+    handlelogout
   };
 
   return (
