@@ -129,6 +129,9 @@ function AddVehicle({ addVehicle }) {
         v_insurance: '',
         v_name: '',
         v_type: '',
+        v_color: '',
+        v_mileage: '',
+        v_engine_type: '',
         v_rto: '',
         o_no: '',
         v_pay: '',
@@ -194,6 +197,36 @@ function AddVehicle({ addVehicle }) {
         onChange={handleInputChange}
       />
       {errors.v_rto && <span className="error">{errors.v_rto}</span>}
+
+      <input
+        className="megh-1"
+        type="text"
+        name="v_color"
+        placeholder="Color"
+        value={newVehicle.v_color}
+        onChange={handleInputChange}
+      />
+      {errors.v_color && <span className="error">{errors.v_color}</span>}
+
+      <input
+        className="megh-1"
+        type="text"
+        name="v_mileage"
+        placeholder="Mileage"
+        value={newVehicle.v_mileage}
+        onChange={handleInputChange}
+      />
+      {errors.v_mileage && <span className="error">{errors.v_mileage}</span>}
+
+      <input
+        className="megh-1"
+        type="text"
+        name="v_engine_type"
+        placeholder="Engine Type"
+        value={newVehicle.v_engine_type}
+        onChange={handleInputChange}
+      />
+      {errors.v_engine_type && <span className="error">{errors.v_engine_type}</span>}
 
       <input
         className="megh-1"

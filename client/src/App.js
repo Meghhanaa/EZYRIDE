@@ -21,7 +21,8 @@ import { ViewProvider, useViewContext } from "./Context_api/contextApi";
 import OwnerLayout from "../src/modules/OwnerLayout";
 import CustomerLayout from "../src/modules/CustomerLayout";
 import AdminLayout from "../src/modules/AdminLayout"
-import MyBookings from "./Pages/MyBookings";
+// import MyBookings from "./Pages/MyBookings";
+import AddDriver from "./components/AddDriver";
 
 function App() {
    // Set to "customer" or "owner" based on app logic
@@ -41,7 +42,8 @@ function App() {
 
   return (
         <Layout>
-        <MyBookings></MyBookings>
+        {/* <MyBookings></MyBookings> */}
+        <AddDriver></AddDriver>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Models" element={<Models/>} />
