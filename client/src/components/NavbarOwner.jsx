@@ -84,8 +84,8 @@ const toggleMenu = () => {
                   {isMenuVisible && ( 
                     <ul className="menu">
                       <li className="menu-item"><Link to={'/Profile'}>My Profile</Link></li>
-                      <li className="menu-item">Add Vehicles</li> 
-                      <li className="menu-item">Add drivers</li>
+                      <li className="menu-item"><Link to={'/AddVehicle'}>Add Vehicles</Link></li> 
+                      <li className="menu-item"><Link to={'/AddDriver'}>Add drivers</Link></li>
                       <li className="menu-item"onClick={handlelogout}>Logout</li> 
                     </ul> 
                   )}
@@ -182,7 +182,7 @@ const toggleMenu = () => {
           <ul className="navbar__links">
             <li><Link className="home-link" to="/">Home</Link></li>
             <li><Link className="about-link" to="/About">About</Link></li>
-            <li><Link className="models-link" to="/models">My Vehicle</Link></li>
+            <li><Link className="models-link" to="/VehiclePage">My Vehicle</Link></li>
             <li><Link className="models-link" to="/models">My Drivers</Link></li>
             <li><Link className="safety-link" to="/Safety">Safety</Link></li>
             <li><Link className="team-link" to="/OurTeam">Our Team</Link></li>
@@ -212,8 +212,8 @@ const toggleMenu = () => {
                   {isMenuVisible && ( 
                     <ul className="menu">
                       <li className="menu-item">My Profile</li>
-                      <li className="menu-item">Add Vehicles</li> 
-                      <li className="menu-item">Add drivers</li>
+                      <li className="menu-item"><Link to={'/AddVehicle'}>Add Vehicles</Link></li> 
+                      <li className="menu-item"><Link to={'/AddDriver'}>Add drivers</Link></li>
                       <li className="menu-item"onClick={handlelogout}>Logout</li> 
                     </ul> 
                   )}
