@@ -24,7 +24,7 @@ import AdminLayout from "../src/modules/AdminLayout"
 
 function App() {
   const [properties, setProperties] = useState([]);
-  const [role, setRole] = useState("owner"); // Set to "customer" or "owner" based on app logic
+  const [role, setRole] = useState("customer"); // Set to "customer" or "owner" based on app logic
 
   const addVehicle = (vehicle) => {
     setProperties([...properties, vehicle]);
