@@ -1,0 +1,19 @@
+.my-bookings {
+    padding: 2rem;
+  }
+  
+  .my-bookings h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .my-bookings table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .my-bookings th, .my-bookings td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  

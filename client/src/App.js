@@ -21,10 +21,11 @@ import { ViewProvider, useViewContext } from "./Context_api/contextApi";
 import OwnerLayout from "../src/modules/OwnerLayout";
 import CustomerLayout from "../src/modules/CustomerLayout";
 import AdminLayout from "../src/modules/AdminLayout"
+import MyBookings from "./Pages/MyBookings";
 
 function App() {
    // Set to "customer" or "owner" based on app logic
-   const{role}=useViewContext();
+   const{role} = useViewContext();
 
   // const addVehicle = (vehicle) => {
   //   setProperties([...properties, vehicle]);
@@ -40,6 +41,7 @@ function App() {
 
   return (
         <Layout>
+        <MyBookings></MyBookings>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Models" element={<Models/>} />
