@@ -1,9 +1,11 @@
 // src/Pages/MyBookings.js
 import React, { useEffect, useState } from 'react';
-// import '../styles/MyBookingsStyles/MyBookings.css';
+import '../styles/MyBookingsStyles/MyBookings.css';
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
+  const { vehicle,handleBookNowClick,handleMore,close } = useViewContext(); // Access context values
+
   useEffect(() => {
     const fetchBookings = async () => {
       // Example data, replace with API call to your backend
@@ -19,8 +21,9 @@ const MyBookings = () => {
   }, []);
 
   return (
+    <>
+    <h1 className='megh-title'>My Bookings</h1>
     <div className="my-bookings">
-      <h2>My Bookings</h2>
       <table>
         <thead>
           <tr>
@@ -28,26 +31,37 @@ const MyBookings = () => {
             <th>Vehicle Model</th>
             <th>Booking Date</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {bookings.length > 0 ? (
-            bookings.map((booking) => (
-              <tr key={booking.id}>
-                <td>{booking.id}</td>
-                <td>{booking.model}</td>
-                <td>{booking.date}</td>
-                <td>{booking.status}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="4">No bookings found</td>
-            </tr>
-          )}
-        </tbody>
+  {bookings.length > 0 ? (
+    bookings.map((booking) => (
+      <tr key={booking.id}>
+        <td>{booking.id}</td>
+        <td>{booking.model}</td>
+        <td>{booking.date}</td>
+        <td style={{
+          color: booking.status === "Confirmed" ? "green" : 
+                 booking.status === "Pending" ? "orange" : 
+                 booking.status === "Cancelled" ? "red" : "black",
+          fontWeight: "bold"
+        }}>
+          {booking.status}
+        </td>
+        <td><button className='button'>View More</button></td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="5">No bookings found</td>
+    </tr>
+  )}
+</tbody>
+
       </table>
     </div>
+  </>
   );
 };
 
