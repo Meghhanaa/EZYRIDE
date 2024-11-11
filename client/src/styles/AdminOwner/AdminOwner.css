@@ -1,0 +1,62 @@
+/* AdminOwner.css */
+
+.admin-owner-container {
+    max-width: 90%;
+    margin: 40px auto; /* Center the container with a top margin */
+    padding: 20px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .owner-profile {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .owner-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid maroon;
+    padding: 5px;
+    object-fit: cover;
+  }
+  
+  .owner-details {
+    flex: 1;
+  }
+  
+  .owner-details ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .owner-details li {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .owner-details li strong {
+    color: maroon;
+  }
+  
+  .h2 {
+    font-size: 30px;
+    font-family: 1000;
+    color: maroon;
+    margin-top: 100px;
+  }
+  

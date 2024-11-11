@@ -21,10 +21,6 @@ import { ViewProvider, useViewContext } from "./Context_api/contextApi";
 import OwnerLayout from "../src/modules/OwnerLayout";
 import CustomerLayout from "../src/modules/CustomerLayout";
 import AdminLayout from "../src/modules/AdminLayout"
-<<<<<<< HEAD
-import MyBookings from "./Pages/MyBookings";
-import VehiclePage from "./Pages/VehiclePage";
-=======
 // import MyBookings from "./Pages/MyBookings";
 import AddDriver from "./components/AddDriver";
 // import MyBookings from "./components/MyBookings";
@@ -33,7 +29,8 @@ import AdminVehicles from "./Pages/AdminVehicles";
 import AdminBookings from "./Pages/AdminBookings";
 import AdminCust from "./Pages/AdminCust";
 import AdminOwner from "./Pages/AdminOwner";
->>>>>>> bf9f91c04689db9beb921fb6f3a8034c8b275fa3
+import AdminOwnerInfo from "./Pages/AdminOwnerInfo";
+import AdminCustInfo from "./Pages/AdminCustInfo";
 
 function App() {
    // Set to "customer" or "owner" based on app logic
@@ -53,13 +50,9 @@ function App() {
 
   return (
         <Layout>
-<<<<<<< HEAD
-        <AddVehicle/>
-=======
         {/* <MyBookings></MyBookings> */}
-        {/* <AdminCust></AdminCust> */}
-        {/* <AdminBookings></AdminBookings> */}
->>>>>>> bf9f91c04689db9beb921fb6f3a8034c8b275fa3
+        {/* <AdminCust></AdminCust>
+        <AdminBookings></AdminBookings> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Models" element={<Models/>} />
@@ -83,6 +76,8 @@ function App() {
             <Route path="/AdminBookings" element={<AdminBookings></AdminBookings>} />
             <Route path="/AdminCust" element={<AdminCust></AdminCust>} />
             <Route path="/AdminOwner" element={<AdminOwner></AdminOwner>} />
+            <Route path="/AdminCustInfo" element={<AdminCustInfo></AdminCustInfo>} />
+            <Route path="/AdminOwnerInfo" element={<AdminOwnerInfo></AdminOwnerInfo>} />
             {/* <Route path="/HomeOwner" element={<HomeOwner />} /> */}
           </Routes>
         </Layout>
