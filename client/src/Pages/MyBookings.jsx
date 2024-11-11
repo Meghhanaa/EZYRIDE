@@ -1,8 +1,6 @@
 // src/Pages/MyBookings.js
 import React, { useEffect, useState } from 'react';
 import '../styles/MyBookingsStyles/MyBookings.css';
-import { useViewContext } from '../Context_api/contextApi';
-import InfoModal from '../components/InfoModal';
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
