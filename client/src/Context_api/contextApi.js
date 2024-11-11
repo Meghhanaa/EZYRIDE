@@ -329,6 +329,13 @@ const handlePayLaterClick = async()=>{
   }
 
 
+//logout
+const handlelogout =()=>{
+  setUserName("");
+  setMess("")
+  setRole("")
+
+}
 
 
   //custom hook for book by customer
@@ -365,7 +372,8 @@ const handlePayLaterClick = async()=>{
     custNumber,
     handlePayLaterClick,
     handleBookNowClick,
-    handleBookSubmit
+    handleBookSubmit,
+    handlelogout
   };
 
   return (

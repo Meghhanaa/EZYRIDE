@@ -10,32 +10,15 @@ const InfoModal = () => {
   return (
     <>
       <Navbar />
-<<<<<<< HEAD
-      <div className="vehicle-info-container">
-        <img src={dummyVehicle.v_image} alt={`${dummyVehicle.v_name}`} className="vehicle-info-image" />
-        <h1>{dummyVehicle.v_name}</h1>
-        <div className="vehicle-info">
-          <form>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="insuranceNumber"><strong>RTO:</strong></label>
-                <input type="text" id="insuranceNumber" name="insuranceNumber" defaultValue={dummyVehicle.v_rto} required readOnly />
-              </div>
-              <div className="form-group">
-                <label htmlFor="vehicleType"><strong>Vehicle Type:</strong></label>
-                <input type="text" id="vehicleType" name="vehicleType" defaultValue={dummyVehicle.v_type} required readOnly />
-              </div>
-            </div>
-=======
->>>>>>> 89289670d3e876bac5900ce63c82597e0d159a6c
 
       {/* Overlay within the section, clicking on it will close the modal */}
-      <div className="section-overlay" onClick={handleClose}></div>
+      {/* <div className="section-overlay" onClick={handleClose}></div> */}
 
       {/* Modal content container */}
       <div className="modal-container">
         {/* Close icon to close the modal */}
-        <ImCross className="close-icon" onClick={handleClose} />
+        {/* <ImCross className="close-icon" onClick={handleClose} /> */}
+
 
         <div className="vehicle-info-container">
           <img src={dummyVehicle.v_image} alt={`${dummyVehicle.v_name}`} className="vehicle-info-image" />
@@ -100,21 +83,6 @@ const InfoModal = () => {
                 </div>
               </div>
 
-<<<<<<< HEAD
-            <div className="form-row">
-              
-              <div className="form-group">
-                <label htmlFor="booked"><strong>Booked:</strong></label>
-                <input type="text" id="booked" name="booked" defaultValue={dummyVehicle.v_booked ? "Yes" : "No"} required readOnly />
-              </div>
-              <div className="form-group">
-                <label htmlFor="price"><strong>Price:</strong></label>
-                <input type="text" id="price" name="price" Value={dummyVehicle.v_pay} required readOnly />
-              </div>
-            </div>
-            <button></button>
-          </form>
-=======
               {/* Payment Amount and Booked Status */}
               <div className="form-row">
                 <div className="form-group">
@@ -126,9 +94,9 @@ const InfoModal = () => {
                   <span className="span">{dummyVehicle.v_booked ? 'Yes' : 'No'}</span>
                 </div>
               </div>
+               <center><button className="close-icon" onClick={handleClose}>Close</button></center>
             </form>
           </div>
->>>>>>> 89289670d3e876bac5900ce63c82597e0d159a6c
         </div>
       </div>
     </>
