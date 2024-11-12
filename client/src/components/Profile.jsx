@@ -74,8 +74,6 @@ const Profile = () => {
                 <input type="text" id="password" name="password" defaultValue={profileData.c_password} required />
               </div>
             </div>
-
-            {/* <button type="submit" className='button'>Update Profile</button> */}
           </form>
         </div>
       </div>

@@ -32,6 +32,7 @@ import AdminCust from "./Pages/AdminCust";
 import AdminOwner from "./Pages/AdminOwner";
 import AdminOwnerInfo from "./Pages/AdminOwnerInfo";
 import AdminCustInfo from "./Pages/AdminCustInfo";
+import MyDrivers from "./Pages/MyDrivers";
 
 function App() {
    // Set to "customer" or "owner" based on app logic
@@ -83,6 +84,7 @@ function App() {
             <Route path="/AdminOwner" element={<AdminOwner></AdminOwner>} />
             <Route path="/AdminCustInfo" element={<AdminCustInfo></AdminCustInfo>} />
             <Route path="/AdminOwnerInfo" element={<AdminOwnerInfo></AdminOwnerInfo>} />
+            <Route path="/MyDrivers" element={<MyDrivers></MyDrivers>}/>
             {/* <Route path="/HomeOwner" element={<HomeOwner />} /> */}
           </Routes>
         </Layout>

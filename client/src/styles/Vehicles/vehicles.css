@@ -175,16 +175,15 @@
   }
   
   .megh-1:focus {
-    border-color: #007bff; /* Changes border color on focus */
+    border-color:maroon; /* Changes border color on focus */
     outline: none; /* Removes default blue outline */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adds a subtle glow effect on focus */
+    box-shadow: maroon; /* Adds a subtle glow effect on focus */
   }
   
   .btn.button {
     width: 50%; /* Button width is also 50% */
     padding: 10px; /* Padding for the button */
     text-align: center; /* Centers text within the button */
-    background-color: #007bff; /* Primary color for the button */
     color: white; /* White text color */
     border: none; /* Removes border */
     border-radius: 4px; /* Rounded corners */
@@ -192,7 +191,7 @@
   }
   
   .btn.button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: rgb(178, 60, 60); /* Darker blue on hover */
   }
 
 
@@ -461,8 +460,7 @@
     font-size: 2.5rem;
     align-items: center;
     justify-content: center;
-    margin-left: 45%;
-    margin-top: 10%;
+    margin-top: 15%;
     font-weight: bolder;
     color: maroon;
   }

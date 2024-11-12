@@ -1,16 +1,17 @@
 import React from 'react';
 import "../styles/Vehicles/vehicles.css";
 import { useViewContext } from '../Context_api/contextApi';
-import InfoModal from '../components/InfoModal';
+import Navbar from '../components/Navbar';
+import AdminVehicles from './AdminVehicles';
 
 
-const MyDrivers = () => {
+const Models = () => {
   const { vehicle,handleBookNowClick,handleMore,close } = useViewContext(); // Access context values
   return (
     <>
     {/* <Navbar/> */}
     <section className="section" id="popular">
-    <h1 className='megh-title'>MY DRIVERS</h1>
+    <h1 className='megh-title'>YOUR VEHICLES</h1>
       {/* <HeroPages name="Vehicle Models" /> */}
       <div className="container">
         {/* Display filtered vehicles */}
@@ -24,8 +25,7 @@ const MyDrivers = () => {
                    <h1 className="popular__title">{property.v_name}</h1>
                    <p className="popular__description">{property.o_street}</p>
                    <div className="popular__buttons">
-                     <button className="popular__button book" onClick={() => handleBookNowClick(property.v_insurance)}>Book Now</button>
-                     <button className="popular__button more" onClick={() => handleMore(property.v_insurance)}>More</button>
+                     <button className="popular__button book" onClick={() => handleBookNowClick(property.v_insurance)}>Booked</button>
                 ,  </div> 
                 </div>
               </article>))}
@@ -35,11 +35,11 @@ const MyDrivers = () => {
     </section>
     {
       close&&(
-        <InfoModal/>
+        <AdminVehicles/>
       )
     }
     </>
   );
 };
 
-export default MyDrivers;
+export default Models;

@@ -19,6 +19,7 @@ const MyBookings = () => {
             <th>Vehicle Model</th>
             <th>Booking Date</th>
             <th>Total Amount</th>
+            <th>Payment Status</th>
             <th></th>
           </tr>
         </thead>

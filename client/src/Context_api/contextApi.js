@@ -49,7 +49,7 @@ const ViewProvider = ({ children }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        // console.log('Form Data:', formData);
+        console.log('Form Data:', formData);
         const response = await axios.post('http://localhost:3001/customer_login', formData, {
           headers: { 'Content-Type': 'application/json' },withCredentials: true,
         });
@@ -67,6 +67,7 @@ const ViewProvider = ({ children }) => {
         if (error.response) {
           setMess(error.response.data.message || 'An error occurred. Please try again.');
         } else {
+          console.log(error)
           console.log('An error occurred. Please try again.');
           setMess('An error occurred. Please try again.');
         }
