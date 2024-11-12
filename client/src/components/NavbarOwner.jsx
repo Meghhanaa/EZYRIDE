@@ -12,7 +12,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 function NavbarOwner() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration4
-  const {userName,handlelogout,profilepic}=useViewContext();
+  const {userName,handlelogout,profilepic,profileownerInfo}=useViewContext();
   // const userName = 'Meghana';
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   useEffect(() => {
@@ -83,7 +83,7 @@ const toggleMenu = () => {
                   </button> 
                   {isMenuVisible && ( 
                     <ul className="menu">
-                      <li className="menu-item"><Link to={'/Profile'}>My Profile</Link></li>
+                      <li className="menu-item" onClick={profileownerInfo}><Link to={'/Profile'}>My Profile</Link></li>
                       <li className="menu-item"><Link to={'/AddVehicle'}>Add Vehicles</Link></li> 
                       <li className="menu-item"><Link to={'/AddDriver'}>Add drivers</Link></li>
                       <li className="menu-item"onClick={handlelogout}>Logout</li> 
@@ -211,7 +211,7 @@ const toggleMenu = () => {
                   </button> 
                   {isMenuVisible && ( 
                     <ul className="menu">
-                      <li className="menu-item">My Profile</li>
+                      <li className="menu-item" onClick={profileownerInfo}><Link to={'/Profile'}>My Profile</Link></li>
                       <li className="menu-item"><Link to={'/AddVehicle'}>Add Vehicles</Link></li> 
                       <li className="menu-item"><Link to={'/AddDriver'}>Add drivers</Link></li>
                       <li className="menu-item"onClick={handlelogout}>Logout</li> 

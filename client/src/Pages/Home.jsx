@@ -14,7 +14,7 @@ function Home() {
       {/* <Navbar></Navbar> */}
       {/* <Hero1 /> */}
       <Hero/>
-      {role === "" && <BookCar />}
+      {role === "customer" && <BookCar />}
       <PlanTrip />
       <Reviews/>
       <Footer /> 

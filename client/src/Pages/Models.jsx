@@ -11,7 +11,7 @@ const Models = () => {
     <>
     {/* <Navbar/> */}
     <section className="section" id="popular">
-    <h1 className='megh-title'>YOUR VEHICLES</h1>
+    <h1 className='megh-title'></h1>
       {/* <HeroPages name="Vehicle Models" /> */}
       <div className="container">
         {/* Display filtered vehicles */}

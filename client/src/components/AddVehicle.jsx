@@ -8,9 +8,10 @@ function AddVehicle({ addVehicle }) {
     v_name: '',
     v_type: '',
     v_rto: '',
-    o_no: '',
+    v_color:'',
+    v_mileage:'',
+    v_engine_type:'',
     v_pay: '',
-    v_booked: '',
     v_desp: '',
   });
 
@@ -75,22 +76,22 @@ function AddVehicle({ addVehicle }) {
       }
     }
 
-    // Logic for Owner Number (must be exactly 10 digits)
-    else if (name === 'o_no') {
-      const regex = /^\d{0,10}$/; // Only numeric values, up to 10 digits
-      if (regex.test(value)) {
-        setNewVehicle({ ...newVehicle, [name]: value });
+    // // Logic for Owner Number (must be exactly 10 digits)
+    // else if (name === 'o_no') {
+    //   const regex = /^\d{0,10}$/; // Only numeric values, up to 10 digits
+    //   if (regex.test(value)) {
+    //     setNewVehicle({ ...newVehicle, [name]: value });
 
-        // Set error based on length
-        if (value.length === 10) {
-          setErrors({ ...errors, [name]: '' });
-        } else {
-          setErrors({ ...errors, [name]: 'Owner number must be exactly 10 digits long.' });
-        }
-      } else {
-        setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
-      }
-    }
+    //     // Set error based on length
+    //     if (value.length === 10) {
+    //       setErrors({ ...errors, [name]: '' });
+    //     } else {
+    //       setErrors({ ...errors, [name]: 'Owner number must be exactly 10 digits long.' });
+    //     }
+    //   } else {
+    //     setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
+    //   }
+    // }
 
     // For other inputs
     else {
@@ -143,6 +144,8 @@ function AddVehicle({ addVehicle }) {
   };
 
   return (
+    <>
+    <br></br><br></br><br></br><br></br>
     <div className="add-property-form">
       <h1 className="add-titlee">Add New Vehicle</h1>
       <input
@@ -228,7 +231,7 @@ function AddVehicle({ addVehicle }) {
       />
       {errors.v_engine_type && <span className="error">{errors.v_engine_type}</span>}
 
-      <input
+      {/* <input
         className="megh-1"
         type="text"
         name="o_no"
@@ -236,7 +239,7 @@ function AddVehicle({ addVehicle }) {
         value={newVehicle.o_no}
         onChange={handleInputChange}
       />
-      {errors.o_no && <span className="error">{errors.o_no}</span>}
+      {errors.o_no && <span className="error">{errors.o_no}</span>} */}
 
       <input
         className="megh-1"
@@ -262,7 +265,10 @@ function AddVehicle({ addVehicle }) {
         Add Vehicle
       </button>
     </div>
+    </>
   );
+  
 }
+
 
 export default AddVehicle;
