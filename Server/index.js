@@ -516,6 +516,11 @@ app.post('/adddriverowner', upload.single('d_image'),async(req,res)=>{
       INSERT INTO driver (d_image, d_no, d_name, d_aadhar,d_lic_no,d_DOB,d_state, d_city,d_street,d_pin,d_email,d_gender,o_no)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `, [imageUrl, d_no, d_name, d_aadhar,d_lic_no,d_DOB,d_state, d_city,d_street,d_pin,d_email,d_gender,o_no]);
+    
+    await pool.query(`
+      UPDATE owner SET o_driver_count = o_driver_count + 1 WHERE o_no = ?
+    `, [o_no]);
+
     // Return success response
     res.status(200).json({ message: 'driver added'});
   } catch (error) {
@@ -597,10 +602,11 @@ app.get('/adminallCustomer', async (req, res) => {
 });
 
 //to get all owner
-app.get('/adminallOwner',async (req, res) => {
+app.get('/adminallOwners',async (req, res) => {
     try {
         // Query all customer
         const [data] = await pool.query('SELECT * FROM owner'); 
+        console.log(data)
         res.status(200).json(data);
     } catch (error) {
         console.error("Error fetching owner:", error);
@@ -622,7 +628,16 @@ app.get('/adminallBooking', async (req, res) => {
 });
 
 //get all the vehicle
-
+app.get('/adminallvehicle', async (req, res) => {
+    try {
+        // Query to retrieve all bookings
+        const [data] = await pool.query('SELECT * FROM vehicle'); 
+        res.status(200).json(data);
+    } catch (error) {
+        console.error("Error fetching vehicle", error);
+        res.status(500).json({ message: 'An error occurred while fetching vehicle.' });
+    }
+});
 
 //all payment detail
 app.get('/allpayment',async (req, res) => {

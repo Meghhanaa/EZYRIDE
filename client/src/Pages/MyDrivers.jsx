@@ -24,7 +24,7 @@ const MyDrivers = () => {
                    <h1 className="popular__title">{property.d_no}</h1>
                    <p className="popular__description">{property.d_street}</p>
                    <div className="popular__buttons">
-                     <button className="popular__button more" onClick={() => handleMore(property.d_no)}>More</button>
+                     <button className="popular__button more">More</button>
                 ,  </div> 
                 </div>
               </article>))}
