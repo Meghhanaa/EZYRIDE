@@ -21,6 +21,7 @@ const AdminOwner = () => {
             <th>Gender</th>
             <th>Role</th>
             <th>Driver Count</th>
+            {/* <th>More Information</th> */}
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@ const AdminOwner = () => {
                 <td>{owner.o_gender}</td>
                 <td>{owner.o_role}</td>
                 <td>{owner.o_driver_count}</td>
+                {/* <td><button>View More</button></td> */}
               </tr>
             ))
           ) : (

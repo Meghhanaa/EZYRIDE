@@ -92,6 +92,11 @@
     font-weight: 500;
     align-items: center;
   }
+
+  .navbar__buttons a {
+    text-decoration: none;
+    color: black;
+  }
   
   .mobile-signin{
     font-size: 1.5rem;
@@ -101,6 +106,8 @@
 
   /* Menu button styles */ 
   .menu-button { 
+    margin: -10px;
+    margin-left: 2px;
     background-color: #444; /* Adjust as needed */ 
     color: #fff; /* Adjust as needed */ 
     border: none; 
@@ -128,7 +135,15 @@
       padding: 10px 20px; 
       color: #fff; /* Adjust as needed */ 
       cursor: pointer; 
+      text-decoration: none;
+      color: #000000;
     } 
+
+    .menu-item .link {
+      color: black !important;
+      text-decoration: none !important;
+    }
+    
     
     .menu-item:hover { 
       background-color: #555; 
@@ -275,6 +290,8 @@
   .open-nav {
     left: 0;
   }
+
+
   
   /* Dropdown Menu Styles */
   .dropdown-menu {

@@ -47,6 +47,11 @@
       color: $text-black;
     }
 
+    Link {
+      text-decoration: none;
+      color: black;
+    }
+
     h1 {
       font-size: $h1-size;
       font-family: $titles-font;

@@ -149,6 +149,7 @@
   }
   
   .add-property-form {
+    margin: 100px auto;
     display: flex;
     flex-direction: column;
     align-items: center; /* Center-aligns all items horizontally */
@@ -262,10 +263,11 @@
   }
 
   .add-property-form {
-    max-width: 800px; /* Set a maximum width for better layout */
-    margin: 20px auto; /* Center the form on the page */
-    border: 1px solid #ccc; /* Optional border */
-    border-radius: 8px; /* Rounded corners */
+    max-width: 700px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     background-color: #f9f9f9;
   }
   
@@ -396,7 +398,7 @@
 
 .add-property-form {
   max-width: 700px; /* Set a maximum width for better layout */
-  margin: 20px auto; /* Center the form on the page */
+  margin: 100px auto; /* Center the form on the page */
   padding: 20px;
   border: 1px solid #ccc; /* Optional border */
   border-radius: 8px; /* Rounded corners */
@@ -431,14 +433,14 @@
   font-size: 18px;
   font-weight: bold;
   color: white;
-  background-color: #4CAF50;
+  background-color: #750E21;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .btn.button:hover {
-  background-color: #45a049;
+  background-color: rgb(162, 73, 73);
 }
 
 

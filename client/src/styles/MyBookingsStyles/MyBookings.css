@@ -14,6 +14,7 @@
 .my-bookings .button {
   padding: 8px 16px;
   font-size: 14px;
+  color: #f9f9f9;
 }
 
 .my-bookings h2 {
@@ -28,6 +29,11 @@
   border-collapse: collapse;
 }
 
+.close-icon{
+  color: white;
+  background-color: #750E21 ;
+  border: none;
+}
 .my-bookings th,
 .my-bookings td {
   padding: 12px;
@@ -37,7 +43,7 @@
 }
 
 .my-bookings th {
-  background-color: maroon;
+  background-color: #750E21 ;
   color: white;
   font-weight: bold;
 }
@@ -73,7 +79,7 @@
   justify-content: center;
   margin-top: 8%;
   font-weight: bolder;
-  color: maroon;
+  color: #750E21 ;
 }
 
 /* Responsive styles */
@@ -104,7 +110,7 @@
     justify-content: center;
     margin-top: 15%;
     font-weight: bolder;
-    color: maroon;
+    color: #750E21 ;
   }
 }
 

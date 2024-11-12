@@ -21,6 +21,7 @@ const AdminCustomer = () => {
               <th>State</th>
               <th>Gender</th>
               <th>Role</th>
+              {/* <th></th> */}
             </tr>
           </thead>
           <tbody>
@@ -35,6 +36,7 @@ const AdminCustomer = () => {
                   <td>{customer.c_state}</td>
                   <td>{customer.c_gender}</td>
                   <td>{customer.c_role}</td>
+                  {/* <td><button>View More</button></td> */}
                 </tr>
               ))
             ) : (
