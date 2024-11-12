@@ -289,7 +289,9 @@ const custallbooking=async()=>{
   const handleAllOwnerVehicle = async () => {
     try {
       // console.log("Search initiated:", searchVehData);
-      const response = await axios.get(`http://localhost:3001/vehiclesOwner`);
+      const response = await axios.get(`http://localhost:3001/vehiclesOwner`,{
+        params: { o_no: formownerData.o_no }
+      });
 
       console.log('Search Results:', response.data);
       setvehicleOwner(response.data);
@@ -306,7 +308,8 @@ const custallbooking=async()=>{
   const handleAllOwnerdriver = async () => {
     try {
       // console.log("Search initiated:", searchVehData);
-      const response = await axios.get(`http://localhost:3001/driversOwner`);
+      const response = await axios.get(`http://localhost:3001/driversOwner`,
+      {params:{o_no:formownerData.o_no}});
 
       console.log('Search Results:', response.data);
       setdriverOwner(response.data);
@@ -324,8 +327,7 @@ const custallbooking=async()=>{
   const handleAllAdminCustomer = async () => {
     try {
       // console.log("Search initiated:", searchVehData);
-      const response = await axios.get(`http://localhost:3001/adminCustomer`);
-
+      const response = await axios.get(`http://localhost:3001/adminallCustomer`);
       console.log('Search Results:', response.data);
       setAdminCustomer(response.data);
       console.log('Results:', AdminCustomer);
@@ -341,7 +343,7 @@ const custallbooking=async()=>{
   const handleAllAdminOwner = async () => {
     try {
       // console.log("Search initiated:", searchVehData);
-      const response = await axios.get(`http://localhost:3001/adminOwners`);
+      const response = await axios.get(`http://localhost:3001/adminallOwners`);
 
       console.log('Search Results:', response.data);
       setAdminOwners(response.data);
@@ -358,7 +360,7 @@ const custallbooking=async()=>{
     const handleAllAdminBooking = async () => {
       try {
         // console.log("Search initiated:", searchVehData);
-        const response = await axios.get(`http://localhost:3001/adminBooking`);
+        const response = await axios.get(`http://localhost:3001/adminallBooking`);
   
         console.log('Search Results:', response.data);
         setAdminBooking(response.data);
