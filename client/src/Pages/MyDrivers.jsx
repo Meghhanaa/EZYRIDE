@@ -5,7 +5,7 @@ import InfoModal from '../components/InfoModal';
 
 
 const MyDrivers = () => {
-  const { vehicle,handleBookNowClick,handleMore,close } = useViewContext(); // Access context values
+  const { driverOwner,handleMore,close } = useViewContext(); // Access context values
   return (
     <>
     {/* <Navbar/> */}
@@ -16,16 +16,15 @@ const MyDrivers = () => {
         {/* Display filtered vehicles */}
         <div className="popular__container swiper">
           <div className="swiper-wrapper">
-            {vehicle.map((property) => (
+            {driverOwner.map((property) => (
               <article className="popular__card swiper-slide">
-                <img className="popular__img" src={property.v_image} alt={property.v_name} />
+                <img className="popular__img" src={property.d_image} alt={property.d_name} />
                 <div className="popular__data">
-                   <h2 className="popular__price"><span>Rs </span>{property.v_pay}</h2>
-                   <h1 className="popular__title">{property.v_name}</h1>
+                   <h2 className="popular__price"><span>Rs </span>{property.d_name}</h2>
+                   <h1 className="popular__title">{property.d_no}</h1>
                    <p className="popular__description">{property.o_street}</p>
                    <div className="popular__buttons">
-                     <button className="popular__button book" onClick={() => handleBookNowClick(property.v_insurance)}>Book Now</button>
-                     <button className="popular__button more" onClick={() => handleMore(property.v_insurance)}>More</button>
+                     <button className="popular__button more" onClick={() => handleMore(property.d_no)}>More</button>
                 ,  </div> 
                 </div>
               </article>))}

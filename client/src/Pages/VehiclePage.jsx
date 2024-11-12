@@ -5,7 +5,7 @@ import InfoModal from '../components/InfoModal';
 
 
 const VehiclePage = () => {
-  const { vehicle,handleBookNowClick,handleMore,close } = useViewContext(); // Access context values
+  const { vehicleOwner,handleMore, close} = useViewContext(); // Access context values
   return (
     <>
     <section className="section" id="popular">
@@ -14,7 +14,7 @@ const VehiclePage = () => {
         {/* Display filtered vehicles */}
         <div className="popular__container swiper">
           <div className="swiper-wrapper">
-            {vehicle.map((property) => (
+            {vehicleOwner.map((property) => (
               <article className="popular__card swiper-slide">
                 <img className="popular__img" src={property.v_image} alt={property.v_name} />
                 <div className="popular__data">
@@ -22,7 +22,6 @@ const VehiclePage = () => {
                    <h1 className="popular__title">{property.v_name}</h1>
                    <p className="popular__description">{property.o_street}</p>
                    <div className="popular__buttons">
-                     <button className="popular__button book" onClick={() => handleBookNowClick(property.v_insurance)}>Book Now</button>
                      <button className="popular__button more" onClick={() => handleMore(property.v_insurance)}>More</button>
                 ,  </div> 
                 </div>

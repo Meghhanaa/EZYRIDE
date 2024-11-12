@@ -148,7 +148,7 @@ const ViewProvider = ({ children }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-const handleadminSubmit = async (e) => {
+  const handleadminSubmit = async (e) => {
     e.preventDefault();
     if (validateadminForm()) {
       try {
@@ -158,8 +158,8 @@ const handleadminSubmit = async (e) => {
         });
         setMess(response.data.message);
         setUserName(response.data.user.name);
-        setProfilepic(response.data.image.name)
-        setRole(response.data.role.name)
+        setRole(response.data.role.name);
+        console.log(response.data.message.role);
         navigate('/');
       } catch (error) {
         if (error.response) {
@@ -168,10 +168,9 @@ const handleadminSubmit = async (e) => {
           console.log('An error occurred. Please try again.');
           setMess('An error occurred. Please try again.');
         }
-      }
-    }
-  };
-  
+      }
+    }
+  };
 
   //custom hook for vehicle search
   const [searchVehData, setSearchVehData] = useState({
@@ -208,6 +207,7 @@ const handleadminSubmit = async (e) => {
       const response = await axios.get(`http://localhost:3001/vehicles`, {
         params: searchVehData,
       });
+
       console.log('Search Results:', response.data);
       setVehicle(response.data);
       console.log('Results:', vehicle);
@@ -216,6 +216,109 @@ const handleadminSubmit = async (e) => {
       console.log('Error fetching vehicles:', error);
     }
   };
+
+  //myVehiclesOwner
+  const [vehicleOwner,setvehicleOwner]=useState([]);
+  const handleAllOwnerVehicle = async () => {
+    try {
+      // console.log("Search initiated:", searchVehData);
+      const response = await axios.get(`http://localhost:3001/vehiclesOwner`);
+
+      console.log('Search Results:', response.data);
+      setvehicleOwner(response.data);
+      console.log('Results:', vehicleOwner);
+      // navigate('/VehiclePage');
+    } catch (error) {
+      console.log('Error fetching vehicles:', error);
+    }
+  };
+
+
+  //myDriverOwner
+  const [driverOwner,setdriverOwner]=useState([]);
+  const handleAllOwnerdriver = async () => {
+    try {
+      // console.log("Search initiated:", searchVehData);
+      const response = await axios.get(`http://localhost:3001/driversOwner`);
+
+      console.log('Search Results:', response.data);
+      setdriverOwner(response.data);
+      console.log('Results:', driverOwner);
+      // navigate('/driverPage');
+    } catch (error) {
+      console.log('Error fetching drivers:', error);
+    }
+  };
+
+
+  //admin ALL customer
+
+  const [AdminCustomer,setAdminCustomer]=useState([]);
+  const handleAllAdminCustomer = async () => {
+    try {
+      // console.log("Search initiated:", searchVehData);
+      const response = await axios.get(`http://localhost:3001/adminCustomer`);
+
+      console.log('Search Results:', response.data);
+      setAdminCustomer(response.data);
+      console.log('Results:', AdminCustomer);
+      // navigate('/driverPage');
+    } catch (error) {
+      console.log('Error fetching drivers:', error);
+    }
+  };
+
+  //admin All owners
+
+  const [AdminOwners,setAdminOwners]=useState([]);
+  const handleAllAdminOwner = async () => {
+    try {
+      // console.log("Search initiated:", searchVehData);
+      const response = await axios.get(`http://localhost:3001/adminOwners`);
+
+      console.log('Search Results:', response.data);
+      setAdminOwners(response.data);
+      console.log('Results:', AdminOwners);
+      // navigate('/driverPage');
+    } catch (error) {
+      console.log('Error fetching drivers:', error);
+    }
+  };
+
+    //admin ALL customer
+
+    const [AdminBooking,setAdminBooking]=useState([]);
+    const handleAllAdminBooking = async () => {
+      try {
+        // console.log("Search initiated:", searchVehData);
+        const response = await axios.get(`http://localhost:3001/adminBooking`);
+  
+        console.log('Search Results:', response.data);
+        setAdminBooking(response.data);
+        console.log('Results:', AdminBooking);
+        // navigate('/driverPage');
+      } catch (error) {
+        console.log('Error fetching drivers:', error);
+      }
+    };
+
+
+    //all vehicles for the admin
+  const [vehicleAdmin,setvehicleAdmin]=useState([]);
+  const handleAllAdminVehicle = async () => {
+    try {
+      // console.log("Search initiated:", searchVehData);
+      const response = await axios.get(`http://localhost:3001/vehiclesAdmin`);
+
+      console.log('Search Results:', response.data);
+      setvehicleAdmin(response.data);
+      console.log('Results:', vehicleAdmin);
+      // navigate('/VehiclePage');
+    } catch (error) {
+      console.log('Error fetching vehicles:', error);
+    }
+  };
+
 
   //information of vehicle
   const [dummyVehicle,setdummyVehicle]=useState([]);
@@ -258,6 +361,8 @@ const [custNumber,setcustNumber]=useState('');
 .catch(error => {
     console.error('Error in searching:', error);
 });
+
+
 
 };
 const [BookformData, setBookFormData] = useState({
@@ -402,7 +507,19 @@ const handlelogout =()=>{
     handleBookNowClick,
     handleBookSubmit,
     custbookingDetail,
-    handlelogout
+    handlelogout,
+    handleAllOwnerVehicle,
+    vehicleOwner,
+    handleAllOwnerdriver,
+    driverOwner,
+    handleAllAdminCustomer,
+    AdminCustomer,
+    handleAllAdminOwner,
+    AdminOwners,
+    handleAllAdminBooking,
+    AdminBooking,
+    handleAllAdminVehicle,
+    vehicleAdmin
   };
 
   return (

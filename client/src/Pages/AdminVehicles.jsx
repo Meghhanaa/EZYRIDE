@@ -1,9 +1,12 @@
 import React from 'react';
 import "../styles/AdminVehicles/AdminVehicles.css";
 import Navbar from '../components/Navbar';
+import { useViewContext } from '../Context_api/contextApi';
+
+//vehicleAdmin
 
 // Sample vehicle data
-const vehicleData = {
+const vehicleAdmin = {
   v_image: "https://via.placeholder.com/150", // Placeholder image URL
   v_insurance: "2024-12-31", // Example expiration date
   v_name: "Toyota Corolla",
@@ -19,75 +22,76 @@ const vehicleData = {
 };
 
 const AdminVehicles = () => {
+  const { vehicleAdmin } = useViewContext(); // Access context values
   return (
     <>
       <Navbar />
       <h1 className='h1'>Admin Vehicles</h1>
       <div className="admin-vehicles-container">
-        <img src={vehicleData.v_image} alt={vehicleData.v_name} className="v-image" />
-        <h1>{vehicleData.v_name}</h1>
+        <img src={vehicleAdmin.v_image} alt={vehicleAdmin.v_name} className="v-image" />
+        <h1>{vehicleAdmin.v_name}</h1>
         
         <div className="vehicle-info">
           <form>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="vehicleName"><strong>Vehicle Name:</strong></label>
-                <input type="text" id="vehicleName" name="vehicleName" defaultValue={vehicleData.v_name} required readOnly />
+                <input type="text" id="vehicleName" name="vehicleName" defaultValue={vehicleAdmin.v_name} required readOnly />
               </div>
               <div className="form-group">
                 <label htmlFor="vehicleType"><strong>Vehicle Type:</strong></label>
-                <input type="text" id="vehicleType" name="vehicleType" defaultValue={vehicleData.v_type} required readOnly/>
+                <input type="text" id="vehicleType" name="vehicleType" defaultValue={vehicleAdmin.v_type} required readOnly/>
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="description"><strong>Description:</strong></label>
-                <input type="text" id="description" name="description" defaultValue={vehicleData.v_desp} required readOnly/>
+                <input type="text" id="description" name="description" defaultValue={vehicleAdmin.v_desp} required readOnly/>
               </div>
               <div className="form-group">
                 <label htmlFor="rtoNumber"><strong>RTO:</strong></label>
-                <input type="text" id="rtoNumber" name="rtoNumber" defaultValue={vehicleData.v_rto} required readOnly/>
+                <input type="text" id="rtoNumber" name="rtoNumber" defaultValue={vehicleAdmin.v_rto} required readOnly/>
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="color"><strong>Color:</strong></label>
-                <input type="text" id="color" name="color" defaultValue={vehicleData.v_color} required readOnly/>
+                <input type="text" id="color" name="color" defaultValue={vehicleAdmin.v_color} required readOnly/>
               </div>
               <div className="form-group">
                 <label htmlFor="mileage"><strong>Mileage:</strong></label>
-                <input type="text" id="mileage" name="mileage" defaultValue={vehicleData.v_mileage} required readOnly/>
+                <input type="text" id="mileage" name="mileage" defaultValue={vehicleAdmin.v_mileage} required readOnly/>
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="engineType"><strong>Engine Type:</strong></label>
-                <input type="text" id="engineType" name="engineType" defaultValue={vehicleData.v_engine_type} required readOnly/>
+                <input type="text" id="engineType" name="engineType" defaultValue={vehicleAdmin.v_engine_type} required readOnly/>
               </div>
               <div className="form-group">
                 <label htmlFor="ownerContact"><strong>Owner's Contact:</strong></label>
-                <input type="text" id="ownerContact" name="ownerContact" defaultValue={vehicleData.o_no} required readOnly />
+                <input type="text" id="ownerContact" name="ownerContact" defaultValue={vehicleAdmin.o_no} required readOnly />
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="insuranceExpiry"><strong>Insurance Expiry:</strong></label>
-                <input type="date" id="insuranceExpiry" name="insuranceExpiry" defaultValue={vehicleData.v_insurance} required readOnly />
+                <input type="date" id="insuranceExpiry" name="insuranceExpiry" defaultValue={vehicleAdmin.v_insurance} required readOnly />
               </div>
               <div className="form-group">
                 <label htmlFor="price"><strong>Price:</strong></label>
-                <input type="text" id="price" name="price" defaultValue={vehicleData.v_pay} required readOnly />
+                <input type="text" id="price" name="price" defaultValue={vehicleAdmin.v_pay} required readOnly />
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="booked"><strong>Booked:</strong></label>
-                <input type="text" id="booked" name="booked" defaultValue={vehicleData.v_booked} required readOnly />
+                <input type="text" id="booked" name="booked" defaultValue={vehicleAdmin.v_booked} required readOnly />
               </div>
             </div>
           </form>

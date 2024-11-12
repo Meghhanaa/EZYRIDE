@@ -48,10 +48,9 @@
     }
 
     h1 {
-      color: aliceblue ;
       font-size: $h1-size;
       font-family: $titles-font;
-      font-weight: 700;
+      font-weight: 1000;
       color: $text-black;
       line-height: 1.2;
       margin-top: 1rem;
@@ -154,5 +153,3 @@
 .show-scroll {
   display: flex;
 }
-
-

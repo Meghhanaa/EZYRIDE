@@ -12,7 +12,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 function NavbarOwner() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration4
-  const {userName,handlelogout,profilepic}=useViewContext();
+  const {userName,handlelogout,profilepic,handleAllOwnerVehicle,handleAllOwnerdriver}=useViewContext();
   // const userName = 'Meghana';
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   useEffect(() => {
@@ -162,8 +162,8 @@ const toggleMenu = () => {
           <ul className="mobile-navbar__links">
             <li><Link onClick={toggleNav} to="/">Home</Link></li>
             <li><Link onClick={toggleNav} to="/About">About</Link></li>
-            <li><Link className="models-link" to="/VehiclePage">My Vehicle</Link></li>
-            <li><Link className="models-link" to="/MyDrivers">My Drivers</Link></li>
+            <li><Link className="models-link" to="/VehiclePage" onClick={handleAllOwnerVehicle}>My Vehicle</Link></li>
+            <li><Link className="models-link" to="/MyDrivers" onClick={handleAllOwnerdriver}>My Drivers</Link></li>
             <li><Link onClick={toggleNav} to="/Safety">Safety</Link></li>
             <li><Link onClick={toggleNav} to="/OurTeam">Our Team</Link></li>
             <li><Link onClick={toggleNav} to="/ContactEzy">Contact</Link></li>
@@ -182,8 +182,8 @@ const toggleMenu = () => {
           <ul className="navbar__links">
             <li><Link className="home-link" to="/">Home</Link></li>
             <li><Link className="about-link" to="/About">About</Link></li>
-            <li><Link className="models-link" to="/VehiclePage">My Vehicle</Link></li>
-            <li><Link className="models-link" to="/MyDrivers">My Drivers</Link></li>
+            <li><Link className="models-link" to="/VehiclePage" onClick={handleAllOwnerVehicle}>My Vehicle</Link></li>
+            <li><Link className="models-link" to="/MyDrivers" onClick={handleAllOwnerdriver}>My Drivers</Link></li>
             <li><Link className="safety-link" to="/Safety">Safety</Link></li>
             <li><Link className="team-link" to="/OurTeam">Our Team</Link></li>
             <li><Link className="contact-link" to="/contactEzy">Contact</Link></li>

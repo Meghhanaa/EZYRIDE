@@ -8,7 +8,6 @@ import meghna from "../images/ourteam/meghnaji.jpg";
 import Footer from "../components/Footer.jsx";
 import HeroPages from "../components/HeroPages";
 import "../styles/ourteam/ourteam.css";
-import Navbar from "../components/Navbar.jsx";
 
 function OurTeam() {
   const message =
