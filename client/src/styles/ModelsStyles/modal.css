@@ -37,6 +37,7 @@
   font-size:2rem;
   border:1px solid black;
   color: red;
+  margin-top:-12px;
   cursor: pointer;
   transition: color 0.3s;
 }

@@ -11,11 +11,13 @@ const useViewContext = () => useContext(viewContext);
 const ViewProvider = ({ children }) => {
   const navigate = useNavigate();
 
-  const [role, setRole] = useState("");
+  const [role,setRole] = useState("customer");
   const [errors, setErrors] = useState({});
   const [mess, setMess] = useState("");
   const [userName, setUserName] = useState("");
   const [profilepic,setProfilepic]=useState("");
+  const [custNumber,setcustNumber]=useState(0);
+  const [number,setnumber]=useState(0)
 
 
   const [formData, setFormData] = useState({
@@ -55,7 +57,7 @@ const ViewProvider = ({ children }) => {
         setUserName(response.data.user.name);
         setProfilepic(response.data.image.name)
         setRole(response.data.role.name)
-        // setnumber(response.data.user.number);
+        setnumber(response.data.user.number);
         console.log(response.data.role.name)
         console.log(response.data.image.name)
         console.log(response.data.user.name)
@@ -110,6 +112,7 @@ const ViewProvider = ({ children }) => {
         setUserName(response.data.user.name);
         setProfilepic(response.data.image.name)
         setRole(response.data.role.name)
+        setnumber(formownerData.o_no)
         navigate('/');
       } catch (error) {
         if (error.response) {
@@ -172,7 +175,71 @@ const ViewProvider = ({ children }) => {
     }
   };
 
-  //custom hook for vehicle search
+  //profile
+  const [profileData,setprofileData]=useState([])
+  const profilecustomerInfo=async()=>{
+     try {
+      console.log(formData.c_no)
+        const response = await axios.get('http://localhost:3001/custprofile',{
+          params: { c_no: formData.c_no },
+          headers: { 'Content-Type': 'application/json' },withCredentials: true,
+        });
+        console.log("data",response.data);
+        setprofileData(response.data);
+      } catch (error) {
+        if (error.response) {
+          setMess(error.response.data.message || 'An error occurred. Please try again.');
+        } else {
+          console.log('An error occurred. Please try again.');
+          setMess('An error occurred. Please try again.');
+        }
+      }
+
+  }
+
+const profileownerInfo=async()=>{
+     try {
+        const response = await axios.get('http://localhost:3001/ownerprofile',{
+          params: { o_no: formownerData.o_no },
+          headers: { 'Content-Type': 'application/json' },withCredentials: true,
+        });
+        setprofileData(response.data);
+      } catch (error) {
+        if (error.response) {
+          setMess(error.response.data.message || 'An error occurred. Please try again.');
+        } else {
+          console.log('An error occurred. Please try again.');
+          setMess('An error occurred. Please try again.');
+        }
+      }
+
+  }
+
+
+//customer all booking
+
+const [custbookingdetail,setcustbookingdetail]=useState([])
+const custallbooking=async()=>{
+  try{
+    const response = await axios.get('http://localhost:3001/custallbooking',{
+          params: { c_no: formData.c_no },
+          headers: { 'Content-Type': 'application/json' },withCredentials: true,
+        });
+        setcustbookingdetail(response.data);
+        console.log(custbookingdetail)
+        console.log(response.data)
+  }
+  catch (error) {
+        if (error.response) {
+          setMess(error.response.data.message || 'An error occurred. Please try again.');
+        } else {
+          console.log('An error occurred. Please try again.');
+          setMess('An error occurred. Please try again.');
+        }
+      }
+}
+
+//custom hook for vehicle search
   const [searchVehData, setSearchVehData] = useState({
     color: '',
     vehicleType: '',
@@ -343,7 +410,6 @@ catch(error){
 
   //Save booking details
 const [BookData,setBookData]=useState([]);
-const [custNumber,setcustNumber]=useState('');
 
   const handleBookNowClick = async (e) => {
     console.log(e);
@@ -436,37 +502,12 @@ const handlePayLaterClick = async()=>{
 
   }
 
-
-// customer booking details
-
-const [custbookingdetail,setcustbookingdetail]=useState([])
-const custbookingDetail=async()=>{
-      try {
-        // console.log('Form Data:', formData);
-        const response = await axios.get('http://localhost:3001/custbookingdetail', formData.c_no, {
-          headers: { 'Content-Type': 'application/json' },withCredentials: true,
-        });
-        
-        custbookingdetail(response.data)
-        console.log(formData.c_no)
-        navigate('/');
-      } catch (error) {
-        if (error.response) {
-          setMess(error.response.data.message || 'An error occurred. Please try again.');
-        } else {
-          console.log('An error occurred. Please try again.');
-          setMess('An error occurred. Please try again.');
-        }
-    }
-}
-
-
 //logout
 const handlelogout =()=>{
   setUserName("");
   setMess("")
   setRole("")
-
+  navigate('/')
 }
 
 
@@ -474,6 +515,10 @@ const handlelogout =()=>{
 
   const allValue = { 
     profilepic,
+    number,
+    profileData,
+    profilecustomerInfo,
+    profileownerInfo,
     role,
     handleSubmit,
     handleInputChange,
@@ -519,7 +564,10 @@ const handlelogout =()=>{
     handleAllAdminBooking,
     AdminBooking,
     handleAllAdminVehicle,
-    vehicleAdmin
+    vehicleAdmin,
+    custbookingdetail,
+    custallbooking,
+    handlelogout
   };
 
   return (

@@ -94,7 +94,7 @@ const InfoModal = () => {
                   <span className="span">{dummyVehicle.v_booked ? 'Yes' : 'No'}</span>
                 </div>
               </div>
-               <center><button className="close-icon" onClick={handleClose}>Close</button></center>
+               <center><button className="close-icon" onClick={handleClose}>Close</button></center><br></br><br></br>
             </form>
           </div>
         </div>

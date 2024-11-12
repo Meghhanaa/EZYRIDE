@@ -12,7 +12,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 function Navbar() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration4
-  const {userName,handlelogout,profilepic}=useViewContext();
+  const {userName,handlelogout,profilepic,profilecustomerInfo,custallbooking}=useViewContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   useEffect(() => {
     // Retrieve user name from local storage
@@ -82,8 +82,8 @@ const toggleMenu = () => {
                   </button> 
                   {isMenuVisible && ( 
                     <ul className="menu">
-                      <li className="menu-item"><Link to={'/Profile'}>My Profile</Link></li>
-                      <li className="menu-item">My Bookings</li> 
+                      <li className="menu-item" onClick={profilecustomerInfo}><Link to={'/Profile'}>My Profile</Link></li>
+                      <li className="menu-item" onClick={custallbooking}><Link to={'/MyBookings'} > My Bookings </Link></li> 
                       <li className="menu-item" onClick={handlelogout}>Logout</li> 
                     </ul> 
                   )}
@@ -207,8 +207,8 @@ const toggleMenu = () => {
                   </button> 
                   {isMenuVisible && ( 
                     <ul className="menu">
-                      <li className="menu-item">My Profile</li>
-                      <li className="menu-item">My Bookings</li> 
+                      <li className="menu-item" onClick={profilecustomerInfo}><Link to={'/Profile'}>My Profile</Link></li>
+                      <li className="menu-item" onClick={custallbooking}><Link to={'/MyBookings'} > My Bookings </Link></li> 
                       <li className="menu-item" onClick={handlelogout}>Logout</li> 
                     </ul> 
                   )}

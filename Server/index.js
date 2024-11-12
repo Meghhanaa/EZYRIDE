@@ -106,7 +106,7 @@ app.post('/customer_login', async (req, res) => {
     // const token = jwt.sign({ c_no: user.c_no, c_name: user.c_name,role:user.c_roll }, JWT_SECRET, { expiresIn: '24h' });
     // console.log(token);
     // res.cookie('token', token, { httpOnly: true, secure: false, path: '/', sameSite: 'Lax' });
-    res.status(200).json({ message: 'Login successful', user: { name: user.c_name },role:{name:user.c_role},image:{name:user.c_image}});
+    res.status(200).json({ message: 'Login successful', user: { name: user.c_name,number:user.c_no },role:{name:user.c_role},image:{name:user.c_image}});
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -205,6 +205,79 @@ app.post('/admin_login', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }}
 );
+
+app.get('/custprofile', async (req, res) => {
+  const { c_no } = req.query;
+
+  try {
+    // Query to find customer details based on specified customer number
+    const [rows] = await pool.query(
+      'SELECT * FROM customer WHERE c_no = ?',
+      [c_no]
+    );
+
+    console.log(rows[0]);
+
+    // Send the result as JSON
+    res.json(rows[0]);
+
+  } catch (error) {
+    console.error('Error fetching customer detail:', error.message);
+    res.status(500).json({ error: 'An error occurred while fetching customer detail' });
+  }
+});
+
+app.get('/ownerprofile', async (req, res) => {
+  const { o_no } = req.query;
+
+  try {
+    // Query to find customer details based on specified customer number
+    const [rows] = await pool.query(
+      'SELECT * FROM owner WHERE o_no = ?',
+      [o_no]
+    );
+
+    console.log(rows[0]);
+
+    // Send the result as JSON
+    res.json(rows[0]);
+
+  } catch (error) {
+    console.error('Error fetching customer detail:', error.message);
+    res.status(500).json({ error: 'An error occurred while fetching customer detail' });
+  }
+});
+
+//customer all booking
+app.get('/custallbooking',async(req,res)=>{
+  const {c_no}=req.query;
+  try { 
+     const [rows] = await pool.query( 
+      ` SELECT 
+    b.book_id,
+    v.v_name,
+    b.b_date,
+    b.b_pay,
+    b.b_payment_status,
+    v.v_insurance
+FROM 
+    booking b
+JOIN 
+    vehicle v ON b.v_insurance = v.v_insurance 
+JOIN 
+    customer c ON b.c_no = c.c_no     
+WHERE 
+    c.c_no = ?; `
+      , [c_no] );
+     console.log(rows[0]);
+     res.json(rows);
+     }catch (error) {
+    console.error('Error fetching customer detail:', error.message);
+    res.status(500).json({ error: 'An error occurred while fetching customer detail' });
+  }
+
+})
+
 
 
 //get all the data of vehicle
