@@ -12,7 +12,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 function AdminNav() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration4
-  const { userName, handleAllAdminCustomer, handleAllAdminOwner, handleAllAdminBooking}=useViewContext();
+  const { userName, handleAllAdminCustomer, handleAllAdminOwner, handleAllAdminBooking, handleAllAdminVehicle}=useViewContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   useEffect(() => {
     // Retrieve user name from local storage
@@ -115,7 +115,7 @@ const toggleMenu = () => {
           <ul className="mobile-navbar__links">
             <li><Link onClick={toggleNav} to="/">Home</Link></li>
             <li><Link onClick={toggleNav} to="/About">About</Link></li>
-            <li><Link className="models-link" to="/AdminVehicles">All Vehicles</Link></li>
+            <li><Link className="models-link" to="/AdminVehicles" onClick={handleAllAdminVehicle}>All Vehicles</Link></li>
             <li><Link className="models-link" to="/AdminCust" onClick={handleAllAdminCustomer}>All Customers</Link></li>
             <li><Link className="models-link" to="/AdminOwner" onClick={handleAllAdminOwner}>All Owners</Link></li>
             <li><Link className="models-link" to="/AdminBookings" onClick={handleAllAdminBooking}>All Bookings</Link></li>
@@ -137,7 +137,7 @@ const toggleMenu = () => {
           <ul className="navbar__links">
             <li><Link className="home-link" to="/">Home</Link></li>
             <li><Link className="about-link" to="/About">About</Link></li>
-            <li><Link className="models-link" to="/AdminVehicles">All Vehicles</Link></li>
+            <li><Link className="models-link" to="/AdminVehicles" onClick={handleAllAdminVehicle}>All Vehicles</Link></li>
             <li><Link className="models-link" to="/AdminCust" onClick={handleAllAdminCustomer}>All Customers</Link></li>
             <li><Link className="models-link" to="/AdminOwner" onClick={handleAllAdminOwner}>All Owners</Link></li>
             <li><Link className="models-link" to="/AdminBookings" onClick={handleAllAdminBooking}>All Bookings</Link></li>

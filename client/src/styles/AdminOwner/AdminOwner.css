@@ -5,13 +5,6 @@
   border-radius: 10px;
   font-family: Arial, sans-serif;
 }
-
-.megh-h2{
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
 .owner-profile {
   display: flex;
   flex-direction: row;
