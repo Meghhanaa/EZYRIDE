@@ -5,7 +5,6 @@ const AddDriver = () => {
   const [driver, setDriver] = useState({
     d_image: '',
     d_no: '',
-    o_no: '',
     d_name: '',
     d_lic_no: '',
     d_DOB: '',
@@ -52,10 +51,6 @@ const AddDriver = () => {
         <label>
           Driver No:
           <input type="text" name="d_no" value={driver.d_no} onChange={handleChange} />
-        </label>
-        <label>
-          Owner No:
-          <input type="text" name="o_no" value={driver.o_no} onChange={handleChange} />
         </label>
         <label>
           Name:

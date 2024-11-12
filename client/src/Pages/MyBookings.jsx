@@ -2,28 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/MyBookingsStyles/MyBookings.css';
 import { useViewContext } from '../Context_api/contextApi';
+import InfoModal from '../components/InfoModal';
 
 const MyBookings = () => {
-  const [bookings, setBookings] = useState([]);
-  const { vehicle,handleBookNowClick,handleMore,close } = useViewContext(); // Access context values
-
-  useEffect(() => {
-    const fetchBookings = async () => {
-      // Example data, replace with API call to your backend
-      const bookingsData = [
-        { id: 1, model: 'Tesla Model S', b_pay:100,date: '2024-11-12', status: 'Paid' },
-        { id: 2, model: 'Ford Mustang',b_pay:100, date: '2024-11-15', status: 'Not Paid' },
-        { id: 3, model: 'BMW X5',b_pay:100, date: '2024-11-18', status: 'Not Paid' },
-      ];
-      setBookings(bookingsData);
-    };
-
-    fetchBookings();
-  }, []);
+  const {custbookingdetail,close,handleMore} = useViewContext();
 
   return (
     <>
-    <h1 className='h1'>My Bookings</h1>
+    {console.log(custbookingdetail)}
+    <h1 className='megh-title'>My Bookings</h1>
     <div className="my-bookings">
       <table>
         <thead>
@@ -37,32 +24,32 @@ const MyBookings = () => {
           </tr>
         </thead>
         <tbody>
-  {bookings.length > 0 ? (
-    bookings.map((booking) => (
-      <tr key={booking.id}>
-        <td>{booking.id}</td>
-        <td>{booking.model}</td>
-        <td>{booking.date}</td>
-        <td>{booking.b_pay}</td>
-        <td style={{
-          color: booking.status === "Paid" ? "green" : 
-                 booking.status === "Not Paid" ? "red" : "black",
-          fontWeight: "bold"
-        }}>
-          {booking.status}
-        </td>
-        <td><button className='button'>View More</button></td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="5">No bookings found</td>
+{custbookingdetail.length > 0 ? (
+  custbookingdetail.map((booking) => (
+    <tr key={booking.book_id}>
+      <td>{booking.book_id}</td>
+      <td>{booking.v_name}</td>
+      <td>{booking.b_date}</td>
+      <td>
+        {booking.b_pay}
+      </td>
+      <td><button className='button' onClick={() => handleMore(booking.v_insurance)}>View More</button></td>
     </tr>
-  )}
-</tbody>
+  ))
+) : (
+  <tr>
+    <td colSpan="5">No bookings found</td>
+  </tr>
+)}
 
+</tbody>
       </table>
     </div>
+    {
+      close&&(
+        <InfoModal/>
+      )
+    }
   </>
   );
 };
