@@ -19,7 +19,7 @@ const AddDriver = () => {
     d_pin: '',
     d_gender: '',
   });
-  const {formownerData}=useViewContext();
+  const {formownerData,handleAllOwnerdriver}=useViewContext();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -49,6 +49,7 @@ const AddDriver = () => {
     try {
       const response = await axios.post('http://localhost:3001/adddriverowner', formDataToSend);
       console.log(response.data);
+      handleAllOwnerdriver();
       navigate('/MyDrivers');
     } catch (error) {
       if (error.response) {
