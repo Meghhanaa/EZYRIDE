@@ -377,8 +377,7 @@ const custallbooking=async()=>{
   const handleAllAdminVehicle = async () => {
     try {
       // console.log("Search initiated:", searchVehData);
-      const response = await axios.get(`http://localhost:3001/vehiclesAdmin`);
-
+      const response = await axios.get(`http://localhost:3001/adminallvehicle`);
       console.log('Search Results:', response.data);
       setvehicleAdmin(response.data);
       console.log('Results:', vehicleAdmin);
@@ -471,7 +470,7 @@ const [BookformData, setBookFormData] = useState({
       console.log('Booking successfully created:', response.data);
       setIsDriverRequired(false);
       settotalPay(0)
-      navigate('/')
+      navigate('/MyBookings')
     } catch (error) {
       console.error('Error creating booking:', error);
     }
@@ -566,6 +565,7 @@ const handlelogout =()=>{
     AdminBooking,
     handleAllAdminVehicle,
     vehicleAdmin,
+    custbookingdetail,
     custallbooking,
     handlelogout
   };
