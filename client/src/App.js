@@ -31,6 +31,8 @@ import AdminVehicles from "./Pages/AdminVehicles";
 import AdminBookings from "./Pages/AdminBookings";
 import AdminCust from "./Pages/AdminCust";
 import AdminOwner from "./Pages/AdminOwner";
+import AdminOwnerInfo from "./Pages/AdminOwnerInfo";
+import AdminCustInfo from "./Pages/AdminCustInfo";
 
 function App() {
    // Set to "customer" or "owner" based on app logic
@@ -50,6 +52,9 @@ function App() {
 
   return (
         <Layout>
+        {/* <MyBookings></MyBookings> */}
+        {/* <AdminCust></AdminCust>
+        <AdminBookings></AdminBookings> */}
         <AddVehicle/>
         {/* <MyBookings></MyBookings> */}
         {/* <AdminCust></AdminCust> */}
@@ -77,6 +82,8 @@ function App() {
             <Route path="/AdminBookings" element={<AdminBookings></AdminBookings>} />
             <Route path="/AdminCust" element={<AdminCust></AdminCust>} />
             <Route path="/AdminOwner" element={<AdminOwner></AdminOwner>} />
+            <Route path="/AdminCustInfo" element={<AdminCustInfo></AdminCustInfo>} />
+            <Route path="/AdminOwnerInfo" element={<AdminOwnerInfo></AdminOwnerInfo>} />
             {/* <Route path="/HomeOwner" element={<HomeOwner />} /> */}
           </Routes>
         </Layout>
