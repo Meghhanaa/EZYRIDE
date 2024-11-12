@@ -26,7 +26,6 @@ import VehiclePage from "./Pages/VehiclePage";
 // import MyBookings from "./Pages/MyBookings";
 import AddDriver from "./components/AddDriver";
 // import MyBookings from "./components/MyBookings";
-import VehiclePage from "./Pages/VehiclePage";
 import AdminVehicles from "./Pages/AdminVehicles";
 import AdminBookings from "./Pages/AdminBookings";
 import AdminCust from "./Pages/AdminCust";
@@ -54,8 +53,8 @@ function App() {
         <Layout>
         {/* <MyBookings></MyBookings> */}
         {/* <AdminCust></AdminCust>
-        <AdminBookings></AdminBookings> */}
-        <AddVehicle/>
+        <AdminBookings></AdminBookings>
+        <AddVehicle/> */}
         {/* <MyBookings></MyBookings> */}
         {/* <AdminCust></AdminCust> */}
         {/* <AdminBookings></AdminBookings> */}
@@ -76,7 +75,7 @@ function App() {
             <Route path="/InfoModal" element={<InfoModal />} />
             <Route path="/adminLogin" element={<AdminLogin />} />
             <Route path="/AddDriver" element={<AddDriver></AddDriver>} />
-            {/* <Route path="/MyBookings" element={<MyBookings></MyBookings>} /> */}
+            <Route path="/MyBookings" element={<MyBookings></MyBookings>} />
             <Route path="/VehiclePage" element={<VehiclePage></VehiclePage>} />
             <Route path="/AdminVehicles" element={<AdminVehicles></AdminVehicles>} />
             <Route path="/AdminBookings" element={<AdminBookings></AdminBookings>} />

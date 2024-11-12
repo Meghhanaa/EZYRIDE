@@ -162,7 +162,7 @@ const toggleMenu = () => {
           <ul className="mobile-navbar__links">
             <li><Link onClick={toggleNav} to="/">Home</Link></li>
             <li><Link onClick={toggleNav} to="/About">About</Link></li>
-            <li><Link className="models-link" to="/models">My Vehicle</Link></li>
+            <li><Link className="models-link" to="/VehiclePage">My Vehicle</Link></li>
             <li><Link className="models-link" to="/models">My Drivers</Link></li>
             <li><Link onClick={toggleNav} to="/Safety">Safety</Link></li>
             <li><Link onClick={toggleNav} to="/OurTeam">Our Team</Link></li>

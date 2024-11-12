@@ -3,7 +3,7 @@ import Logo from "../images/logo/logo_ezy.png";
 import { useEffect, useState } from "react";
 import { TbGridDots } from "react-icons/tb";
 import { FaTimes } from "react-icons/fa";
-import UserImage from "../images/card-image.png"; // Path to user image
+// import UserImage from "../images/card-image.png"; // Path to user image
 import { useViewContext } from "../Context_api/contextApi";
 import "../styles/NavbarStyles/Navbar.css"
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
@@ -115,10 +115,10 @@ const toggleMenu = () => {
           <ul className="mobile-navbar__links">
             <li><Link onClick={toggleNav} to="/">Home</Link></li>
             <li><Link onClick={toggleNav} to="/About">About</Link></li>
-            <li><Link className="models-link" to="/models">All Vehicles</Link></li>
-            <li><Link className="models-link" to="/models">All Customers</Link></li>
-            <li><Link className="models-link" to="/models">All Owners</Link></li>
-            <li><Link className="models-link" to="/models">All Bookings</Link></li>
+            <li><Link className="models-link" to="/AdminVehicles">All Vehicles</Link></li>
+            <li><Link className="models-link" to="/AdminCust">All Customers</Link></li>
+            <li><Link className="models-link" to="/AdminOwner">All Owners</Link></li>
+            <li><Link className="models-link" to="/AdminBookings">All Bookings</Link></li>
             <li><Link onClick={toggleNav} to="/Safety">Safety</Link></li>
             <li><Link onClick={toggleNav} to="/OurTeam">Our Team</Link></li>
             <li><Link onClick={toggleNav} to="/ContactEzy">Contact</Link></li>
@@ -137,10 +137,10 @@ const toggleMenu = () => {
           <ul className="navbar__links">
             <li><Link className="home-link" to="/">Home</Link></li>
             <li><Link className="about-link" to="/About">About</Link></li>
-            <li><Link className="models-link" to="/models">All Vehicles</Link></li>
-            <li><Link className="models-link" to="/models">All Customers</Link></li>
-            <li><Link className="models-link" to="/models">All Owners</Link></li>
-            <li><Link className="models-link" to="/models">All Bookings</Link></li>
+            <li><Link className="models-link" to="/AdminVehicles">All Vehicles</Link></li>
+            <li><Link className="models-link" to="/AdminCust">All Customers</Link></li>
+            <li><Link className="models-link" to="/AdminOwner">All Owners</Link></li>
+            <li><Link className="models-link" to="/AdminBookings">All Bookings</Link></li>
             <li><Link className="safety-link" to="/Safety">Safety</Link></li>
             <li><Link className="team-link" to="/OurTeam">Our Team</Link></li>
             <li><Link className="contact-link" to="/contactEzy">Contact</Link></li>
