@@ -20,7 +20,7 @@ const AdminLogin = () => {
         <div
           style={{
             width: '100%',
-            maxWidth: '1100px',
+            maxWidth: '550px',
             display: 'flex',
             backgroundColor: '#fff',
             boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
@@ -31,7 +31,7 @@ const AdminLogin = () => {
           {/* Left Side - Sign In */}
           <div
             style={{
-              width: '50%',
+              width: '100%',
               padding: '40px',
               display: 'flex',
               flexDirection: 'column',

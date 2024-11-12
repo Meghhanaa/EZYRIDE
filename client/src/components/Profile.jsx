@@ -10,7 +10,7 @@ const Profile = () => {
      {role==='customer'&&(
         <div className="profile-container">
           <img src={profileData.c_image} alt={`${profileData.c_name}'s profile`} className="profile-image" />
-          <h1>{profileData.c_name}</h1>
+          <h1 className='megh-pro'>{profileData.c_name}</h1>
         <div className="profile-info">
           <form>
             <div className="form-row">

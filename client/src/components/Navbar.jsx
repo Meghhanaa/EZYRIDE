@@ -82,8 +82,12 @@ const toggleMenu = () => {
                   </button> 
                   {isMenuVisible && ( 
                     <ul className="menu">
-                      <li className="menu-item" onClick={profilecustomerInfo}><Link to={'/Profile'}>My Profile</Link></li>
-                      <li className="menu-item" onClick={custallbooking}><Link to={'/MyBookings'} > My Bookings </Link></li> 
+                    <li className="menu-item" onClick={profilecustomerInfo}>
+                      <Link to={'/Profile'} className="link" style={{ color: 'black', textDecoration: 'none' }}>My Profile</Link>
+                    </li>
+                    <li className="menu-item" onClick={custallbooking}>
+                      <Link to={'/MyBookings'} className="menu-item" style={{ color: 'black', textDecoration: 'none' }}>My Bookings</Link>
+                    </li>
                       <li className="menu-item" onClick={handlelogout}>Logout</li> 
                     </ul> 
                   )}
@@ -94,6 +98,7 @@ const toggleMenu = () => {
                 className="mobile-navbar__signin"
                 onClick={toggleDropdown}
                 style={{
+                  margin: "-50px",
                   backgroundColor: "#750E21",
                   color: "white",
                   padding: "1rem 2rem",
