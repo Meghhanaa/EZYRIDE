@@ -1,0 +1,75 @@
+.owner-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 700px;
+    padding: 20px;
+    border-radius: 8px;
+    margin-left: 25%;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+  }
+  
+.image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* position: sticky; */
+    top: 0;
+    max-width: 100%;
+    object-fit: cover;
+}
+  
+  /* Styling for owner details */
+  .owner-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1.5;
+    color: rgb(23, 23, 148);
+  }
+  
+  .owner-details ul li {
+    margin-bottom: 8px;
+    font-size: 16px;
+    width: 600px;
+    padding: 10px;
+    line-height: 1.5;
+    color: rgb(23, 23, 148);
+  }
+  
+  .owner-details ul li strong {
+    font-weight: bold;
+    color: maroon;
+  }
+
+  .h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin: 120px 0;
+    color: maroon;
+    font-weight: 600;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-owner-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .owner-profile {
+      width: 90%;
+      padding: 15px;
+      margin-left: 3%;
+    }
+    .owner-details ul li {
+      max-width: 300px;
+    }
+
+  }
+  

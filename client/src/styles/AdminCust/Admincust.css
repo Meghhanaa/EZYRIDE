@@ -1,0 +1,94 @@
+/* Styling for the entire table container */
+.admin-customer {
+    padding: 20px;
+    max-width: 1200px;
+    overflow-x: auto;
+    margin: -100px auto 40px; 
+  }
+  
+  /* Styling for the table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Table headers styling */
+  th {
+    background-color: maroon;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    font-size: 13px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  /* Table cells styling */
+  td {
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+    color: blue;
+  }
+  
+  /* Styling for customer image */
+  .customer-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid maroon;
+  }
+  
+  /* View More button styling */
+  button {
+    padding: 10px 12px;
+    background-color: maroon;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: rgb(187, 74, 74);
+  }
+  
+  /* Header styling */
+  .h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Extra styling for responsiveness */
+  @media (max-width: 768px) {
+    .admin-customer {
+      padding: 10px;
+    }
+  
+    table {
+      font-size: 14px;
+    }
+  
+    th, td {
+      padding: 8px;
+    }
+  
+    .customer-image {
+      width: 40px;
+      height: 40px;
+    }
+  
+    button {
+      padding: 6px 12px;
+    }
+  }
+  

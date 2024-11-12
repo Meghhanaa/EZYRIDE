@@ -20,12 +20,7 @@
   .main {
     overflow: hidden; /* For the animations ScrollReveal*/
   }
-
-.popular__container {
-    margin-top: 100px;
-    padding: 1rem 0 5rem;
-  }
-  
+ 
   .popular__card {
     width: 290px;
     background-color: var(--container-color);
@@ -154,7 +149,6 @@
   }
   
   .add-property-form {
-    margin-top: 0.5%;
     display: flex;
     flex-direction: column;
     align-items: center; /* Center-aligns all items horizontally */
@@ -239,8 +233,6 @@
     font-size: 24px;
     cursor: pointer;
   }
-  
-  
 
   .category-buttons {
     margin-top: 100px;
@@ -270,6 +262,52 @@
     background-color: #000;
   }
 
+  .add-property-form {
+    max-width: 800px; /* Set a maximum width for better layout */
+    margin: 20px auto; /* Center the form on the page */
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9;
+  }
+  
+  .add-titlee {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .megh-1 {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .btn.button {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: maroon;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn.button:hover {
+    background-color: rgb(162, 73, 73);
+  }
+  
   /* Tablet screens */
 @media (max-width: 768px) {
   .add-titlee {
@@ -356,6 +394,55 @@
   text-align: center;
 }
 
+
+.add-property-form {
+  max-width: 700px; /* Set a maximum width for better layout */
+  margin: 20px auto; /* Center the form on the page */
+  padding: 20px;
+  border: 1px solid #ccc; /* Optional border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f9f9f9;
+}
+
+.add-titlee {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.megh-1 {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.btn.button {
+  width: 40%;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn.button:hover {
+  background-color: #45a049;
+}
+
+
 /* Adjust font and spacing on smaller screens */
 @media (max-width: 768px) {
   .info-modal-content {
@@ -437,3 +524,4 @@
   font-weight: bolder;
   color: maroon;
 }
+

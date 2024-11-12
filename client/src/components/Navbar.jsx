@@ -82,7 +82,7 @@ const toggleMenu = () => {
                   </button> 
                   {isMenuVisible && ( 
                     <ul className="menu">
-                      <li className="menu-item"><Link to={'/Profile'}>Your Profile</Link></li>
+                      <li className="menu-item"><Link to={'/Profile'}>My Profile</Link></li>
                       <li className="menu-item">My Bookings</li> 
                       <li className="menu-item" onClick={handlelogout}>Logout</li> 
                     </ul> 
@@ -207,7 +207,7 @@ const toggleMenu = () => {
                   </button> 
                   {isMenuVisible && ( 
                     <ul className="menu">
-                      <li className="menu-item">Your Profile</li>
+                      <li className="menu-item">My Profile</li>
                       <li className="menu-item">My Bookings</li> 
                       <li className="menu-item" onClick={handlelogout}>Logout</li> 
                     </ul> 
