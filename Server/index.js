@@ -504,6 +504,48 @@ app.post('/bookingpaylater', async (req, res) => {
   }
 });
 
+//to post data of driver in backend
+app.post('/adddriverowner', upload.single('d_image'),async(req,res)=>{
+   
+   const {d_no, d_name, d_aadhar,d_lic_no,d_DOB,d_state, d_city,d_street,d_pin,d_email,d_gender,o_no } = req.body;
+   const data=await cloudinary.uploader.upload(req.file.path)
+  try {
+    const imageUrl=data.secure_url;
+    // Insert booking data into the booking table
+    const [result] = await pool.query(`
+      INSERT INTO driver (d_image, d_no, d_name, d_aadhar,d_lic_no,d_DOB,d_state, d_city,d_street,d_pin,d_email,d_gender,o_no)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [imageUrl, d_no, d_name, d_aadhar,d_lic_no,d_DOB,d_state, d_city,d_street,d_pin,d_email,d_gender,o_no]);
+    // Return success response
+    res.status(200).json({ message: 'driver added'});
+  } catch (error) {
+    console.error('Error creating driver', error);
+    res.status(500).json({ message: 'Error creating driver' });
+  }
+})
+
+//to post data of vehicle in backend
+app.post('/addvehicleowner', upload.single('v_image'), async (req, res) => {
+  const { o_no, v_desp, v_pay, v_engine_type, v_mileage, v_color, v_rto, v_type, v_name, v_insurance } = req.body;
+  const data = await cloudinary.uploader.upload(req.file.path);
+  
+  try {
+    const imageUrl = data.secure_url;
+    // Insert vehicle data into the vehicle table
+    const [result] = await pool.query(`
+      INSERT INTO vehicle (v_image, o_no, v_desp, v_pay, v_engine_type, v_mileage, v_color, v_rto, v_type, v_name, v_insurance)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [imageUrl, o_no, v_desp, v_pay, v_engine_type, v_mileage, v_color, v_rto, v_type, v_name, v_insurance]);
+    
+    // Return success response
+    res.status(200).json({ message: 'Vehicle added' });
+  } catch (error) {
+    console.error('Error creating vehicle', error);
+    res.status(500).json({ message: 'Error creating vehicle' });
+  }
+});
+
+
 //to get all the drivers
 app.get('/alldriver', async (req, res) => {
     try {
