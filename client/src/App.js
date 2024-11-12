@@ -21,6 +21,8 @@ import { ViewProvider, useViewContext } from "./Context_api/contextApi";
 import OwnerLayout from "../src/modules/OwnerLayout";
 import CustomerLayout from "../src/modules/CustomerLayout";
 import AdminLayout from "../src/modules/AdminLayout"
+import MyBookings from "./Pages/MyBookings";
+import VehiclePage from "./Pages/VehiclePage";
 // import MyBookings from "./Pages/MyBookings";
 import AddDriver from "./components/AddDriver";
 // import MyBookings from "./components/MyBookings";
@@ -53,6 +55,10 @@ function App() {
         {/* <MyBookings></MyBookings> */}
         {/* <AdminCust></AdminCust>
         <AdminBookings></AdminBookings> */}
+        <AddVehicle/>
+        {/* <MyBookings></MyBookings> */}
+        {/* <AdminCust></AdminCust> */}
+        {/* <AdminBookings></AdminBookings> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Models" element={<Models/>} />
