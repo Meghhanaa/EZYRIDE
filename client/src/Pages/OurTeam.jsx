@@ -18,35 +18,35 @@ function OurTeam() {
     {
       imgSrc: meghna,
       name: "Meghana Tamrakar",
-      role: "Head of CEO",
+      role: "Project Member",
       description: "As a 2nd year MCA student at MANIT Bhopal, Meghna brings a wealth of knowledge and creativity to the EZYRIDE team.",
       socialLinks: { twitter: "#", github: "#", linkedin: "#", instagram: "#" }
     },
     {
         imgSrc: anurag,
         name: "Anurag Sharma",
-        role: "Head of CEO",
+        role: "Project Member",
         description: "As a 2nd year MCA student at MANIT Bhopal, Anurag's enthusiasm for technology makes him an invaluable asset.",
         socialLinks: { twitter: "https://x.com/AnuragS95281180", github: "https://github.com/anuragsharma5259", linkedin: "https://www.linkedin.com/in/anuragsharma5259", instagram: "https://www.instagram.com/anuragsharma5259/" }
       },
     {
       imgSrc: anchal,
       name: "Anchal Kumari",
-      role: "Head of CEO",
+      role: "Project Member",
       description: "Anchal, a 2nd year MCA student at MANIT Bhopal, is known for her attention to detail and innovative ideas.",
       socialLinks: { twitter: "#", github: "#", linkedin: "#", instagram: "#" }
     },
     {
       imgSrc: amit,
       name: "Amit Mondal",
-      role: "Head of CEO",
+      role: "Project Member",
       description: "Amit, a 2nd year MCA student from MANIT Bhopal, ensures that EZYRIDE is always on the cutting edge.",
       socialLinks: { twitter: "#", github: "https://github.com/Mondal71", linkedin: "#", instagram: "#" }
     },
     {
         imgSrc: harstuti,
         name: "harstuti",
-        role: "Head of CEO",
+        role: "Project Member",
         description: "As a 2nd year MCA student at MANIT Bhopal, harstuti brings a wealth of knowledge and creativity to the EZYRIDE team.",
         socialLinks: { twitter: "#", github: "#", linkedin: "#", instagram: "#" }
       },
@@ -55,13 +55,13 @@ function OurTeam() {
   ];
 
   const sliderSettings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,         
-    autoplaySpeed: 4000,      
+    autoplaySpeed: 2000,      
     responsive: [
       {
         breakpoint: 768,
@@ -100,10 +100,10 @@ function OurTeam() {
               </div>
               <p>{member.description}</p>
               <ul className="team-icon">
-                <li><a href={member.socialLinks.twitter} className="twitter"><i className="fa fa-twitter"></i></a></li>
-                <li><a href={member.socialLinks.github} className="github"><i className="fa fa-github"></i></a></li>
-                <li><a href={member.socialLinks.linkedin} className="linkedin"><i className="fa fa-linkedin"></i></a></li>
-                <li><a href={member.socialLinks.instagram} className="instagram"><i className="fa fa-instagram"></i></a></li>
+                <li><a href={member.socialLinks.twitter} className="twitter"><i className="fa-brands fa-twitter"></i></a></li>
+                <li><a href={member.socialLinks.github} className="github"><i className="fa-brands fa-github"></i></a></li>
+                <li><a href={member.socialLinks.linkedin} className="linkedin"><i className="fa-brands fa-linkedin"></i></a></li>
+                <li><a href={member.socialLinks.instagram} className="instagram"><i className="fa-brands fa-instagram"></i></a></li>
               </ul>
             </div>
           ))}

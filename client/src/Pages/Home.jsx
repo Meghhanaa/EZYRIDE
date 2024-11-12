@@ -12,8 +12,8 @@ function Home() {
   return (
     <>
       {/* <Navbar></Navbar> */}
-      <Hero1 />
-      {/* <Hero/> */}
+      {/* <Hero1 /> */}
+      <Hero/>
       {role === "" && <BookCar />}
       <PlanTrip />
       <Reviews/>

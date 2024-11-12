@@ -18,25 +18,12 @@ const RegCustomer = () => {
   c_email: '',
   c_gender: '',
   c_password: '',
+  c_image:null
 });
 
 
   const [passwordVisible, setPasswordVisible] = useState(false);
-  // const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  // const [alreadyCustomer, setAlreadyCustomer] = useState(false);
   const [errors, setErrors] = useState({});
-
-//   const handleInputChange = (e) => {
-//   const { name, value } = e.target;
-
-//   if (name === 'c_no') {
-//     // Convert contactNo to BigInt
-//     setFormData({ ...formData, [name]: bigInt(value) });
-//   } else {
-//     setFormData({ ...formData, [name]: value });
-//   }
-// };
-
 const handleInputChange = (e) => {
   const { name, value } = e.target;
 
@@ -141,48 +128,57 @@ const handleInputChange = (e) => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = validateForm();
-    if (validateForm()) {
-      try {
-        console.log('Form Data:', formData);
-        const response = await axios.post('http://localhost:3001/customer_register', formData, {
-        headers: { 'Content-Type': 'application/json' }
-      });
-        // setMessage(response.data.message);
-        console.log(response.data.message);
-        navigate('/main_customer');
-        console.log(response.data.message) // You might want to save this token in localStorage or context
-        // localStorage.setItem('token', response.data.token);
-      } catch (error) {
-        if (error.response) {
-          console.log(error.response.data.message || 'An error occurred. Please try again.');
-        } else {
-          console.log('An error occurred. Please try again.');
-        }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (validateForm()) {
+    const formDataToSend = new FormData();
+    formDataToSend.append('c_image', formData.c_image); // Append the file
+    formDataToSend.append('c_no', formData.c_no); // Append other fields
+    formDataToSend.append('c_name', formData.c_name);
+    formDataToSend.append('c_aadhar', formData.c_aadhar);
+    formDataToSend.append('c_lic_no', formData.c_lic_no);
+    formDataToSend.append('c_DOB', formData.c_DOB);
+    formDataToSend.append('c_state', formData.c_state);
+    formDataToSend.append('c_city', formData.c_city);
+    formDataToSend.append('c_street', formData.c_street);
+    formDataToSend.append('c_pin', formData.c_pin);
+    formDataToSend.append('c_email', formData.c_email);
+    formDataToSend.append('c_gender', formData.c_gender);
+    formDataToSend.append('c_password', formData.c_password);
+
+    try {
+      const response = await axios.post('http://localhost:3001/customer_register', formDataToSend);
+      console.log(response.data.message);
+      navigate('/main_customer');
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message || 'An error occurred. Please try again.');
+      } else {
+        console.log('An error occurred. Please try again.');
       }
-    } else {
-      setErrors(validationErrors);
     }
-  };
+  } else {
+    console.log('Form validation failed');
+  }
+};
+
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    
+    console.log(file)
     if (file && file.size > 2000000) { // Example: Limit file size to 2MB
         setErrors((prevErrors) => ({
             ...prevErrors,
-            image: "File size should be less than 2MB.",
+            c_image: "File size should be less than 2MB.",
         }));
     } else {
         setFormData((prevData) => ({
             ...prevData,
-            image: file,
+            c_image: file,
         }));
         setErrors((prevErrors) => ({
             ...prevErrors,
-            image: null, // Clear error if file is valid
+            c_image: null, // Clear error if file is valid
         }));
     }
 };
@@ -234,32 +230,12 @@ const handleInputChange = (e) => {
           >
             Register as Customer
           </h2>
-          <form onSubmit={handleSubmit}>
-            {/* Form Fields */}
-            {/* <div style={{ marginBottom: '16px' }}>
-              <input
-                type="text"
-                name="c_no"
-                placeholder="Contact No."
-                value={formData.c_no}
-                onChange={handleInputChange}
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  border: '1px solid #ccc',
-                  borderRadius: '5px',
-                  outline: 'none',
-                  marginBottom: '10px',
-                }}
-              />
-              {errors.contactNo && <p style={{ color: 'red' }}>{errors.contactNo}</p>}
-            </div> */}
-
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             {/* Image Upload */}
             <div style={{ marginBottom: '16px' }}>
                 <input
                     type="file"
-                    name="image"
+                    name="c_image"
                     accept="image/*"  // Restrict to image files only
                     onChange={handleImageUpload}
                     style={{
@@ -272,7 +248,7 @@ const handleInputChange = (e) => {
                     }}
                     required
                 />
-                {errors.image && <p style={{ color: 'red' }}>{errors.image}</p>}
+                {errors.c_image && <p style={{ color: 'red' }}>{errors.c_image}</p>}
             </div>
 
 

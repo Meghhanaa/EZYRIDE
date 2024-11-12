@@ -12,7 +12,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 function NavbarOwner() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration4
-  const {userName,handlelogout}=useViewContext();
+  const {userName,handlelogout,profilepic}=useViewContext();
   // const userName = 'Meghana';
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   useEffect(() => {
@@ -65,7 +65,7 @@ const toggleMenu = () => {
             {userName ? (
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <img
-                  src={UserImage}
+                  src={profilepic}
                   alt="user-icon"
                   style={{
                     width: "40px",
@@ -193,7 +193,7 @@ const toggleMenu = () => {
             {userName ? (
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <img
-                  src={UserImage}
+                  src={profilepic}
                   alt="user-icon"
                   style={{
                     width: "40px",
