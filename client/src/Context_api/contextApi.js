@@ -551,7 +551,6 @@ const handlelogout =()=>{
     handlePayLaterClick,
     handleBookNowClick,
     handleBookSubmit,
-    custbookingDetail,
     handlelogout,
     handleAllOwnerVehicle,
     vehicleOwner,
