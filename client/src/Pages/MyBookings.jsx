@@ -11,9 +11,9 @@ const MyBookings = () => {
     const fetchBookings = async () => {
       // Example data, replace with API call to your backend
       const bookingsData = [
-        { id: 1, model: 'Tesla Model S', date: '2024-11-12', status: 'Confirmed' },
-        { id: 2, model: 'Ford Mustang', date: '2024-11-15', status: 'Pending' },
-        { id: 3, model: 'BMW X5', date: '2024-11-18', status: 'Cancelled' },
+        { id: 1, model: 'Tesla Model S', b_pay:100,date: '2024-11-12', status: 'Paid' },
+        { id: 2, model: 'Ford Mustang',b_pay:100, date: '2024-11-15', status: 'Not Paid' },
+        { id: 3, model: 'BMW X5',b_pay:100, date: '2024-11-18', status: 'Not Paid' },
       ];
       setBookings(bookingsData);
     };
@@ -23,7 +23,7 @@ const MyBookings = () => {
 
   return (
     <>
-    <h1 className='megh-title'>My Bookings</h1>
+    <h1 className='h1'>My Bookings</h1>
     <div className="my-bookings">
       <table>
         <thead>
@@ -31,7 +31,8 @@ const MyBookings = () => {
             <th>Booking ID</th>
             <th>Vehicle Model</th>
             <th>Booking Date</th>
-            <th>Status</th>
+            <th>Total Amount</th>
+            <th>Payment Status</th>
             <th></th>
           </tr>
         </thead>
@@ -42,10 +43,10 @@ const MyBookings = () => {
         <td>{booking.id}</td>
         <td>{booking.model}</td>
         <td>{booking.date}</td>
+        <td>{booking.b_pay}</td>
         <td style={{
-          color: booking.status === "Confirmed" ? "green" : 
-                 booking.status === "Pending" ? "orange" : 
-                 booking.status === "Cancelled" ? "red" : "black",
+          color: booking.status === "Paid" ? "green" : 
+                 booking.status === "Not Paid" ? "red" : "black",
           fontWeight: "bold"
         }}>
           {booking.status}

@@ -36,12 +36,18 @@ const AddDriver = () => {
   };
 
   return (
+    <>
+    <h1 className='h1'>Add Driver</h1>
     <div className="add-driver-container">
-      <h1>Add Driver</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Image URL:
-          <input type="text" name="d_image" value={driver.d_image} onChange={handleChange} />
+          <input
+          type="file"
+          name="d_image"
+          accept="image/*"
+          onChange={handleChange}  // handle file change here
+        />
         </label>
         <label>
           Driver No:
@@ -101,10 +107,6 @@ const AddDriver = () => {
           <input type="password" name="d_password" value={driver.d_password} onChange={handleChange} />
         </label>
         <label>
-          Booked:
-          <input type="checkbox" name="d_booked" checked={driver.d_booked} onChange={handleChange} />
-        </label>
-        <label>
           Role:
           <select name="d_role" value={driver.d_role} onChange={handleChange}>
             <option value="">Select</option>
@@ -115,6 +117,7 @@ const AddDriver = () => {
         <button type="submit">Add Driver</button>
       </form>
     </div>
+    </>
   );
 };
 
