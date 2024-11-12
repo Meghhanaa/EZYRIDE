@@ -47,7 +47,7 @@ const ViewProvider = ({ children }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        // console.log('Form Data:', formData);
+        console.log('Form Data:', formData);
         const response = await axios.post('http://localhost:3001/customer_login', formData, {
           headers: { 'Content-Type': 'application/json' },withCredentials: true,
         });
@@ -55,6 +55,7 @@ const ViewProvider = ({ children }) => {
         setUserName(response.data.user.name);
         setProfilepic(response.data.image.name)
         setRole(response.data.role.name)
+        // setnumber(response.data.user.number);
         console.log(response.data.role.name)
         console.log(response.data.image.name)
         console.log(response.data.user.name)
@@ -64,6 +65,7 @@ const ViewProvider = ({ children }) => {
         if (error.response) {
           setMess(error.response.data.message || 'An error occurred. Please try again.');
         } else {
+          console.log(error)
           console.log('An error occurred. Please try again.');
           setMess('An error occurred. Please try again.');
         }

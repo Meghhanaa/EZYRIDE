@@ -8,9 +8,10 @@ function AddVehicle({ addVehicle }) {
     v_name: '',
     v_type: '',
     v_rto: '',
-    o_no: '',
+    v_color: '',
+    v_mileage: '',
+    v_engine_type: '',
     v_pay: '',
-    v_booked: '',
     v_desp: '',
   });
 
@@ -25,7 +26,6 @@ function AddVehicle({ addVehicle }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Validate image type
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -41,68 +41,36 @@ function AddVehicle({ addVehicle }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    // Logic for Insurance input (e.g., 8-10 numeric digits)
     if (name === 'v_insurance') {
-      const regex = /^\d{0,10}$/; // Only numeric values, up to 10 digits
+      const regex = /^\d{0,10}$/;
       if (regex.test(value)) {
         setNewVehicle({ ...newVehicle, [name]: value });
-
-        // Set error based on length
-        if (value.length === 10) {
-          setErrors({ ...errors, [name]: '' });
-        } else {
-          setErrors({ ...errors, [name]: 'Insurance number must be 10 digits long.' });
-        }
+        setErrors({
+          ...errors,
+          [name]: value.length === 10 ? '' : 'Insurance number must be 10 digits long.',
+        });
       } else {
         setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
       }
-    }
-
-    // Logic for RTO input (e.g., alphanumeric, 8-15 characters)
-    else if (name === 'v_rto') {
-      const regex = /^[a-zA-Z0-9]{0,15}$/; // Alphanumeric values, up to 15 characters
+    } else if (name === 'v_rto') {
+      const regex = /^[a-zA-Z0-9]{0,15}$/;
       if (regex.test(value)) {
         setNewVehicle({ ...newVehicle, [name]: value });
-
-        // Set error based on length
-        if (value.length >= 8 && value.length <= 15) {
-          setErrors({ ...errors, [name]: '' });
-        } else {
-          setErrors({ ...errors, [name]: 'RTO must be between 8 and 15 alphanumeric characters.' });
-        }
+        setErrors({
+          ...errors,
+          [name]: value.length >= 8 && value.length <= 15 ? '' : 'RTO must be between 8 and 15 characters.',
+        });
       } else {
         setErrors({ ...errors, [name]: 'Only alphanumeric values are allowed.' });
       }
-    }
-
-    // Logic for Owner Number (must be exactly 10 digits)
-    else if (name === 'o_no') {
-      const regex = /^\d{0,10}$/; // Only numeric values, up to 10 digits
-      if (regex.test(value)) {
-        setNewVehicle({ ...newVehicle, [name]: value });
-
-        // Set error based on length
-        if (value.length === 10) {
-          setErrors({ ...errors, [name]: '' });
-        } else {
-          setErrors({ ...errors, [name]: 'Owner number must be exactly 10 digits long.' });
-        }
-      } else {
-        setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
-      }
-    }
-
-    // For other inputs
-    else {
+    } else {
       setNewVehicle({ ...newVehicle, [name]: value });
-      setErrors({ ...errors, [name]: '' }); // Reset error for other fields
+      setErrors({ ...errors, [name]: '' });
     }
   };
 
   const handleAddVehicle = (e) => {
     e.preventDefault();
-
-    // Validate the form before submitting
     const tempErrors = {};
     if (!newVehicle.v_insurance || newVehicle.v_insurance.length !== 10) {
       tempErrors.v_insurance = 'Insurance number must be 10 digits long.';
@@ -110,18 +78,13 @@ function AddVehicle({ addVehicle }) {
     if (!newVehicle.v_rto || newVehicle.v_rto.length < 8 || newVehicle.v_rto.length > 15) {
       tempErrors.v_rto = 'RTO must be between 8 and 15 characters.';
     }
-    if (!newVehicle.o_no || newVehicle.o_no.length !== 10) {
-      tempErrors.o_no = 'Owner number must be exactly 10 digits long.';
-    }
     if (!newVehicle.v_name) tempErrors.v_name = 'Vehicle name is required';
     if (!newVehicle.v_type || newVehicle.v_type === 'Select') tempErrors.v_type = 'Vehicle type is required';
     if (!newVehicle.v_pay) tempErrors.v_pay = 'Payment information is required';
-    if (!newVehicle.v_booked) tempErrors.v_booked = 'Booked status is required';
     if (!newVehicle.v_desp) tempErrors.v_desp = 'Description is required';
 
     setErrors(tempErrors);
 
-    // If no errors, submit the form
     if (Object.keys(tempErrors).length === 0) {
       addVehicle(newVehicle);
       setNewVehicle({
@@ -133,19 +96,16 @@ function AddVehicle({ addVehicle }) {
         v_mileage: '',
         v_engine_type: '',
         v_rto: '',
-        o_no: '',
         v_pay: '',
-        v_booked: '',
         v_desp: '',
       });
-      setErrors({}); // Clear errors after successful submission
+      setErrors({});
     }
   };
 
   return (
-    <>
-    <h1 className="h1">Add New Vehicle</h1>
-    <div className="add-property-form">
+    <form className="add-property-form" onSubmit={handleAddVehicle}>
+      <h1 className="add-titlee">Add New Vehicle</h1>
       <input
         className="megh-1"
         type="file"
@@ -232,16 +192,6 @@ function AddVehicle({ addVehicle }) {
       <input
         className="megh-1"
         type="text"
-        name="o_no"
-        placeholder="Owner Number"
-        value={newVehicle.o_no}
-        onChange={handleInputChange}
-      />
-      {errors.o_no && <span className="error">{errors.o_no}</span>}
-
-      <input
-        className="megh-1"
-        type="text"
         name="v_pay"
         placeholder="Payment"
         value={newVehicle.v_pay}
@@ -259,11 +209,10 @@ function AddVehicle({ addVehicle }) {
       />
       {errors.v_desp && <span className="error">{errors.v_desp}</span>}
 
-      <button className="btn button" onClick={handleAddVehicle}>
+      <button className="btn button" type="submit">
         Add Vehicle
       </button>
-    </div>
-    </>
+    </form>
   );
 }
 
