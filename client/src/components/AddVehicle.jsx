@@ -20,7 +20,7 @@ function AddVehicle() {
 
   const [errors, setErrors] = useState({});
 
-  const {formownerData}=useViewContext();
+  const {formownerData,handleAllOwnerVehicle}=useViewContext();
    const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -47,6 +47,7 @@ const handleSubmit = async (e) => {
     try {
       const response = await axios.post('http://localhost:3001/addvehicleowner', formDataToSend);
       console.log(response.data);
+      handleAllOwnerVehicle();
       navigate('/VehiclePage');
     } catch (error) {
       if (error.response) {
