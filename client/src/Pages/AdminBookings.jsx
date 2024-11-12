@@ -16,8 +16,8 @@ const AdminBookings = () => {
             <th>Vehicle Model</th>
             <th>Booking Date</th>
             <th>Status</th>
-            <th>Customer Name</th>
-            <th>Contact</th>
+            <th>Customer number</th>
+            <th>driver number</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +35,7 @@ const AdminBookings = () => {
                  {booking.b_payment_status}
                 </td>
                 <td>{booking.c_no}</td>
+                <td>{booking.d_no}</td>
               </tr>
             ))
           ) : (

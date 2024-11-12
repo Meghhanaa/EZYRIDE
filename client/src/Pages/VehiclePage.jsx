@@ -20,7 +20,7 @@ const VehiclePage = () => {
                 <div className="popular__data">
                    <h2 className="popular__price"><span>Rs </span>{property.v_pay}</h2>
                    <h1 className="popular__title">{property.v_name}</h1>
-                   <p className="popular__description">{property.o_street}</p>
+                   <p className="popular__description">{property.v_mileage}</p>
                    <div className="popular__buttons">
                      <button className="popular__button more" onClick={() => handleMore(property.v_insurance)}>More</button>
                 ,  </div> 

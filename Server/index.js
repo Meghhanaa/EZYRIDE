@@ -545,6 +545,32 @@ app.post('/addvehicleowner', upload.single('v_image'), async (req, res) => {
   }
 });
 
+//vehicles of owner 
+app.get('/vehiclesOwner', async (req, res) => {
+  const { o_no } = req.query; // Access query parameter
+  try {
+    const [data] = await pool.query('SELECT * FROM vehicle WHERE o_no = ?', [o_no]);
+    console.log(data);
+    res.status(200).json(data);
+  } catch (error) {
+    console.error('Error fetching vehicle', error);
+    res.status(500).json({ message: 'Error fetching vehicle' });
+  }
+});
+
+//driver of owner
+app.get('/driversOwner', async (req, res) => {
+  const { o_no } = req.query; // Access query parameter
+  try {
+    const [data] = await pool.query('SELECT * FROM driver WHERE o_no = ?', [o_no]);
+    console.log(data);
+    res.status(200).json(data);
+  } catch (error) {
+    console.error('Error fetching driver', error);
+    res.status(500).json({ message: 'Error fetching driver' });
+  }
+});
+
 
 //to get all the drivers
 app.get('/alldriver', async (req, res) => {
@@ -559,7 +585,7 @@ app.get('/alldriver', async (req, res) => {
 });
 
 //to get all customer
-app.get('/allcustomer', async (req, res) => {
+app.get('/adminallCustomer', async (req, res) => {
     try {
         // Query all customer
         const [data] = await pool.query('SELECT * FROM customer'); 
@@ -571,7 +597,7 @@ app.get('/allcustomer', async (req, res) => {
 });
 
 //to get all owner
-app.get('/allowner',async (req, res) => {
+app.get('/adminallOwner',async (req, res) => {
     try {
         // Query all customer
         const [data] = await pool.query('SELECT * FROM owner'); 
@@ -582,9 +608,9 @@ app.get('/allowner',async (req, res) => {
     }
 });
 
-//all get all booking
-// Get all bookings
-app.get('/allbooking', async (req, res) => {
+
+// Get all bookings admin
+app.get('/adminallBooking', async (req, res) => {
     try {
         // Query to retrieve all bookings
         const [data] = await pool.query('SELECT * FROM booking'); 
@@ -594,6 +620,8 @@ app.get('/allbooking', async (req, res) => {
         res.status(500).json({ message: 'An error occurred while fetching bookings.' });
     }
 });
+
+//get all the vehicle
 
 
 //all payment detail

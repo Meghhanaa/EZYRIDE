@@ -20,9 +20,9 @@ const MyDrivers = () => {
               <article className="popular__card swiper-slide">
                 <img className="popular__img" src={property.d_image} alt={property.d_name} />
                 <div className="popular__data">
-                   <h2 className="popular__price"><span>Rs </span>{property.d_name}</h2>
+                   <h2 className="popular__price">{property.d_name}</h2>
                    <h1 className="popular__title">{property.d_no}</h1>
-                   <p className="popular__description">{property.o_street}</p>
+                   <p className="popular__description">{property.d_street}</p>
                    <div className="popular__buttons">
                      <button className="popular__button more" onClick={() => handleMore(property.d_no)}>More</button>
                 ,  </div> 
