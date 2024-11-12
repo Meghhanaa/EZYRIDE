@@ -143,8 +143,9 @@ function AddVehicle({ addVehicle }) {
   };
 
   return (
+    <>
+    <h1 className="h1">Add New Vehicle</h1>
     <div className="add-property-form">
-      <h1 className="add-titlee">Add New Vehicle</h1>
       <input
         className="megh-1"
         type="file"
@@ -262,6 +263,7 @@ function AddVehicle({ addVehicle }) {
         Add Vehicle
       </button>
     </div>
+    </>
   );
 }
 

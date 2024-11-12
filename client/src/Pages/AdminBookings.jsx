@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import "../styles/AdminBooking/AdminBooking.css";
 
 const AdminBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -11,7 +12,7 @@ const AdminBookings = () => {
           id: 1, 
           model: 'Tesla Model S', 
           date: '2024-11-12', 
-          status: 'Confirmed', 
+          status: 'Paid', 
           customerName: 'John Doe', 
           contact: '1234567890' 
         },
@@ -19,7 +20,7 @@ const AdminBookings = () => {
           id: 2, 
           model: 'Ford Mustang', 
           date: '2024-11-15', 
-          status: 'Pending', 
+          status: 'Not Paid', 
           customerName: 'Jane Smith', 
           contact: '0987654321' 
         },
@@ -27,7 +28,7 @@ const AdminBookings = () => {
           id: 3, 
           model: 'BMW X5', 
           date: '2024-11-18', 
-          status: 'Cancelled', 
+          status: 'Not Paid', 
           customerName: 'Mike Johnson', 
           contact: '1122334455' 
         },
@@ -39,8 +40,9 @@ const AdminBookings = () => {
   }, []);
 
   return (
+    <>
+    <h2 className='h2'>All Bookings</h2>
     <div className="admin-bookings">
-      <h2>All Bookings</h2>
       <table>
         <thead>
           <tr>
@@ -59,7 +61,13 @@ const AdminBookings = () => {
                 <td>{booking.id}</td>
                 <td>{booking.model}</td>
                 <td>{booking.date}</td>
-                <td>{booking.status}</td>
+                <td style={{
+                  color: booking.status === "Paid" ? "green" : 
+                        booking.status === "Not Paid" ? "red" : "black",
+                  fontWeight: "bold"
+                }}>
+                 {booking.status}
+                </td>
                 <td>{booking.customerName}</td>
                 <td>{booking.contact}</td>
               </tr>
@@ -72,6 +80,7 @@ const AdminBookings = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

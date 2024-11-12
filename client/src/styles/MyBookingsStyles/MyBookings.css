@@ -2,6 +2,13 @@
   position: relative;
   top: 10px;
   width: 100%;
+  margin: 10px auto;
+  padding: 20px;
+  max-width: 1200px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .my-bookings .button {
@@ -9,84 +16,111 @@
   font-size: 14px;
 }
 
-  
-  .my-bookings h2 {
-    margin-bottom: 1rem;
-  }
-  
-  .my-bookings table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .my-bookings th, .my-bookings td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  .status-confirmed {
-    color: rgb(73, 204, 73);
-    font-weight: bold;
-  }
-  
-  .status-pending {
-    color: orange;
-    font-weight: bold;
-  }
-  
-  .status-cancelled {
-    color: red;
-    font-weight: bold;
-  }
-  
+.my-bookings h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
 
+.my-bookings table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.my-bookings th,
+.my-bookings td {
+  padding: 12px;
+  text-align: left;
+  font-size: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.my-bookings th {
+  background-color: maroon;
+  color: white;
+  font-weight: bold;
+}
+
+.my-bookings tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.my-bookings td {
+  color: #555;
+}
+
+.my-bookings td[colspan="4"] {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+.status-confirmed {
+  color: rgb(73, 204, 73);
+  font-weight: bold;
+}
+
+.status-cancelled {
+  color: red;
+  font-weight: bold;
+}
+
+.h1 {
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8%;
+  font-weight: bolder;
+  color: maroon;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
   .my-bookings {
-    margin: 10px auto;
-    padding: 20px;
-    max-width: 1200px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    max-width: 100%;
   }
-  
+
   .my-bookings h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 24px;
+    font-size: 20px;
   }
-  
-  .my-bookings table {
-    width: 100%;
-    border-collapse: collapse;
+
+  .my-bookings .button {
+    font-size: 12px;
+    padding: 6px 12px;
   }
-  
+
   .my-bookings th,
   .my-bookings td {
-    padding: 12px;
-    text-align: left;
-    font-size: 15px;
-    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    padding: 10px;
   }
-  
-  .my-bookings th {
-    background-color: maroon;
-    color: white;
-    font-weight: bold;
+  .h1 {
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+    font-weight: bolder;
+    color: maroon;
   }
-  
-  .my-bookings tr:nth-child(even) {
-    background-color: #f2f2f2;
+}
+
+@media (max-width: 480px) {
+  .my-bookings h2 {
+    font-size: 18px;
   }
-  
+
+  .my-bookings th,
   .my-bookings td {
-    color: #555;
+    font-size: 13px;
+    padding: 8px;
   }
-  
-  .my-bookings td[colspan="4"] {
-    text-align: center;
-    color: #888;
-    font-style: italic;
+
+  .h1 {
+    font-size: 2rem;
+    margin-top: 15%;
   }
- 
+}
