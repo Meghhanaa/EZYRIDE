@@ -163,7 +163,7 @@ const handleSubmit = async (e) => {
       />
       {errors.v_engine_type && <span className="error">{errors.v_engine_type}</span>}
 
-      /* <input
+       <input
         className="megh-1"
         type="text"
         name="v_pay"
