@@ -1,4 +1,3 @@
-/* Container for the owner profile */
 .owner-profile {
     display: flex;
     flex-direction: column;
@@ -6,24 +5,33 @@
     width: 700px;
     padding: 20px;
     border-radius: 8px;
+    margin-left: 25%;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
   }
   
-  /* Owner image styling */
-  .image img {
+.image {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    position:sticky;
-    margin-bottom: 15px;
-  }
+    margin-bottom: 8px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* position: sticky; */
+    top: 0;
+    max-width: 100%;
+    object-fit: cover;
+}
   
   /* Styling for owner details */
   .owner-details ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    color: maroon;
-    text-align: left;
+    line-height: 1.5;
+    color: rgb(23, 23, 148);
   }
   
   .owner-details ul li {
@@ -37,11 +45,9 @@
   
   .owner-details ul li strong {
     font-weight: bold;
-    color: #333;
     color: maroon;
   }
-  
-  /* Title styling */
+
   .h2 {
     text-align: center;
     font-size: 3rem;
@@ -50,7 +56,6 @@
     font-weight: 600;
   }
   
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     .admin-owner-container {
       flex-direction: column;
@@ -60,6 +65,11 @@
     .owner-profile {
       width: 90%;
       padding: 15px;
+      margin-left: 3%;
     }
+    .owner-details ul li {
+      max-width: 300px;
+    }
+
   }
   

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/AdminOwner/AdminOwnerInfo.css";
+import Footer from "../components/Footer";
 
 // Sample owner data
 const ownerData = [
   { 
-    o_image: 'https://via.placeholder.com/150',
+    o_image: 'https://eskipaper.com/images/beautiful-girls-1.jpg',
     o_no: '001',
     o_name: 'John Doe',
     o_DOB: '1980-01-01',
@@ -35,6 +36,7 @@ const AdminOwnerInfo = () => {
                 <img src={owner.o_image} alt="Owner" />
               </div>
               <div className="owner-details">
+              {/* <img src={owner.o_image} alt="Owner" className='image' /> */}
                 <ul>
                   <li><strong>Name:</strong> {owner.o_name}</li>
                   <li><strong>Owner Number:</strong> {owner.o_no}</li>
@@ -57,6 +59,7 @@ const AdminOwnerInfo = () => {
           <div>No owners found</div>
         )}
       </div>
+      <Footer/>
     </>
   );
 };

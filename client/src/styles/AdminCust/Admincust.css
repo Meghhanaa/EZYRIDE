@@ -1,9 +1,9 @@
 /* Styling for the entire table container */
 .admin-customer {
-    margin: 20px auto;
     padding: 20px;
     max-width: 1200px;
     overflow-x: auto;
+    margin: -100px auto 40px; 
   }
   
   /* Styling for the table */
@@ -32,6 +32,7 @@
     border: 1px solid #ddd;
     text-align: left;
     vertical-align: middle;
+    color: blue;
   }
   
   /* Styling for customer image */

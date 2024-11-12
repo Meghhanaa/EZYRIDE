@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/AdminCust/Admincust.css"; // If you want to keep the same styling
+import Footer from "../components/Footer";
 
 const AdminCustomer = () => {
   const [customers, setCustomers] = useState([]);
@@ -104,6 +105,7 @@ const AdminCustomer = () => {
           </tbody>
         </table>
       </div>
+      <Footer/>
     </>
   );
 };

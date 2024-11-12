@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/AdminOwner/AdminOwner.css";
+import Footer from "../components/Footer";
 
 const AdminOwner = () => {
   const [owners, setOwners] = useState([]);
@@ -82,6 +83,7 @@ const AdminOwner = () => {
         </tbody>
       </table>
     </div>
+    <Footer/>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "../styles/AdminCust/AdminCustInfo.css";
+import Footer from "../components/Footer";
 
 // Sample customer data
 const customerData = [
@@ -57,6 +58,7 @@ const AdminCustInfo = () => {
           <div>No customers found</div>
         )}
       </div>
+      <Footer/>
     </>
   );
 };
