@@ -15,6 +15,7 @@ const ViewProvider = ({ children }) => {
   const [errors, setErrors] = useState({});
   const [mess, setMess] = useState("");
   const [userName, setUserName] = useState("");
+  const [profilepic,setProfilepic]=useState("");
 
 
   const [formData, setFormData] = useState({
@@ -46,13 +47,18 @@ const ViewProvider = ({ children }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        console.log('Form Data:', formData);
+        // console.log('Form Data:', formData);
         const response = await axios.post('http://localhost:3001/customer_login', formData, {
           headers: { 'Content-Type': 'application/json' },withCredentials: true,
         });
         setMess(response.data.message);
         setUserName(response.data.user.name);
-        // setRole(response.data.message.role)
+        setProfilepic(response.data.image.name)
+        setRole(response.data.role.name)
+        console.log(response.data.role.name)
+        console.log(response.data.image.name)
+        console.log(response.data.user.name)
+        console.log(formData.c_no)
         navigate('/');
       } catch (error) {
         if (error.response) {
@@ -64,9 +70,6 @@ const ViewProvider = ({ children }) => {
       }
     }
   };
-
-
-
 
   const [formownerData, setFormownerData] = useState({
     o_no: '',
@@ -103,8 +106,8 @@ const ViewProvider = ({ children }) => {
         });
         setMess(response.data.message);
         setUserName(response.data.user.name);
+        setProfilepic(response.data.image.name)
         setRole(response.data.role.name)
-        console.log(response.data.message.role)
         navigate('/');
       } catch (error) {
         if (error.response) {
@@ -122,9 +125,7 @@ const ViewProvider = ({ children }) => {
     a_no: '',
     a_password: '',
   });
-
-
-  
+ 
   const handleadminInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -155,8 +156,8 @@ const handleadminSubmit = async (e) => {
         });
         setMess(response.data.message);
         setUserName(response.data.user.name);
-        setRole(response.data.role.name);
-        console.log(response.data.message.role);
+        setProfilepic(response.data.image.name)
+        setRole(response.data.role.name)
         navigate('/');
       } catch (error) {
         if (error.response) {
@@ -329,6 +330,30 @@ const handlePayLaterClick = async()=>{
   }
 
 
+// customer booking details
+
+const [custbookingdetail,setcustbookingdetail]=useState([])
+const custbookingDetail=async()=>{
+      try {
+        // console.log('Form Data:', formData);
+        const response = await axios.get('http://localhost:3001/custbookingdetail', formData.c_no, {
+          headers: { 'Content-Type': 'application/json' },withCredentials: true,
+        });
+        
+        custbookingdetail(response.data)
+        console.log(formData.c_no)
+        navigate('/');
+      } catch (error) {
+        if (error.response) {
+          setMess(error.response.data.message || 'An error occurred. Please try again.');
+        } else {
+          console.log('An error occurred. Please try again.');
+          setMess('An error occurred. Please try again.');
+        }
+    }
+}
+
+
 //logout
 const handlelogout =()=>{
   setUserName("");
@@ -341,6 +366,7 @@ const handlelogout =()=>{
   //custom hook for book by customer
 
   const allValue = { 
+    profilepic,
     role,
     handleSubmit,
     handleInputChange,
@@ -373,6 +399,7 @@ const handlelogout =()=>{
     handlePayLaterClick,
     handleBookNowClick,
     handleBookSubmit,
+    custbookingDetail,
     handlelogout
   };
 

@@ -3,8 +3,12 @@ import mysql from 'mysql2/promise'; // Use mysql2/promise for async/await
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
-import session from'express-session';
+import { v2 as cloudinary } from 'cloudinary';
+import multer from 'multer';
+// import multer from 'multer';
+// import upload from './upload.js'; // Import the upload configuration
+// import jwt from 'jsonwebtoken';
+// import session from'express-session';
 
 dotenv.config(); // Load environment variables
 
@@ -13,6 +17,7 @@ const portlocation = 3001;
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 
 app.use(cors({
   origin: process.env.ORIGIN, // Allow only specific frontend origin
@@ -20,6 +25,26 @@ app.use(cors({
   credentials: true // Enable cookies and other credentials
 }));
 app.use(cookieParser());
+
+cloudinary.config({
+  cloud_name: process.env.Cloud_name,
+  api_key: process.env.Api_key,
+  api_secret:process.env.Api_secret,
+});
+
+const storage = multer.diskStorage({
+  destination:function(req,file,cb){
+    cb(null,'./uploads')
+  },
+  filename:function(req,file,cb){
+    console.log(file);
+    const uniqueSuffix=Date.now()
+    cb(null,uniqueSuffix +'-'+ file.originalname)
+  }
+})
+
+// Export upload function
+const upload = multer({ storage: storage });
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
@@ -81,7 +106,7 @@ app.post('/customer_login', async (req, res) => {
     // const token = jwt.sign({ c_no: user.c_no, c_name: user.c_name,role:user.c_roll }, JWT_SECRET, { expiresIn: '24h' });
     // console.log(token);
     // res.cookie('token', token, { httpOnly: true, secure: false, path: '/', sameSite: 'Lax' });
-    res.status(200).json({ message: 'Login successful', user: { name: user.c_name },role:{name:user.c_role}});
+    res.status(200).json({ message: 'Login successful', user: { name: user.c_name },role:{name:user.c_role},image:{name:user.c_image}});
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -89,18 +114,22 @@ app.post('/customer_login', async (req, res) => {
 });
 
 // Customer Register Route
-app.post('/customer_register', async (req, res) => {
+app.post('/customer_register', upload.single('c_image'), async (req, res) => {
   const { c_no, c_name, c_aadhar, c_lic_no, c_DOB, c_state, c_city, c_street, c_pin, c_email, c_gender, c_password } = req.body;
-
+  console.log(req.body);
+  console.log(req.file);
+  const data=await cloudinary.uploader.upload(req.file.path)
   try {
     const [rows] = await pool.query('SELECT * FROM customer WHERE c_no = ?', [c_no]);
-    if (rows.length > 0) {
+    if (rows.length > 0 || !req.file) {
       return res.status(400).json({ message: 'User already exists' });
     }
+    // const imageUrl = req.file ? req.file.path : null;
+     const imageUrl=data.secure_url;
 
     await pool.query(
-      'INSERT INTO customer (c_no, c_name, c_lic_no, c_DOB, c_aadhar, c_email, c_state, c_city, c_street, c_pin, c_gender, c_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [c_no, c_name, c_lic_no, c_DOB, c_aadhar, c_email, c_state, c_city, c_street, c_pin, c_gender, c_password]
+      'INSERT INTO customer (c_image,c_no, c_name, c_lic_no, c_DOB, c_aadhar, c_email, c_state, c_city, c_street, c_pin, c_gender, c_password) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [imageUrl,c_no, c_name, c_lic_no, c_DOB, c_aadhar, c_email, c_state, c_city, c_street, c_pin, c_gender, c_password]
     );
 
     res.status(201).json({ message: 'User registered successfully' });
@@ -124,7 +153,7 @@ app.post('/owner_login', async (req, res) => {
     // const token = jwt.sign({ o_no: user.o_no, o_name: user.o_name,role:user.o_roll }, JWT_SECRET, { expiresIn: '1h' });
     console.log(user)
     // res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-    res.status(200).json({ message: 'Login successful', user: { name: user.o_name },role:{name:user.o_role} });
+    res.status(200).json({ message: 'Login successful', user: { name: user.o_name },role:{name:user.o_role} ,image:{name:user.o_image}});
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -132,18 +161,22 @@ app.post('/owner_login', async (req, res) => {
 });
 
 // Owner Register Route
-app.post('/owner_register', async (req, res) => {
+app.post('/owner_register', upload.single('o_image'), async (req, res) => {
   const { o_no, o_name, o_aadhar, o_DOB, o_state, o_city, o_street, o_pin, o_email, o_gender, o_password } = req.body;
-
+  console.log(req.body);
+  console.log(req.file);
+  const data=await cloudinary.uploader.upload(req.file.path)
   try {
     const [rows] = await pool.query('SELECT * FROM owner WHERE o_no = ?', [o_no]);
     if (rows.length > 0) {
       return res.status(400).json({ message: 'User already exists' });
     }
+    const imageUrl=data.secure_url;
+
 
     await pool.query(
-      'INSERT INTO owner (o_no, o_name, o_DOB, o_aadhar, o_email, o_state, o_city, o_street, o_pin, o_gender, o_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [o_no, o_name, o_DOB, o_aadhar, o_email, o_state, o_city, o_street, o_pin, o_gender, o_password]
+      'INSERT INTO owner (o_image,o_no, o_name, o_DOB, o_aadhar, o_email, o_state, o_city, o_street, o_pin, o_gender, o_password) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [imageUrl,o_no, o_name, o_DOB, o_aadhar, o_email, o_state, o_city, o_street, o_pin, o_gender, o_password]
     );
 
     res.status(201).json({ message: 'User registered successfully' });
