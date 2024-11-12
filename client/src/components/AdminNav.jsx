@@ -12,7 +12,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 function AdminNav() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration4
-  const {userName}=useViewContext();
+  const { userName, handleAllAdminCustomer, handleAllAdminOwner, handleAllAdminBooking}=useViewContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   useEffect(() => {
     // Retrieve user name from local storage
@@ -116,9 +116,9 @@ const toggleMenu = () => {
             <li><Link onClick={toggleNav} to="/">Home</Link></li>
             <li><Link onClick={toggleNav} to="/About">About</Link></li>
             <li><Link className="models-link" to="/AdminVehicles">All Vehicles</Link></li>
-            <li><Link className="models-link" to="/AdminCust">All Customers</Link></li>
-            <li><Link className="models-link" to="/AdminOwner">All Owners</Link></li>
-            <li><Link className="models-link" to="/AdminBookings">All Bookings</Link></li>
+            <li><Link className="models-link" to="/AdminCust" onClick={handleAllAdminCustomer}>All Customers</Link></li>
+            <li><Link className="models-link" to="/AdminOwner" onClick={handleAllAdminOwner}>All Owners</Link></li>
+            <li><Link className="models-link" to="/AdminBookings" onClick={handleAllAdminBooking}>All Bookings</Link></li>
             <li><Link onClick={toggleNav} to="/Safety">Safety</Link></li>
             <li><Link onClick={toggleNav} to="/OurTeam">Our Team</Link></li>
             <li><Link onClick={toggleNav} to="/ContactEzy">Contact</Link></li>
@@ -138,9 +138,9 @@ const toggleMenu = () => {
             <li><Link className="home-link" to="/">Home</Link></li>
             <li><Link className="about-link" to="/About">About</Link></li>
             <li><Link className="models-link" to="/AdminVehicles">All Vehicles</Link></li>
-            <li><Link className="models-link" to="/AdminCust">All Customers</Link></li>
-            <li><Link className="models-link" to="/AdminOwner">All Owners</Link></li>
-            <li><Link className="models-link" to="/AdminBookings">All Bookings</Link></li>
+            <li><Link className="models-link" to="/AdminCust" onClick={handleAllAdminCustomer}>All Customers</Link></li>
+            <li><Link className="models-link" to="/AdminOwner" onClick={handleAllAdminOwner}>All Owners</Link></li>
+            <li><Link className="models-link" to="/AdminBookings" onClick={handleAllAdminBooking}>All Bookings</Link></li>
             <li><Link className="safety-link" to="/Safety">Safety</Link></li>
             <li><Link className="team-link" to="/OurTeam">Our Team</Link></li>
             <li><Link className="contact-link" to="/contactEzy">Contact</Link></li>
