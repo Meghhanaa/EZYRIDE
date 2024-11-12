@@ -22,6 +22,14 @@ const AdminVehicles = () => {
                    <h1 className="popular__title">{property.v_name}</h1>
                    <p className="popular__description">{property.o_street}</p>
                    <div className="popular__buttons">
+                   {
+  property.v_booked === 1 ? (
+    <button className="popular__button more" onClick={() => handleMore(property.v_insurance)}>Booked</button>
+  ) : (
+    <button className="popular__button more" onClick={() => handleMore(property.v_insurance)}>Not Booked</button>
+  )
+}
+
                      <button className="popular__button more" onClick={() => handleMore(property.v_insurance)}>More</button>
                 ,  </div> 
                 </div>
