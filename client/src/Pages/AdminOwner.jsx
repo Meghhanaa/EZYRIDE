@@ -8,7 +8,7 @@ const AdminOwner = () => {
 
   return (
     <>
-    <h1 className='megh-h2'>All Owners</h1>
+    <h1 className='h2'>All Owners</h1>
     <div className="admin-owner-container"> 
       <table>
         <thead>

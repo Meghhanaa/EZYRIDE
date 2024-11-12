@@ -566,7 +566,6 @@ const handlelogout =()=>{
     AdminBooking,
     handleAllAdminVehicle,
     vehicleAdmin,
-    custbookingdetail,
     custallbooking,
     handlelogout
   };
